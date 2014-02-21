@@ -1,0 +1,19 @@
+Classe abstraite User
+classes filles:
+	-> Bidder
+	-> Buyer
+
+Classe Product
+	-> Price
+	-> Auction où elle est vendue
+
+Classe Auction
+	- Bidder 
+	- Liste<Buyer> buyers
+
+enum -> type de prix (pour l'instant que €)
+Classe Price :
+	- currency
+	- value
+
+	+convertTo(currency)
