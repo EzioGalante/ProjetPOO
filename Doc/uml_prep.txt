@@ -1,0 +1,61 @@
+Classe abstraite User
+
+	- string nickname
+	- string password
+	- unsigned float money
+
+	+ User(string, string) 
+	+ print()
+
+	classes filles:
+	-> Bidder
+		- List<Product> personnalProducts
+		
+		+ print()
+
+	-> Buyer
+		- List<Product> recentProducts
+
+		+ print()
+
+
+Classe Product
+	- Price currentPrice
+	- Auction où elle est vendue //Dans le Auction case 1
+	- Bidder owner
+	- string description
+	- Buyer highestPriceBuyer
+	- Price current_price
+	- //Price buyout_price
+	- Price minimum_price
+
+	+ Product(Bidder salesman, Auction saleContext, 
+	+ void setDescription(string newDescr)
+	+ string getDescription()
+	+ unsigned float raisePrice(price p)
+	
+
+
+enum  -> type de currency (prix pour l'instant que €)
+
+Classe Price :
+	- currency 
+	- value
+
+	+ setValue(int)
+	+ setCurrency(currency)
+	+ convertTo(currency)
+
+
+Classe Auction
+	- Bidder owner
+	- Liste<Buyer> buyers
+	- List<Product> subject
+	- Date end_of_auction
+	
+
+Classe AuctionHall
+	- List<Bidder> bidders
+	- List<Buyer> buyers
+	- List<Auction> auctions
+
