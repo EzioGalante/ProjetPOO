@@ -1,4 +1,5 @@
 Classe abstraite User
+<<<<<<< HEAD
 
 	- string nickname
 	- string password
@@ -59,3 +60,23 @@ Classe AuctionHall
 	- List<Buyer> buyers
 	- List<Auction> auctions
 
+=======
+classes filles:
+	-> Bidder
+	-> Buyer
+
+Classe Product
+	-> Price
+	-> Auction où elle est vendue
+
+Classe Auction
+	- Bidder 
+	- Liste<Buyer> buyers
+
+enum -> type de prix (pour l'instant que €)
+Classe Price :
+	- currency
+	- value
+
+	+convertTo(currency)
+>>>>>>> e31f4b40d48535c69dd56878f1f483ccdff69fc4
