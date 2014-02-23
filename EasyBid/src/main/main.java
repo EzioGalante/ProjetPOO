@@ -12,14 +12,15 @@ public class main {
 
 	public static void main(String[] args) {
 		
-		User User = new  User("Pierre","Hewins",1);
-		User User1 = new  User("Ezio","Galante",2);
+		User User = new  User("Pierre","Hewins",1,0.0);
+		User User1 = new  User("Ezio","Galante",2,0.0);
 		//Bidder bid = new Bidder()
 		
 		List<User> maliste = new ArrayList<User>();
 		maliste.add(User);
 		maliste.add(User1);
 		
+		System.out.println(maliste);
 		
 	}
 
