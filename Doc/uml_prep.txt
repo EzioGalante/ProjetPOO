@@ -1,24 +1,19 @@
-Classe abstraite User
-<<<<<<< HEAD
+/*
+*	Choisir & implémenter les méthodes nécessaires aux utilisateurs.
+*
+*	Ezio (User & Product)
+*/
 
+Classe User
 	- string nickname
 	- string password
 	- unsigned float money
-
+	- List<Product> personnalProducts
+	- List<Product> recentProducts
+	
 	+ User(string, string) 
 	+ print()
-
-	classes filles:
-	-> Bidder
-		- List<Product> personnalProducts
-		
-		+ print()
-
-	-> Buyer
-		- List<Product> recentProducts
-
-		+ print()
-
+	
 
 Classe Product
 	- Price currentPrice
@@ -47,6 +42,13 @@ Classe Price :
 	+ setCurrency(currency)
 	+ convertTo(currency)
 
+/*
+*
+*	Coté Enchères, il faut choisir & dessiner l'architecture du logiciel à ce niveau.
+*	
+*	Pierre
+*
+*/
 
 Classe Auction
 	- Bidder owner
@@ -56,27 +58,5 @@ Classe Auction
 	
 
 Classe AuctionHall
-	- List<Bidder> bidders
-	- List<Buyer> buyers
+	- List<User> users
 	- List<Auction> auctions
-
-=======
-classes filles:
-	-> Bidder
-	-> Buyer
-
-Classe Product
-	-> Price
-	-> Auction où elle est vendue
-
-Classe Auction
-	- Bidder 
-	- Liste<Buyer> buyers
-
-enum -> type de prix (pour l'instant que €)
-Classe Price :
-	- currency
-	- value
-
-	+convertTo(currency)
->>>>>>> e31f4b40d48535c69dd56878f1f483ccdff69fc4
