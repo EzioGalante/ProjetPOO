@@ -73,7 +73,7 @@ coverage.xml
 
 # Mr Developer
 .mr.developer.cfg
-.project
+#.project
 .pydevproject
 
 # Django stuff:
