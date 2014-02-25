@@ -20,6 +20,14 @@ public class AuctionHall {
 		this.knownUsers = new ArrayList<User>();
 		this.auctions = new ArrayList<Product>();
 	}
+
+	public List<User> getKnownUsers() {
+		return knownUsers;
+	}
+
+	public List<Product> getAuctions() {
+		return auctions;
+	}
 	
 	public void addAuction(User u, Product p){
 		if(p==null || u==null){
@@ -66,6 +74,8 @@ public class AuctionHall {
 		knownUsers.add(u);
 		System.out.println("[addUser]: User added to the list");
 	}
+
+
 	
 	/*
 	 * POUR LA SUITE : 

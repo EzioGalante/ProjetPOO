@@ -13,11 +13,11 @@ public class Price {
 		EURO ("Û");
 	
 		private currency(String current){
-	        this.current = current;
+	        //this.current = current;
 	    }
 
 
-	    public String getValue(){return current;}
+	   // public String getValue(){return current;}
 
 	}
 	
