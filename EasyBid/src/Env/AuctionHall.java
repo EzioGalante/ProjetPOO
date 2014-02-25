@@ -7,10 +7,10 @@ import Users.User;
 
 public class AuctionHall {
 	/*
-	 * Classe qui sera instanciée au tout début de l'exécution.
-	 * Elle est le cadre d'action des échanges entre les Utilisateurs et aussi entre les Utilisateurs et les produits.
+	 * Classe qui sera instanciï¿½e au tout dï¿½but de l'exï¿½cution.
+	 * Elle est le cadre d'action des ï¿½changes entre les Utilisateurs et aussi entre les Utilisateurs et les produits.
 	 * 
-	 * Les deux listes répertorient les utilisateurs et les produits.
+	 * Les deux listes rï¿½pertorient les utilisateurs et les produits.
 	 * 
 	 */
 	private List<User> knownUsers;
@@ -29,15 +29,15 @@ public class AuctionHall {
 		return auctions;
 	}
 	
-	public void addAuction(User u, Product p){
-		if(p==null || u==null){
+	public void addAuction(Product p){
+		if(p==null){
 			System.out.println("[addAuction]: Initialisation error.");
-			//sécurité
+			//sï¿½curitï¿½
 			return;
 		}
 		boolean lock = false;
 		for(User i : knownUsers){
-			if(u==i){
+			if(p.getOwner().getFirstname().equals(i.getFirstname()) && p.getOwner().getLastname().equals(i.getLastname())){
 				lock = true;
 				break;
 			}
@@ -47,20 +47,20 @@ public class AuctionHall {
 			return;
 		}
 		for(Product j : auctions){
-			//Dans le cas où un autre produit du même nom est trouvé on ne l'ajoute pas dans la liste
+			//Dans le cas oï¿½ un autre produit du mï¿½me nom est trouvï¿½ on ne l'ajoute pas dans la liste
 			if(p.getName().equals(j.getName())) {
 				System.out.println("[addAuction]: Product name already in use.");
 				return;
 			}
 		}
-		//Dans le cas où le produit n'existe pas déja, on l'ajoute
+		//Dans le cas oï¿½ le produit n'existe pas dï¿½ja, on l'ajoute
 		auctions.add(p);
 		System.out.println("[addAuction]: Product added to the list.");
 	}
 	
 	public void addUser(User u){
 		if(u==null){
-			//sécurité
+			//sï¿½curitï¿½
 			return;
 		}
 		
@@ -70,7 +70,7 @@ public class AuctionHall {
 				return;
 			}
 		}
-		//Utilisateur non trouvé dans la liste des connus donc on l'ajoute
+		//Utilisateur non trouvï¿½ dans la liste des connus donc on l'ajoute
 		knownUsers.add(u);
 		System.out.println("[addUser]: User added to the list");
 	}
@@ -79,7 +79,7 @@ public class AuctionHall {
 	
 	/*
 	 * POUR LA SUITE : 
-	 * 	Implémenter les fonctions raise Price et remove product
+	 * 	Implï¿½menter les fonctions raise Price et remove product
 	 * 
 	 * 	--> Il faut encore la classe price du coup..
 	 * 

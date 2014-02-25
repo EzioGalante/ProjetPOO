@@ -1,5 +1,5 @@
 package Users;
-import java.util.List;
+//import java.util.List;
 
 import Env.Product;
 
@@ -12,8 +12,8 @@ public class User {
 	
 	private double money = 0.0;
 	
-	private List<Product> CurrentProduct;
-	private List<Product> personnalProducts;
+	//private List<Product> CurrentProduct;
+	//private List<Product> personnalProducts;
 	
 	public User(String firstname, String lastname, int id, double money) {
 		this.firstname=firstname;

@@ -1,10 +1,10 @@
 package Env;
 
 public enum Currency {
-	DOLLARD ("$",1.375),
-	LIVRE ("£",0.824),
-	YEN ("´",140.483),
-	EURO ("Û",1);
+	DOLLARD ("D",1.375),
+	LIVRE ("L",0.824),
+	YEN ("Y",140.483),
+	EURO ("E",1);
 	
 	private String current;
 	private double rate;

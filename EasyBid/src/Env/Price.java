@@ -4,30 +4,23 @@ package Env;
 
 public class Price {
 
-	//private String current;
-	private int value;
+	private double value;
 	private Currency current;
 		
-	public Currency getCurrency(){
-		return current;
-
-	}
 	
-	public Price (int value, Currency current) {
-	
-		switch(current.getCurrent()){
-			case "$":
-				//code
-				break;
-		}
+	public Price (double value, Currency current) {
+		this.current = current;
 		this.value=value;
-		
 	}
 	
-	public int getValue() {
+	public double getValue() {
 		return value;
 	}
 
+	public Currency getCurrency(){
+		return current;
+	}
+	
 	
 	public void setValue(int value) {
 		this.value=value;
