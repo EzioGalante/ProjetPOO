@@ -84,11 +84,20 @@ public class AuctionHall {
 	 * 	--> Il faut encore la classe price du coup..
 	 * 
 	 */
-	/*
+	
 	public void raisePrice(User u, Product p, Price contestingPrice) {
 		if(u==null || p==null || contestingPrice==null){
 			System.out.println("[raisePrice]: Initialisation error.");
+			return;
+		}
+		
+		Product inQuestion = null;
+		for(Product i : auctions){
+			if(p.getName().equals(i.getName())){
+				inQuestion = i;
+				break;
+			}
 		}
 	}
-	*/
+	
 }

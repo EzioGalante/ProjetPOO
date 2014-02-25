@@ -32,9 +32,14 @@ public class Product {
 	public User getHighestPriceUser() {
 		return highestPriceUser;
 	}
+	
 	/*
+	 * 
+	 * 
+	 */
+	
 	public void raisePrice(User u, Price currentPrice) {
-		if(this.currentPrice > currentPrice){
+		if(this.currentPrice.getValue() > currentPrice.getValue()){
 			System.out.println("Not accepting context price, it is lower or equal to the current sale price.");
 			return;
 		}
@@ -44,7 +49,7 @@ public class Product {
 	private void setHighestPriceUser(User highestPriceUser) {
 		this.highestPriceUser = highestPriceUser;
 	}
-	*/
+	
 
 	
 	/*
