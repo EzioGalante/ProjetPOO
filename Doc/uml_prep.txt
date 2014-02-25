@@ -22,6 +22,8 @@ Classe Product
 	- string description
 	- Buyer highestPriceBuyer
 	- Price current_price
+	- Price current_price
+	- Price current_price
 	- //Price buyout_price
 	- Price minimum_price
 

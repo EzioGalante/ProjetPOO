@@ -4,6 +4,6 @@ public class Product {
 	//sProduct()
 
 	String name;
-	
+	Price currentPrice;
 
 }
