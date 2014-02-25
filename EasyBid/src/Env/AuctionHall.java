@@ -28,7 +28,7 @@ public class AuctionHall {
 		}
 		for(Product i : auctions){
 			//Dans le cas où un autre produit du même nom est trouvé on ne l'ajoute pas dans la liste
-			if(p.name.equals(i.name)) {
+			if(p.getName().equals(i.getName())) {
 				System.out.println("Product name already in use.");
 				return;
 			}
