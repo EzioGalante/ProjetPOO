@@ -21,21 +21,33 @@ public class AuctionHall {
 		this.auctions = new ArrayList<Product>();
 	}
 	
-	public void addAuction(Product p){
-		if(p==null){
+	public void addAuction(User u, Product p){
+		if(p==null || u==null){
+			System.out.println("[addAuction]: Initialisation error.");
 			//sécurité
 			return;
 		}
-		for(Product i : auctions){
+		boolean lock = false;
+		for(User i : knownUsers){
+			if(u==i){
+				lock = true;
+				break;
+			}
+		}
+		if(lock == false) {
+			System.out.println("[addAuction]: Unknown User, quitting.");
+			return;
+		}
+		for(Product j : auctions){
 			//Dans le cas où un autre produit du même nom est trouvé on ne l'ajoute pas dans la liste
-			if(p.getName().equals(i.getName())) {
-				System.out.println("Product name already in use.");
+			if(p.getName().equals(j.getName())) {
+				System.out.println("[addAuction]: Product name already in use.");
 				return;
 			}
 		}
 		//Dans le cas où le produit n'existe pas déja, on l'ajoute
 		auctions.add(p);
-		System.out.println("Product added to the list.");
+		System.out.println("[addAuction]: Product added to the list.");
 	}
 	
 	public void addUser(User u){
@@ -46,18 +58,27 @@ public class AuctionHall {
 		
 		for(User i : knownUsers){
 			if(u == i){
-				System.out.println("User already in the list.");
+				System.out.println("[addUser]: User already in the list.");
 				return;
 			}
 		}
 		//Utilisateur non trouvé dans la liste des connus donc on l'ajoute
 		knownUsers.add(u);
-		System.out.println("User added to the list");
+		System.out.println("[addUser]: User added to the list");
 	}
 	
 	/*
 	 * POUR LA SUITE : 
 	 * 	Implémenter les fonctions raise Price et remove product
 	 * 
+	 * 	--> Il faut encore la classe price du coup..
+	 * 
 	 */
+	/*
+	public void raisePrice(User u, Product p, Price contestingPrice) {
+		if(u==null || p==null || contestingPrice==null){
+			System.out.println("[raisePrice]: Initialisation error.");
+		}
+	}
+	*/
 }
