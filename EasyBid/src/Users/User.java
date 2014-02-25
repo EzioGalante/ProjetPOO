@@ -22,6 +22,14 @@ public class User {
 		this.money=money;
 	}
 	
+	public String getFirstname(){
+		return firstname;
+	}
+	public String getLastname(){
+		return lastname;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "User [lastname=" + lastname + ", firstname=" + firstname + ",id=" + id +",money="+money+" ]";
