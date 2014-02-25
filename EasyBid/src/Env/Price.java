@@ -21,12 +21,8 @@ public class Price {
 		return current;
 	}
 	
-	
-	public void setValue(int value) {
+	public void setValue(double value) {
 		this.value=value;
-		
 	}
-	
-	
-	
+
 }

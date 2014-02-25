@@ -15,8 +15,8 @@ public class main {
 		
 		AuctionHall hall = new AuctionHall();
 		
-		User User = new  User("Pierre","Hewins",1,0.0);
-		User User1 = new  User("Ezio","Galante",2,0.0);
+		User User = new  User("Pierre","Hewins",1,0.0, hall);
+		User User1 = new  User("Ezio","Galante",2,0.0, hall);
 		
 		
 		hall.addUser(User);

@@ -91,32 +91,32 @@ public class AuctionHall {
 			return;
 		}
 		
-		User userInQuestion = null;
+		User contextUser = null;
 		for(User us : knownUsers){
 			if(u.getFirstname().equals(us.getFirstname())&&u.getLastname().equals(us.getLastname())){
-				userInQuestion = us;
+				contextUser = us;
 				break;
 			}
 		}
 		
-		if(userInQuestion==null){
+		if(contextUser==null){
 			System.out.println("User specified unknown.");
 			return;
 		}
 		
-		Product productInQuestion = null;
+		Product contextProduct = null;
 		for(Product i : auctions){
 			if(p.getName().equals(i.getName())){
-				productInQuestion = i;
+				contextProduct = i;
 				break;
 			}
 		}
-		if(productInQuestion==null){
+		if(contextProduct==null){
 			System.out.println("Product specified unknown.");
 			return;
 		}
 		
-		productInQuestion.raisePrice(userInQuestion, contestingPrice);
+		contextProduct.raisePrice(contextUser, contestingPrice);
 	}
 	
 }
