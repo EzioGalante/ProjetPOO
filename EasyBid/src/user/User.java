@@ -27,7 +27,7 @@ public class User {
 		 * 	-	Récupérer l'exception levée (si elle survient) dans un "catch (IllegalArgumentException votre_nom_dexception)"
 		 */
 		
-		if(firstname.equals("") || lastname.equals(""))
+		if(firstname == null || lastname == null || firstname.equals("") || lastname.equals(""))
 			throw new IllegalArgumentException("User failed to provide first name or last name.");
 		
 		if(h == null)
@@ -46,7 +46,7 @@ public class User {
 		this.money=money;
 		this.hall = h;
 		
-		
+		this.hall.addUser(this);
 	}
 	
 	public String getFirstname(){
@@ -54,6 +54,9 @@ public class User {
 	}
 	public String getLastname(){
 		return lastname;
+	}
+	public int getId(){
+		return id;
 	}
 	
 	

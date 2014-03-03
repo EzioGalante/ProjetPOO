@@ -24,18 +24,10 @@ public class main {
 		try{
 			user = new  User("Pierre","Hewins", new Price(50, Currency.EURO), hall);
 			user1 = new  User("Ezio","Galante",new Price(50, Currency.EURO), hall);
-		} catch(IllegalArgumentException e) {
+		} catch(Exception e) {
 			System.out.println(e.getMessage());
 			return;
 		}
-		
-		hall.addUser(user);
-		hall.addUser(user1);
-		
-		
-		List<User> maliste = new ArrayList<User>();
-		maliste.add(user);
-		maliste.add(user1);
 		
 		
 		System.out.println("HALL : "+hall);
