@@ -5,8 +5,12 @@ package main;
 import java.util.ArrayList;
 import java.util.List;
 
-import Env.AuctionHall;
-import Users.User;
+import env.AuctionHall;
+import env.Currency;
+import env.Price;
+
+import user.User;
+
 
 
 public class main {
@@ -14,26 +18,31 @@ public class main {
 	public static void main(String[] args) {
 		
 		AuctionHall hall = new AuctionHall();
+		User user = null;
+		User user1 = null;
 		
-		User User = new  User("Pierre","Hewins",1,0.0, hall);
-		User User1 = new  User("Ezio","Galante",2,0.0, hall);
+		try{
+			user = new  User("Pierre","Hewins", new Price(50, Currency.EURO), hall);
+			user1 = new  User("Ezio","Galante",new Price(50, Currency.EURO), hall);
+		} catch(IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			return;
+		}
 		
+		hall.addUser(user);
+		hall.addUser(user1);
 		
-		hall.addUser(User);
-		hall.addUser(User1);
-		
-		//Bidder bid = new Bidder()
 		
 		List<User> maliste = new ArrayList<User>();
-		maliste.add(User);
-		maliste.add(User1);
+		maliste.add(user);
+		maliste.add(user1);
 		
 		
 		System.out.println("HALL : "+hall);
 		System.out.println("Users in the hall :");
 		for(User i : hall.getKnownUsers())
 			System.out.println(i.toString());
-		System.out.println(maliste);
+		//System.out.println(maliste);
 		
 	}
 

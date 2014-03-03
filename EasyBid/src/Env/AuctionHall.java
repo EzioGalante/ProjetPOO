@@ -1,9 +1,10 @@
-package Env;
+package env;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import Users.User;
+import user.User;
+
 
 public class AuctionHall {
 	/*
@@ -118,5 +119,6 @@ public class AuctionHall {
 		
 		contextProduct.raisePrice(contextUser, contestingPrice);
 	}
+
 	
 }

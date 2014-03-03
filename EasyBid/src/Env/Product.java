@@ -1,6 +1,6 @@
-package Env;
+package env;
 
-import Users.User;
+import user.User;
 
 public class Product {
 

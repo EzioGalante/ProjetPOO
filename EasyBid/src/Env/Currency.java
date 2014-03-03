@@ -1,4 +1,4 @@
-package Env;
+package env;
 
 public enum Currency {
 	DOLLARD ("D",1.375),
