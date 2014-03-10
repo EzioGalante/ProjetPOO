@@ -1,8 +1,8 @@
 package user;
 //import java.util.List;
 
-import env.AuctionHall;
-import env.Price;
+import environment.AuctionHall;
+import environment.Price;
 
 
 public class User {
@@ -56,8 +56,7 @@ public class User {
 	}
 	public int getId(){
 		return id;
-	}
-	
+	}	
 	
 	@Override
 	public String toString() {

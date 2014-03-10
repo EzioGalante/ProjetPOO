@@ -4,9 +4,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import env.AuctionHall;
-import env.Currency;
-import env.Price;
+import environment.AuctionHall;
+import environment.Currency;
+import environment.Price;
 
 import user.User;
 

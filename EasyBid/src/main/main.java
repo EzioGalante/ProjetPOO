@@ -5,9 +5,9 @@ package main;
 import java.util.ArrayList;
 import java.util.List;
 
-import env.AuctionHall;
-import env.Currency;
-import env.Price;
+import environment.AuctionHall;
+import environment.Currency;
+import environment.Price;
 
 import user.User;
 
