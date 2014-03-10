@@ -46,7 +46,6 @@ public class User {
 		this.money=money;
 		this.hall = h;
 		
-		this.hall.addUser(this);
 	}
 	
 	public String getFirstname(){

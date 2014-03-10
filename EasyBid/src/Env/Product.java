@@ -39,6 +39,10 @@ public class Product {
 	 */
 	
 	public void raisePrice(User u, Price currentPrice) {
+		if(u == this.getOwner()){
+			System.out.println("Owners are not allowed to raise their bids");
+			return;
+		}
 		if(this.currentPrice.getValue() > currentPrice.getValue()){
 			System.out.println("Not accepting context price, it is lower or equal to the current sale price.");
 			return;
@@ -46,6 +50,7 @@ public class Product {
 		setHighestPriceUser(u);
 		this.currentPrice = currentPrice;
 	}
+	
 	private void setHighestPriceUser(User highestPriceUser) {
 		this.highestPriceUser = highestPriceUser;
 	}

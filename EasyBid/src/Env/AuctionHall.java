@@ -33,7 +33,7 @@ public class AuctionHall {
 	public void addAuction(Product p){
 		if(p==null){
 			System.out.println("[addAuction]: Initialisation error.");
-			//s�curit�
+			//securite
 			return;
 		}
 		boolean lock = false;
@@ -48,7 +48,7 @@ public class AuctionHall {
 			return;
 		}
 		for(Product j : auctions){
-			//Dans le cas o� un autre produit du m�me nom est trouv� on ne l'ajoute pas dans la liste
+			//Dans le cas ou un autre produit du meme nom est trouve on ne l'ajoute pas dans la liste
 			if(p.getName().equals(j.getName())) {
 				System.out.println("[addAuction]: Product name already in use.");
 				return;
@@ -92,6 +92,10 @@ public class AuctionHall {
 			return;
 		}
 		
+		if(u == p.getOwner()){
+			System.out.println("Owner is not allowed to raise the bid.");
+			return;
+		}
 		User contextUser = null;
 		for(User us : knownUsers){
 			if(u.getFirstname().equals(us.getFirstname())&&u.getLastname().equals(us.getLastname())){
@@ -117,7 +121,15 @@ public class AuctionHall {
 			return;
 		}
 		
-		contextProduct.raisePrice(contextUser, contestingPrice);
+		double actalValue = contextProduct.getCurrentPrice().getValue()/contextProduct.getCurrentPrice().getCurrency().getRate();
+		double contestingValue = contestingPrice.getValue()/contestingPrice.getCurrency().getRate();
+		if(actalValue < contestingValue){
+			System.out.println("Raising "+p.getName()+" from : "+p.getCurrentPrice().getValue()+" ("
+					+p.getCurrentPrice().getCurrency()
+					+") to : "+contestingPrice+" ("+contestingPrice.getCurrency()+") .");
+			contextProduct.raisePrice(contextUser, contestingPrice);
+		}
+
 	}
 
 	

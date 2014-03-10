@@ -28,7 +28,8 @@ public class main {
 			System.out.println(e.getMessage());
 			return;
 		}
-		
+		hall.addUser(user);
+		hall.addUser(user1);
 		
 		System.out.println("HALL : "+hall);
 		System.out.println("Users in the hall :");
