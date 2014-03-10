@@ -279,16 +279,4 @@ $RECYCLE.BIN/
 *.elc
 [#]*[#]
 
-# images
-*.png
-*.jpg
-*.jpeg
-*.gif
-*.bmp
-*.tiff
-
-# documents
-*.doc
-*.docx
-*.pdf
 
