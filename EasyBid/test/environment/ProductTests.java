@@ -42,7 +42,11 @@ public class ProductTests {
 
 	@Test
 	public void testGetOwner() {
-		fail("Not yet implemented");
+		User i = new User("Product", "Owner", new Price(20, Currency.EURO), this.testHall);
+		Product testproduct = new Product(i, new Price(750, Currency.EURO), "Coffe Table");
+		
+		assertEquals(i, testproduct.getOwner());
+		//fail("Not yet implemented");
 	}
 
 	@Test
