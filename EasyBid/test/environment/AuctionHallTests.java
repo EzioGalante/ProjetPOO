@@ -3,9 +3,6 @@ package environment;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
-
-
 import user.User;
 
 public class AuctionHallTests {
@@ -29,11 +26,11 @@ public class AuctionHallTests {
 		this.testHall.addUser(j);
 		this.testHall.addUser(k);
 		
-		assertEquals(this.testHall.getKnownUsers().size(), 3);
+		assertEquals(3, this.testHall.getKnownUsers().size());
 		
-		assertEquals(this.testHall.getKnownUsers().get(0), i);
-		assertEquals(this.testHall.getKnownUsers().get(1), j);
-		assertEquals(this.testHall.getKnownUsers().get(2), k);
+		assertEquals(i, this.testHall.getKnownUsers().get(0));
+		assertEquals(j, this.testHall.getKnownUsers().get(1));
+		assertEquals(k, this.testHall.getKnownUsers().get(2));
 		
 	}
 
@@ -51,13 +48,20 @@ public class AuctionHallTests {
 		this.testHall.addAuction(p);
 		this.testHall.addAuction(q);
 		this.testHall.addAuction(r);
+		this.testHall.addAuction(s);
 		
 		/* La prochaine ligne verifie aussi que le produit s n'a pas été ajouté !*/
-		assertEquals(this.testHall.getAuctions().size(), 3);
+		assertEquals(3, this.testHall.getAuctions().size());
 		
-		assertEquals(this.testHall.getAuctions().get(0), p);
-		assertEquals(this.testHall.getAuctions().get(1), q);
-		assertEquals(this.testHall.getAuctions().get(2), r);
+		assertEquals(p, this.testHall.getAuctions().get(0));
+		assertEquals(q, this.testHall.getAuctions().get(1));
+		assertEquals(r, this.testHall.getAuctions().get(2));
+		
+		for(Product iter : this.testHall.getAuctions()){
+			if(s == iter){
+				fail("This product should not have been added");
+			}
+		}
 	}
 
 	@Test
@@ -132,7 +136,7 @@ public class AuctionHallTests {
 		User j = new User("Buyer", "One", new Price(420, Currency.EURO), this.testHall);
 		
 		Product p = new Product(i, new Price(750, Currency.EURO), "Coffe Table");
-		assertEquals(p.getCurrentPrice().getValue(), 750, 0);
+		assertEquals(750, p.getCurrentPrice().getValue(), 0);
 
 		this.testHall.raisePrice(i, p, new Price(850, Currency.EURO));
 		assertEquals(750, p.getCurrentPrice().getValue(), 0);

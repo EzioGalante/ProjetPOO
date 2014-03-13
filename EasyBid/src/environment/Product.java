@@ -12,13 +12,17 @@ public class Product {
 	private User highestPriceUser;
 	
 	public Product(User o, Price minPrice, String name){
+		if(o == null || minPrice == null || name == null)
+			throw new IllegalArgumentException("Error in product builder parameters.");
+		if(name == "")
+			throw new IllegalArgumentException("Error, product names cannot be empty.");
+		
 		this.name = name;
 		this.currentPrice = minPrice;
 		this.owner = o;
 	}
 
 	public String getName() {
-
 		return name;
 	}
 
@@ -44,6 +48,7 @@ public class Product {
 			System.out.println("Owners are not allowed to raise their bids");
 			return;
 		}
+		
 		if(this.currentPrice.getValue() > currentPrice.getValue()){
 			System.out.println("Not accepting context price, it is lower or equal to the current sale price.");
 			return;

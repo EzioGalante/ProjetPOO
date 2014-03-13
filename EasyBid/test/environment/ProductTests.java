@@ -1,7 +1,5 @@
 package environment;
 
-
-
 import static org.junit.Assert.*;
 
 import org.junit.Test;
@@ -9,37 +7,28 @@ import org.junit.Test;
 import user.User;
 
 public class ProductTests {
-
-	
 	private AuctionHall testHall = new AuctionHall();
 	
-	
-	
 	private Price p = new Price(10, Currency.EURO);
-	
-	private AuctionHall testHall1 = new AuctionHall();
-	
 	private String testname = "testname";
+	private User testUser = new User("Pierre","lante",p,testHall);
+	private User highestPriceUser = new User("ezio","galante",new Price(10, Currency.EURO),testHall);
+	private User raisePriceUser = new User("Matthias","galante",new Price(10, Currency.EURO),testHall); 
+	private User i = new User("Product", "Owner", new Price(20, Currency.EURO), this.testHall);
 	
-	User i = new User("Product", "Owner", new Price(20, Currency.EURO), this.testHall);
-	Product testproduct = new Product(i, new Price(750, Currency.EURO), "Coffe Table");
-	
-	private User testUser = new User("Pierre","lante",p,testHall1);
-	private User highestPriceUser = new User("ezio","galante",new Price(10, Currency.EURO),testHall1);
-	private User raisePriceUser = new User("Matthias","galante",new Price(10, Currency.EURO),testHall1); 
-	
+	private Product testproduct = new Product(i, new Price(750, Currency.EURO), "Coffe Table");
 	private Product testgoodProduct = new Product(testUser, p, testname);
-	
 	
 	@Test
 	public void testProduct() {
+
 		assertNotNull(this.testgoodProduct);
 		
-		testHall1.addUser(testUser);
-		testHall1.addUser(highestPriceUser);
-		testHall1.addUser(raisePriceUser);
+		testHall.addUser(testUser);
+		testHall.addUser(highestPriceUser);
+		testHall.addUser(raisePriceUser);
 		
-		testHall1.raisePrice(highestPriceUser, testgoodProduct, new Price(15, Currency.EURO));
+		testHall.raisePrice(highestPriceUser, testgoodProduct, new Price(15, Currency.EURO));
 		
 		
 		Product testBadUser = null;
@@ -90,15 +79,15 @@ public class ProductTests {
 	@Test
 	public void testGetHighestPriceUser() {
 		User u = this.testgoodProduct.getHighestPriceUser();
-		assertEquals(raisePriceUser,u);
+		assertEquals(raisePriceUser, u);
 	}
 
 	@Test
 	public void testRaisePrice() {
-		testHall1.raisePrice(raisePriceUser, testgoodProduct, new Price(5, Currency.EURO));
+		testHall.raisePrice(raisePriceUser, testgoodProduct, new Price(5, Currency.EURO));
 		assertEquals(10, testgoodProduct.getCurrentPrice().getValue(),0);
 	
-		testHall1.raisePrice(raisePriceUser, testgoodProduct, new Price(15, Currency.EURO));
+		testHall.raisePrice(raisePriceUser, testgoodProduct, new Price(15, Currency.EURO));
 		assertEquals(15, testgoodProduct.getCurrentPrice().getValue(),0);
 	}
 

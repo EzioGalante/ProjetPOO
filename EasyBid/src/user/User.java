@@ -56,6 +56,9 @@ public class User {
 	}
 	public int getId(){
 		return id;
+	}
+	public AuctionHall getHall(){
+		return hall;
 	}	
 	
 	@Override
