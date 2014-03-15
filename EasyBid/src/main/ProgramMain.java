@@ -1,5 +1,7 @@
 package main;
 
+import easybid.EasyBid;
+
 public class ProgramMain {
 
 	/**
@@ -7,7 +9,7 @@ public class ProgramMain {
 	 */
 	public static void main(String[] args) {
 
-		EasyBid();
+		new EasyBid();
 
 	}
 

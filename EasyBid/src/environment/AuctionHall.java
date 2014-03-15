@@ -121,9 +121,9 @@ public class AuctionHall {
 			return;
 		}
 		
-		double actalValue = contextProduct.getCurrentPrice().getValue()/contextProduct.getCurrentPrice().getCurrency().getRate();
-		double contestingValue = contestingPrice.getValue()/contestingPrice.getCurrency().getRate();
-		if(actalValue < contestingValue){
+		//double actalValue = contextProduct.getCurrentPrice().getValue()/contextProduct.getCurrentPrice().getCurrency().getRate();
+		////double contestingValue = contestingPrice.getValue()/contestingPrice.getCurrency().getRate();
+		if(contextProduct.getCurrentPrice().isWorthMore(contestingPrice)){
 			System.out.println("Raising "+p.getName()+" from : "+p.getCurrentPrice().getValue()+" ("
 					+p.getCurrentPrice().getCurrency()
 					+") to : "+contestingPrice+" ("+contestingPrice.getCurrency()+") .");

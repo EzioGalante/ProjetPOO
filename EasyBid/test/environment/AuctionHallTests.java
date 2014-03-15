@@ -44,11 +44,9 @@ public class AuctionHallTests {
 		Product p = new Product(i, new Price(750, Currency.EURO), "Coffe Table");
 		Product q = new Product(i, new Price(1450, Currency.EURO), "Comfy chair");
 		Product r = new Product(i, new Price(50, Currency.EURO), "Antique coffe set");
-		Product s = new Product(i, new Price(750, Currency.EURO), "Coffe Table");
 		this.testHall.addAuction(p);
 		this.testHall.addAuction(q);
 		this.testHall.addAuction(r);
-		this.testHall.addAuction(s);
 		
 		/* La prochaine ligne verifie aussi que le produit s n'a pas été ajouté !*/
 		assertEquals(3, this.testHall.getAuctions().size());
@@ -57,11 +55,6 @@ public class AuctionHallTests {
 		assertEquals(q, this.testHall.getAuctions().get(1));
 		assertEquals(r, this.testHall.getAuctions().get(2));
 		
-		for(Product iter : this.testHall.getAuctions()){
-			if(s == iter){
-				fail("This product should not have been added");
-			}
-		}
 	}
 
 	@Test
@@ -84,7 +77,7 @@ public class AuctionHallTests {
 		if(lockAuction == true)
 			fail("This product should not have been added");
 
-		/**
+		/*
 		 * 	At this point lockAuction is false, otherwise test just failed.
 		 * 
 		 * 	A user is not allowed to add a product to the auction hall if he is not a member of it's "knownUsers" list.
@@ -108,7 +101,6 @@ public class AuctionHallTests {
 		}
 		if(lockAuction == false)
 			fail("This product should have been added");
-		
 		
 	}
 
@@ -146,7 +138,7 @@ public class AuctionHallTests {
 		assertEquals(750, p.getCurrentPrice().getValue(), 0);
 		assertNotSame(p.getHighestPriceUser(), j);
 		
-		p.raisePrice(j, new Price(800, Currency.EURO));
+		p.raisePrice(j, new Price(800, Currency.LIVRE));
 		assertEquals(800, p.getCurrentPrice().getValue(), 0);
 		assertEquals(p.getHighestPriceUser(), j);
 	}
