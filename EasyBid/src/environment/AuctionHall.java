@@ -32,31 +32,31 @@ public class AuctionHall {
 	
 	public void addAuction(Product p){
 		if(p==null){
-			System.out.println("[addAuction]: Initialisation error.");
+			System.out.println("[AuctionHall][addAuction]: Initialisation error.");
 			//securite
 			return;
 		}
 		boolean lock = false;
-		for(User i : knownUsers){
+		for(User i : this.knownUsers){
 			if(p.getOwner().getFirstname().equals(i.getFirstname()) && p.getOwner().getLastname().equals(i.getLastname())){
 				lock = true;
 				break;
 			}
 		}
 		if(lock == false) {
-			System.out.println("[addAuction]: Unknown User, quitting.");
+			System.out.println("[AuctionHall][addAuction]: Unknown User, quitting.");
 			return;
 		}
-		for(Product j : auctions){
+		for(Product j : this.auctions){
 			//Dans le cas ou un autre produit du meme nom est trouve on ne l'ajoute pas dans la liste
 			if(p.getName().equals(j.getName())) {
-				System.out.println("[addAuction]: Product name already in use.");
+				System.out.println("[AuctionHall][addAuction]: Product name already in use.");
 				return;
 			}
 		}
 		//Dans le cas o� le produit n'existe pas d�ja, on l'ajoute
 		auctions.add(p);
-		System.out.println("[addAuction]: Product added to the list.");
+		System.out.println("[AuctionHall][addAuction]: Product added to the list.");
 	}
 	
 	public void addUser(User u){
@@ -65,15 +65,15 @@ public class AuctionHall {
 			return;
 		}
 		
-		for(User i : knownUsers){
+		for(User i : this.knownUsers){
 			if(u == i){
-				System.out.println("[addUser]: User already in the list.");
+				System.out.println("[AuctionHall][addUser]: User already in the list.");
 				return;
 			}
 		}
 		//Utilisateur non trouv� dans la liste des connus donc on l'ajoute
-		knownUsers.add(u);
-		System.out.println("[addUser]: User added to the list");
+		this.knownUsers.add(u);
+		System.out.println("[AuctionHall][addUser]: User added to the list");
 	}
 
 
@@ -88,7 +88,7 @@ public class AuctionHall {
 	
 	public void raisePrice(User u, Product p, Price contestingPrice) {
 		if(u==null || p==null || contestingPrice==null){
-			System.out.println("[raisePrice]: Initialisation error.");
+			System.out.println("[AuctionHall][raisePrice]: Initialisation error.");
 			return;
 		}
 		
@@ -97,7 +97,7 @@ public class AuctionHall {
 			return;
 		}
 		User contextUser = null;
-		for(User us : knownUsers){
+		for(User us : this.knownUsers){
 			if(u.getFirstname().equals(us.getFirstname())&&u.getLastname().equals(us.getLastname())){
 				contextUser = us;
 				break;
@@ -105,28 +105,29 @@ public class AuctionHall {
 		}
 		
 		if(contextUser==null){
-			System.out.println("User specified unknown.");
+			System.out.println("[AuctionHall][raisePrice] : User specified unknown.");
 			return;
 		}
 		
 		Product contextProduct = null;
-		for(Product i : auctions){
+		for(Product i : this.auctions){
 			if(p.getName().equals(i.getName())){
 				contextProduct = i;
 				break;
 			}
 		}
 		if(contextProduct==null){
-			System.out.println("Product specified unknown.");
+			System.out.println("[AuctionHall][raisePrice] : Product specified unknown.");
 			return;
 		}
 		
-		//double actalValue = contextProduct.getCurrentPrice().getValue()/contextProduct.getCurrentPrice().getCurrency().getRate();
-		////double contestingValue = contestingPrice.getValue()/contestingPrice.getCurrency().getRate();
+		System.err.println("**********************************************");
 		if(contextProduct.getCurrentPrice().isWorthMore(contestingPrice)){
+			
 			System.out.println("Raising "+p.getName()+" from : "+p.getCurrentPrice().getValue()+" ("
 					+p.getCurrentPrice().getCurrency()
 					+") to : "+contestingPrice+" ("+contestingPrice.getCurrency()+") .");
+			
 			contextProduct.raisePrice(contextUser, contestingPrice);
 		}
 

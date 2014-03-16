@@ -63,8 +63,10 @@ public class Price {
 		
 		if(currentValue >= paramValue)
 				return false;
-		else
+		else {
+			System.out.println("[Price][isWorthMore] : param price was greater");
 			return true;
+		}
 	}
 
 }
