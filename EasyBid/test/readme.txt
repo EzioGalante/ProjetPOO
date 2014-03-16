@@ -49,3 +49,16 @@ List of automatically run JUnit tests :
 
 
 	--> User :
+
+		- testUser : testing constructor
+			+ tries to create invalid users (having one of their parameters to null)
+			+ checks invalid users are set to null.
+			
+		- testGetFirstname :
+			+ uses firstname getter to get global user's first name
+			+ checks it is equal to the value we first entered
+			
+		- testGetLastname :
+			+ uses lasttname getter to get global user's last name
+			+ checks it is equal to the value we first entered
+			
