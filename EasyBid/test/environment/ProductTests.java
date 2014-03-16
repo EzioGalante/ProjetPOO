@@ -19,11 +19,11 @@ public class ProductTests {
 	private Product testproduct = new Product(i, new Price(750, Currency.EURO), "Coffe Table");
 	private Product testgoodProduct = new Product(testUser, new Price(10, Currency.EURO), testname);
 	
-	/*@Test
+	@Test
 	public void calltopublish(){
-		
+		testproduct.calltopublish(i);
+		assertEquals(true, testproduct.getPublic());
 	}
-	*/
 	
 	
 	@Test
