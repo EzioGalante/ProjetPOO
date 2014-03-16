@@ -21,6 +21,7 @@ public class Product {
 		this.name = name;
 		this.currentPrice = minPrice;
 		this.owner = o;
+		o.addtoMyproductList(this);
 	}
 	
 	private void setPublic(){

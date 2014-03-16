@@ -17,6 +17,13 @@ public class UserTests {
 	private User testGoodUser = new User("First", "Last", money, testHall);
 	
 	@Test
+	public void addtoMyproductList(){
+		
+		
+		fail("Not yet implemented");
+	}
+	
+	@Test
 	public void testUser() {
 		assertNotNull(this.testGoodUser);
 		

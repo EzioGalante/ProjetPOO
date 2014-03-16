@@ -1,5 +1,8 @@
 package user;
+import environment.Product;
 //import java.util.List;
+
+import java.util.List;
 
 import environment.AuctionHall;
 import environment.Price;
@@ -12,9 +15,14 @@ public class User {
 	private int id = 0;
 	private AuctionHall hall = null;
 	private Price money = null;
-	
+	private List<Product> MyproductList;
 	//private List<Product> currentProducts;
 	//private List<Product> personnalProducts;
+	
+	public void addtoMyproductList(Product p){
+		MyproductList.add(p);
+	}
+	
 	
 	public User(String firstname, String lastname, Price money, AuctionHall h) {
 		
