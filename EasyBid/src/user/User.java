@@ -2,6 +2,8 @@ package user;
 import environment.Product;
 //import java.util.List;
 
+
+import java.util.ArrayList;
 import java.util.List;
 
 import environment.AuctionHall;
@@ -22,7 +24,9 @@ public class User {
 	public void addtoMyproductList(Product p){
 		MyproductList.add(p);
 	}
-	
+	public List<Product> getMyproductList(){
+		return MyproductList;
+	}
 	
 	public User(String firstname, String lastname, Price money, AuctionHall h) {
 		
@@ -53,6 +57,7 @@ public class User {
 		this.id=h.getKnownUsers().size();
 		this.money=money;
 		this.hall = h;
+		this.MyproductList= new ArrayList<>();
 		
 	}
 	

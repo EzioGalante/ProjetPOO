@@ -7,7 +7,7 @@ import org.junit.Test;
 import environment.AuctionHall;
 import environment.Currency;
 import environment.Price;
-
+import environment.Product;
 import user.User;
 
 public class UserTests {
@@ -18,6 +18,9 @@ public class UserTests {
 	
 	@Test
 	public void addtoMyproductList(){
+		/*Product r = new Product(testGoodUser, new Price(50, Currency.EURO), "Antique coffe set");
+		assertEquals(testGoodUser.getMyproductList()., r);
+		*/
 		
 		
 		fail("Not yet implemented");
