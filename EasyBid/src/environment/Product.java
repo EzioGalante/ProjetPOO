@@ -10,6 +10,7 @@ public class Product {
 	private Price currentPrice;
 	private User owner;
 	private User highestPriceUser;
+	private boolean isPublic = false; 
 	
 	public Product(User o, Price minPrice, String name){
 		if(o == null || minPrice == null || name == null)
@@ -21,7 +22,15 @@ public class Product {
 		this.currentPrice = minPrice;
 		this.owner = o;
 	}
-
+	
+	private void setPublic(){
+		this.isPublic=true;
+	}
+	
+	public boolean getPublic() {
+		return isPublic;
+	}
+	
 	public String getName() {
 		return name;
 	}
