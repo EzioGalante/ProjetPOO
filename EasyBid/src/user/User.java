@@ -61,6 +61,10 @@ public class User {
 		
 	}
 	
+	public void Publish(Product p){
+		p.calltopublish(this);
+	}
+	
 	public String getFirstname(){
 		return firstname;
 	}

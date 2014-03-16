@@ -19,6 +19,13 @@ public class ProductTests {
 	private Product testproduct = new Product(i, new Price(750, Currency.EURO), "Coffe Table");
 	private Product testgoodProduct = new Product(testUser, p, testname);
 	
+	/*@Test
+	public void calltopublish(){
+		
+	}
+	*/
+	
+	
 	@Test
 	public void testProduct() {
 

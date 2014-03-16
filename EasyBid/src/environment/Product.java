@@ -27,7 +27,11 @@ public class Product {
 	private void setPublic(){
 		this.isPublic=true;
 	}
-	
+	public void calltopublish(User u){
+		if (this.owner == u){
+			setPublic();
+		}
+	}
 	public boolean getPublic() {
 		return isPublic;
 	}
