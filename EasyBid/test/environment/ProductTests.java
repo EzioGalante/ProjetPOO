@@ -14,14 +14,14 @@ public class ProductTests {
 	private User testUser = new User("Pierre", "lante", new Price(10, Currency.EURO), testHall);
 	private User highestPriceUser = new User("ezio", "galante", new Price(10, Currency.EURO), testHall);
 	private User raisePriceUser = new User("Matthias", "galante", new Price(10, Currency.EURO), testHall); 
-	private User i = new User("Product", "Owner", new Price(20, Currency.EURO), this.testHall);
+	private User owner = new User("Product", "Owner", new Price(20, Currency.EURO), this.testHall);
 	
-	private Product testproduct = new Product(i, new Price(750, Currency.EURO), "Coffe Table");
+	private Product testproduct = new Product(owner, new Price(750, Currency.EURO), "Coffe Table");
 	private Product testgoodProduct = new Product(testUser, new Price(10, Currency.EURO), testname);
 	
 	@Test
 	public void calltopublish(){
-		testproduct.calltopublish(i);
+		testproduct.calltopublish(owner);
 		assertEquals(true, testproduct.getPublic());
 	}
 	
@@ -73,7 +73,7 @@ public class ProductTests {
 
 	@Test
 	public void testGetOwner() {
-		assertEquals(i, testproduct.getOwner());
+		assertEquals(owner, testproduct.getOwner());
 	}
 
 	@Test

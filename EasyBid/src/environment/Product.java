@@ -3,7 +3,21 @@ package environment;
 import user.User;
 
 public class Product {
-
+	
+	/*
+	 *	The Product Class represents the bidding situations.
+	 *	
+	 *	It is created by the owner, who also gives his minimum selling price.
+	 *	This owner may keep the Product private (not for sale), but may also
+	 *	make it public (adds the Product to the list of sales).
+	 *
+	 *  Once the Product is public, the class keeps trace of the User offering
+	 *  the highest bid and of course, how much that User is willing to pay.
+	 *  
+	 *  The bidding stops at a certain date.
+	 * 
+	 */
+	
 	private String name;
 	// private String description;
 	// private String reference;
@@ -23,23 +37,15 @@ public class Product {
 		this.name = name;
 		this.currentPrice = minPrice;
 		this.owner = o;
-		o.addtoMyproductList(this);
+		o.addtoMyProductList(this);
 	}
 
-	private void setPublic() {
-		this.isPublic = true;
-	}
+	
 
-	public void calltopublish(User u) {
-		if (this.owner == u) {
-			setPublic();
-		} else {
-			System.out.println("Pas la permission requise");
-			return;
-
-		}
-	}
-
+	/*
+	 * 	GETTERS : 
+	 * 
+	 */
 	public boolean getPublic() {
 		return isPublic;
 	}
@@ -60,13 +66,34 @@ public class Product {
 		return highestPriceUser;
 	}
 
+	
 	/*
-	 * 
+	 * 	SETTERS :
 	 * 
 	 */
+	private void setHighestPriceUser(User contestingPriceUser) {
+		this.highestPriceUser = contestingPriceUser;
+	}
+	
+	private void setPublic() {
+		this.isPublic = true;
+	}
 
+	/*
+	 * 	METHODS :
+	 * 
+	 */
+	public void calltopublish(User u) {
+		if (this.owner == u) {
+			setPublic();
+		} else {
+			System.out.println("[Product][calltopublish] : Pas la permission requise");
+			return;
+
+		}
+	}
+	
 	public void raisePrice(User u, Price contestingPrice) {
-		System.out.println("+++ [Product][raisePrice] +++");
 		if (u == this.getOwner()) {
 			System.out.println("Owners are not allowed to raise their bids");
 			return;
@@ -77,26 +104,14 @@ public class Product {
 			return;
 		}
 
-		if (this.currentPrice.getValue() > contestingPrice.getValue()) {
+		if (!this.currentPrice.isWorthMore(contestingPrice)) {
 			System.out
 					.println("Not accepting context price, it is lower or equal to the current sale price.");
 			return;
 		}
 
-		System.out.println("+++ !!!![Product][raisePrice]!!!! +++");
 		this.setHighestPriceUser(u);
 		this.currentPrice = contestingPrice;
 	}
-
-	private void setHighestPriceUser(User contestingPriceUser) {
-		this.highestPriceUser = contestingPriceUser;
-	}
-
-	/*
-	 * public Product(User o, Price minPrice, String name, String description,
-	 * String reference){ this.name = name; this.currentPrice = minPrice;
-	 * this.owner = o; this.description = description; this.reference =
-	 * reference; }
-	 */
 
 }

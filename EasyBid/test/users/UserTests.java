@@ -19,7 +19,7 @@ public class UserTests {
 	@Test
 	public void addtoMyproductList(){
 		Product r = new Product(testGoodUser, new Price(50, Currency.EURO), "Antique coffe set");
-		assertEquals(r, testGoodUser.getMyproductList().get(0));
+		assertEquals(r, testGoodUser.getmyProductList().get(0));
 	}
 	
 	@Test

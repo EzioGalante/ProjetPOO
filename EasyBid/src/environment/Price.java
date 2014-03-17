@@ -4,6 +4,12 @@ package environment;
 
 public class Price {
 
+	/*
+	 * Class for representing money. Different currencies may be used (see "Currency" for more details).
+	 * 
+	 * Defines methods for getting and setting its attributes, for changing currency and for comparing two Prices.
+	 */
+	
 	private double value;
 	private Currency current;
 		

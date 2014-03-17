@@ -15,16 +15,7 @@ public class User {
 	private int id = 0;
 	private AuctionHall hall = null;
 	private Price money = null;
-	private List<Product> MyproductList;
-	//private List<Product> currentProducts;
-	//private List<Product> personnalProducts;
-	
-	public void addtoMyproductList(Product p){
-		MyproductList.add(p);
-	}
-	public List<Product> getMyproductList(){
-		return MyproductList;
-	}
+	private List<Product> myProductList;
 	
 	public User(String firstname, String lastname, Price money, AuctionHall h) {
 		
@@ -55,12 +46,8 @@ public class User {
 		this.id=h.getKnownUsers().size();
 		this.money=money;
 		this.hall = h;
-		this.MyproductList= new ArrayList<>();
+		this.myProductList= new ArrayList<>();
 		
-	}
-	
-	public void Publish(Product p){
-		p.calltopublish(this);
 	}
 	
 	public String getFirstname(){
@@ -74,7 +61,18 @@ public class User {
 	}
 	public AuctionHall getHall(){
 		return hall;
-	}	
+	}
+	public List<Product> getmyProductList(){
+		return myProductList;
+	}
+	
+	public void addtoMyProductList(Product p){
+		myProductList.add(p);
+	}
+	
+	public void Publish(Product p){
+		p.calltopublish(this);
+	}
 	
 	@Override
 	public String toString() {

@@ -8,10 +8,10 @@ import user.User;
 
 public class AuctionHall {
 	/*
-	 * Classe qui sera instanci���e au tout d���but de l'ex���cution.
-	 * Elle est le cadre d'action des ���changes entre les Utilisateurs et aussi entre les Utilisateurs et les produits.
 	 * 
-	 * Les deux listes r���pertorient les utilisateurs et les produits.
+	 * Cadre d'action des echanges entre les Utilisateurs et aussi entre les Utilisateurs et les produits.
+	 * 
+	 * Les deux listes repertorient les utilisateurs et les produits.
 	 * 
 	 */
 	private List<User> knownUsers;
@@ -30,6 +30,10 @@ public class AuctionHall {
 		return auctions;
 	}
 	
+	/*
+	 *
+	 * 
+	 */
 	public void addAuction(Product p){
 		if(p==null){
 			System.out.println("[AuctionHall][addAuction]: Initialisation error.");
@@ -54,32 +58,14 @@ public class AuctionHall {
 				return;
 			}
 		}
-		//Dans le cas o��� le produit n'existe pas d���ja, on l'ajoute
-		auctions.add(p);
+		//Dans le cas ou le produit n'existe pas deja, on l'ajoute
+		this.auctions.add(p);
 		System.out.println("[AuctionHall][addAuction]: Product added to the list.");
-	}
-	
-	
-	// wRemove Product Method
-	public void removeProduct(Product p) {
-		if (p == null) {
-			System.out.println("no product to remove");
-			return;
-		}
-			for( Product i : this.auctions){
-			if(p.getName().equals(i.getName())){
-				
-				auctions.remove(p);
-				System.out.println("[AuctionHall][removeProduct]: Product just remove.");
-				return;
-			}
-		}
-	
 	}
 	
 	public void addUser(User u){
 		if(u==null){
-			//s���curit���
+			//securite
 			return;
 		}
 		
@@ -89,7 +75,7 @@ public class AuctionHall {
 				return;
 			}
 		}
-		//Utilisateur non trouv��� dans la liste des connus donc on l'ajoute
+		//Utilisateur non trouve dans la liste des connus donc on l'ajoute
 		this.knownUsers.add(u);
 		System.out.println("[AuctionHall][addUser]: User added to the list");
 	}
@@ -97,10 +83,7 @@ public class AuctionHall {
 
 	
 	/*
-	 * POUR LA SUITE : 
-	 * 	Impl���menter les fonctions raise Price et remove product
 	 * 
-	 * 	--> Il faut encore la classe price du coup..
 	 * 
 	 */
 	
@@ -111,7 +94,7 @@ public class AuctionHall {
 		}
 		
 		if(u == p.getOwner()){
-			System.out.println("Owner is not allowed to raise the bid.");
+			System.out.println("[AuctionHall][raisePrice]Owner is not allowed to raise the bid.");
 			return;
 		}
 		User contextUser = null;
@@ -139,12 +122,11 @@ public class AuctionHall {
 			return;
 		}
 		
-		System.err.println("**********************************************");
 		if(contextProduct.getCurrentPrice().isWorthMore(contestingPrice)){
 			
 			System.out.println("Raising "+p.getName()+" from : "+p.getCurrentPrice().getValue()+" ("
 					+p.getCurrentPrice().getCurrency()
-					+") to : "+contestingPrice+" ("+contestingPrice.getCurrency()+") .");
+					+") to : "+contestingPrice.getValue()+" ("+contestingPrice.getCurrency()+") .");
 			
 			contextProduct.raisePrice(contextUser, contestingPrice);
 		}
