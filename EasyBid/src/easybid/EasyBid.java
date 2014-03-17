@@ -22,27 +22,29 @@ public class EasyBid {
 
 	public void run(){
 		
-		System.out.println("What do you want to do? \nu: Creation of a new User\np: Creation of a new Product\npublish: Publish your product\nq: Quit program");
-		String scan =sc.nextLine();
-		
-		
-		switch(scan)
-		{
-		case "u":
-			createUser();
-			break;
-		case "p":
-			createProduct();
-			break;
-		case "publish":
-			publishProduct();
-			break;
-		case "q":
-			return;
+		while(true)
+		{	
+			System.out.println("What do you want to do? \nu: Creation of a new User\np: Creation of a new Product\npublish: Publish your product\nq: Quit program");
+			String scan =sc.nextLine();
 			
-		default:
-		}
-		
+			
+			switch(scan)
+			{
+			case "u":
+				createUser();
+				break;
+			case "p":
+				//createProduct();
+				break;
+			case "publish":
+				publishProduct();
+				break;
+			case "q":
+				return;
+				
+			default: 
+			}
+		}	
 	}
 
 	private void publishProduct() {
@@ -51,8 +53,17 @@ public class EasyBid {
 	}
 
 	private void createProduct() {
-		// TODO Auto-generated method stub
 		
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Please enter your user id and password to create a product\nUser id:");
+		String id = sc.nextLine();
+		System.out.println("User password:");
+		String pwd = sc.nextLine();
+		
+		for(User i : )
+		
+		Double.parseDouble(money)
+	
 	}
 
 	private void createUser() {
@@ -106,9 +117,16 @@ public class EasyBid {
 		
 		}
 	
+		Scanner sc = new Scanner(System.in);
 		Price p = new Price(Double.parseDouble(money),c);
-		User u = new User(firstname, lastname, "pass", p,this.hall); 
+		
+		System.out.println("You have to create a password user account, please enter it: ");
+		String pwd = sc.nextLine();
+		User u = new User(firstname, lastname, pwd,p,this.hall);
 		hall.addUser(u);
+		System.out.println("Your user id is :"+ u.getId()+" and your password is :"+pwd+"  please remember your id and password, there will be asked later on");
+		
+		
 	}
 }	
 
