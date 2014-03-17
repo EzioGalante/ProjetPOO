@@ -1,6 +1,5 @@
 package easybid;
 
-import java.io.InputStream;
 import java.util.Scanner;
 
 import user.User;
@@ -25,7 +24,7 @@ public class EasyBid {
 		
 		while(true)
 		{	
-			System.out.println("What do you want to do? \nu: Creation of a new User\np: Creation of a new Product\npublish: Publish your product\nq: Quit program");
+			System.out.println("What do you want to do? \nu: Creation of a new User\np: Creation of a new Product\npublish: Publish your product\nusers: List users\nauctions: list public auctions\nq: Quit program");
 			String scan =sc.nextLine();
 			
 			
@@ -38,6 +37,10 @@ public class EasyBid {
 				createProduct();
 				break;
 			case "publish":
+				publishProduct();
+			case "users":
+				publishProduct();
+			case "auctions":
 				publishProduct();
 				break;
 			case "q":
@@ -149,6 +152,26 @@ public class EasyBid {
 		
 		
 	}
+	
+	private void showUser(){
+		if(this.hall.getKnownUsers().size() == 0){
+			System.out.println("[EasyBid][showUser] : no user in the list");
+			return;
+		}
+		for(User i : this.hall.getKnownUsers()){
+			i.toString();
+		}
+	}
+	
+	private void showAuction(){
+		if(this.hall.getAuctions().size() == 0){
+			System.out.println("[EasyBid][showAuction] : no auctions in the list");
+			return;
+		}
+		for(Product p : this.hall.getAuctions()){
+			p.toString();
+		}
+	}
 }	
 /* POUR LA SUITE:
  * 	- creation de la méthode showUser qui affiche la list d'user d'AuctionHall
@@ -157,3 +180,5 @@ public class EasyBid {
  * 	- creation de la méthode removeUser qui permet de supprimer son compte user d'AuctionHall
  * 	- creation de la méthode removePersonnelProduct qui supprime un produit personnel de la liste perso d'un user
  */ 
+
+	

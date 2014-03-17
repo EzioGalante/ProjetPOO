@@ -115,4 +115,8 @@ public class Product {
 		this.currentPrice = contestingPrice;
 	}
 
+	@Override
+	public String toString() {
+		return "Product [Owner :"+owner.getFirstname()+" "+ owner.getLastname()+", price= "+currentPrice.getValue()+" "+currentPrice.getCurrency()+" name: "+this.getName()+" ]";
+	}
 }
