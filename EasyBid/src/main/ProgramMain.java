@@ -9,8 +9,8 @@ public class ProgramMain {
 	 */
 	public static void main(String[] args) {
 
-		new EasyBid();
-
+		 EasyBid e = new EasyBid() ;
+		 e.run();
 	}
 
 }
