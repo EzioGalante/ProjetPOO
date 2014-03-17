@@ -83,12 +83,13 @@ public class Product {
 	 * 	METHODS :
 	 * 
 	 */
-	public void calltopublish(User u) {
+	public boolean calltopublish(User u) {
 		if (this.owner == u) {
 			setPublic();
+			return true;
 		} else {
 			System.out.println("[Product][calltopublish] : Pas la permission requise");
-			return;
+			return false;
 
 		}
 	}

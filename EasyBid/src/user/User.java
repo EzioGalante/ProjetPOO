@@ -71,7 +71,9 @@ public class User {
 	}
 	
 	public void Publish(Product p){
-		p.calltopublish(this);
+		if(p.calltopublish(this)){
+			this.hall.addAuction(p);
+		}
 	}
 	
 	@Override
