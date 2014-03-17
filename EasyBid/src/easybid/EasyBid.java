@@ -107,7 +107,7 @@ public class EasyBid {
 		}
 	
 		Price p = new Price(Double.parseDouble(money),c);
-		User u = new User(firstname, lastname,p,this.hall); 
+		User u = new User(firstname, lastname, "pass", p,this.hall); 
 		hall.addUser(u);
 	}
 }	

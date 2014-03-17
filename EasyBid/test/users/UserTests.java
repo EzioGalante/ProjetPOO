@@ -14,7 +14,7 @@ public class UserTests {
 
 	private AuctionHall testHall = new AuctionHall();
 	private Price money = new Price(20, Currency.EURO);
-	private User testGoodUser = new User("First", "Last", money, testHall);
+	private User testGoodUser = new User("First", "Last", "pass", money, testHall);
 	
 	@Test
 	public void addtoMyproductList(){
@@ -28,12 +28,13 @@ public class UserTests {
 		
 		User testBadFirstNameUser = null;
 		User testBadLastNameUser = null;
+		User testBadPasswordUser = null;
 		User testBadPriceUser = null;
 		User testBadHallUser = null;
 		
 		//Testing with bad first name
 		try {
-			testBadFirstNameUser = new User(null, "ee", new Price(20, Currency.EURO), testHall);
+			testBadFirstNameUser = new User(null, "ee", "pass", new Price(20, Currency.EURO), testHall);
 		} catch(Exception e){
 			System.err.println("bad first name");
 			assertNull(testBadFirstNameUser);
@@ -41,15 +42,23 @@ public class UserTests {
 		
 		//Testing with bad last name
 		try {
-			testBadLastNameUser = new User("ee", null, new Price(20, Currency.EURO), testHall);
+			testBadLastNameUser = new User("ee", null, "pass", new Price(20, Currency.EURO), testHall);
 		} catch(Exception e){
 			System.err.println("bad last name");
 			assertNull(testBadLastNameUser);
 		}
 		
+		//Testing with bad last name
+		try {
+			testBadPasswordUser = new User("ee", "ee", null, new Price(20, Currency.EURO), testHall);
+		} catch(Exception e){
+			System.err.println("bad password");
+			assertNull(testBadPasswordUser);
+		}
+		
 		//Testing with bad Price 
 		try {
-			testBadPriceUser = new User("ee", "ee", null, testHall);
+			testBadPriceUser = new User("ee", "ee", "pass", null, testHall);
 		} catch(Exception e){
 			System.err.println("bad Price");
 			assertNull(testBadPriceUser);
@@ -57,7 +66,7 @@ public class UserTests {
 		
 		//Testing with bad Hall
 		try {
-			testBadHallUser = new User("ee", "ee", new Price(20, Currency.EURO), null);
+			testBadHallUser = new User("ee", "ee", "pass", new Price(20, Currency.EURO), null);
 		} catch(Exception e){
 			System.err.println("bad Hall");
 			assertNull(testBadHallUser);

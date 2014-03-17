@@ -13,11 +13,12 @@ public class User {
 	private String firstname = "";
 	private String lastname = "";
 	private int id = 0;
+	private String password = "";
 	private AuctionHall hall = null;
 	private Price money = null;
 	private List<Product> myProductList;
 	
-	public User(String firstname, String lastname, Price money, AuctionHall h) {
+	public User(String firstname, String lastname, String pass, Price money, AuctionHall h) {
 		
 		/*
 		 * 	Pour gérer les cas d'arguments que nous ne considérons pas valides, 
@@ -34,7 +35,8 @@ public class User {
 		
 		if(firstname == null || lastname == null || firstname.equals("") || lastname.equals(""))
 			throw new IllegalArgumentException("User failed to provide first name or last name.");
-		
+		if(pass == null || pass.equals(""))
+			throw new IllegalArgumentException("User failed to provide password.");
 		if(h == null)
 			throw new IllegalArgumentException("User failed to provide valid AuctionHall");
 		
@@ -47,6 +49,7 @@ public class User {
 		 */
 		this.firstname=firstname;
 		this.lastname=lastname;
+		this.password = pass;
 		this.id=currentId;
 		this.money=money;
 		this.hall = h;

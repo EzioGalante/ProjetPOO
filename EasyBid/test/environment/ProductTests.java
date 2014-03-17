@@ -11,10 +11,10 @@ public class ProductTests {
 	
 
 	private String testname = "testname";
-	private User testUser = new User("Pierre", "lante", new Price(10, Currency.EURO), testHall);
-	private User highestPriceUser = new User("ezio", "galante", new Price(10, Currency.EURO), testHall);
-	private User raisePriceUser = new User("Matthias", "galante", new Price(10, Currency.EURO), testHall); 
-	private User owner = new User("Product", "Owner", new Price(20, Currency.EURO), this.testHall);
+	private User testUser = new User("Pierre", "lante", "pass", new Price(10, Currency.EURO), testHall);
+	private User highestPriceUser = new User("ezio", "galante", "pass", new Price(10, Currency.EURO), testHall);
+	private User raisePriceUser = new User("Matthias", "galante", "pass", new Price(10, Currency.EURO), testHall); 
+	private User owner = new User("Product", "Owner", "pass", new Price(20, Currency.EURO), this.testHall);
 	
 	private Product testproduct = new Product(owner, new Price(750, Currency.EURO), "Coffe Table");
 	private Product testgoodProduct = new Product(testUser, new Price(10, Currency.EURO), testname);
@@ -78,7 +78,7 @@ public class ProductTests {
 
 	@Test
 	public void testGetHighestPriceUser() {
-		User u = new User("price", "raiser", new Price(20, Currency.EURO), this.testHall);
+		User u = new User("price", "raiser", "pass", new Price(20, Currency.EURO), this.testHall);
 		this.testHall.addUser(u);
 		this.testHall.addUser(this.testUser);
 		this.testHall.addAuction(this.testgoodProduct);

@@ -175,10 +175,8 @@ public class AuctionHall {
 	public int giveUserID(){
 		this.currentID++;
 		
-		int id = this.currentID;
-		
-		if(id < 0)
+		if(this.currentID < 0)
 			return 0;
-		return id;
+		return this.currentID;
 	}
 }
