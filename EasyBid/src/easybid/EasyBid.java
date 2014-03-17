@@ -7,6 +7,7 @@ import user.User;
 import environment.AuctionHall;
 import environment.Currency;
 import environment.Price;
+import environment.Product;
 
 public class EasyBid {
 
@@ -34,7 +35,7 @@ public class EasyBid {
 				createUser();
 				break;
 			case "p":
-				//createProduct();
+				createProduct();
 				break;
 			case "publish":
 				publishProduct();
@@ -57,13 +58,33 @@ public class EasyBid {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Please enter your user id and password to create a product\nUser id:");
 		String id = sc.nextLine();
+		
 		System.out.println("User password:");
 		String pwd = sc.nextLine();
 		
-		for(User i : )
-		
-		Double.parseDouble(money)
+		String nameProduct = "";
+		String minPrice = "";
+		for(User i : hall.getKnownUsers() ) 
+		{	
+			
+			if (i.getId() == Integer.parseInt(id) )
+			{
+				if(pwd.equals(i.getPass()))
+				{
+					System.out.println("Hello"+i.getFirstname()+"\nNow refer your name product:");
+					nameProduct = sc.nextLine();
+					System.out.println("Now refer your product minimum price, it's your minimum bid price for this product");
+					minPrice = sc.nextLine();
+				
+					Price p1 = new Price(Double.parseDouble(minPrice), i.getCurrency());
+					Product p = new Product(i, p1, nameProduct);
+					i.addtoMyProductList(p);
+					return;
+				}
+			}
+		}		
 	
+		System.out.println("You are not yet in the User list, you have to create an user before create a product");		
 	}
 
 	private void createUser() {
@@ -129,4 +150,10 @@ public class EasyBid {
 		
 	}
 }	
-
+/* POUR LA SUITE:
+ * 	- creation de la méthode showUser qui affiche la list d'user d'AuctionHall
+ * 	- creation de la méthode showAuction qui affiche la liste de product d'Auctionhall
+ * 	- creation de la méthode showPersonnalProduct qui affiche la liste perso de Product
+ * 	- creation de la méthode removeUser qui permet de supprimer son compte user d'AuctionHall
+ * 	- creation de la méthode removePersonnelProduct qui supprime un produit personnel de la liste perso d'un user
+ */ 

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import environment.AuctionHall;
+import environment.Currency;
 import environment.Price;
 
 
@@ -21,12 +22,12 @@ public class User {
 	public User(String firstname, String lastname, String pass, Price money, AuctionHall h) {
 		
 		/*
-		 * 	Pour gérer les cas d'arguments que nous ne considérons pas valides, 
+		 * 	Pour gï¿½rer les cas d'arguments que nous ne considï¿½rons pas valides, 
 		 * 	nous levons des exceptions pour quitter le constructeur.
 		 * 
 		 * Cela sous-entend que l'appelant de ce constructeur devra : 
 		 * 	-	l'utiliser dans un "try{ ... }"
-		 * 	-	Récupérer l'exception levée (si elle survient) dans un "catch (IllegalArgumentException votre_nom_dexception)"
+		 * 	-	Rï¿½cupï¿½rer l'exception levï¿½e (si elle survient) dans un "catch (IllegalArgumentException votre_nom_dexception)"
 		 */
 		int currentId = h.giveUserID();
 		
@@ -45,7 +46,7 @@ public class User {
 		
 		
 		/*
-		 * 	Si le constructeur considère que les paramètres d'appel sont satisfaisants :
+		 * 	Si le constructeur considï¿½re que les paramï¿½tres d'appel sont satisfaisants :
 		 */
 		this.firstname=firstname;
 		this.lastname=lastname;
@@ -55,6 +56,11 @@ public class User {
 		this.hall = h;
 		this.myProductList= new ArrayList<>();
 		
+	}
+	
+	
+	public String getPass(){
+		return password;
 	}
 	
 	public String getFirstname(){
@@ -73,9 +79,15 @@ public class User {
 		return myProductList;
 	}
 	
+	public Currency getCurrency() {
+		return money.getCurrency();
+	}
+	
 	public void addtoMyProductList(Product p){
 		myProductList.add(p);
+		System.out.println("[User] [addtoMyProductList] Product added to your list");
 	}
+	
 	
 	public void Publish(Product p){
 		if(p.calltopublish(this)){
