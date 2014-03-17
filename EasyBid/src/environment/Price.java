@@ -25,7 +25,10 @@ public class Price {
 		this.value=value;
 	}
 	
-	
+	/*
+	 * 	GETTERS :
+	 * 
+	 */
 	public double getValue() {
 		return value;
 	}
@@ -34,18 +37,28 @@ public class Price {
 		return current;
 	}
 	
-	public void setValue(double value) {
-		if(value <= 0){
-			System.err.println("[Price][setValue] : refusing negative value");
-			return;
-		}
-		this.value=value;
-	}
+	
+	/*
+	 * 	SETTERS :
+	 * 
+	 */
 	
 	private void setRate(Currency c) {
 		this.current = c;
 	}
 	
+	public void giveMoney(Price p) {
+		
+		if(!p.getCurrency().equals(this.getCurrency())){
+			p.convertTo(this.getCurrency());
+		}
+		
+		this.value += p.getValue();
+	}
+	/*
+	 * 	METHODS :
+	 * 
+	 */
 	public void convertTo(Currency current) {
 		
 		if(current==null) {

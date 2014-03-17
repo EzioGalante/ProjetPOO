@@ -80,6 +80,11 @@ public class User {
 		}
 	}
 	
+	
+	public void addMoney(Price p){		
+		this.money.giveMoney(p);
+	}
+	
 	@Override
 	public String toString() {
 		return "User [lastname=" + lastname + ", firstname=" + firstname + ",id=" + id +",money="+money+" ]";

@@ -65,26 +65,11 @@ public class PriceTests {
 		assertEquals(Currency.LIVRE, test.getCurrency());
 		assertEquals(0.824, test.getValue(), 0);
 		
-		test.setValue(test.getValue()*100);
+		test.giveMoney(new Price(test.getValue()*99, Currency.LIVRE));
 		test.convertTo(Currency.YEN);
 		
 		assertEquals(Currency.YEN, test.getCurrency());
-		assertEquals(14048.3, test.getValue(), 0.00001);
-	}
-
-
-	@Test
-	public void testSetValue() {
-		Price test = new Price(1, Currency.EURO);
-		
-		test.setValue(1);
-		assertEquals(1, test.getValue(), 0);
-		test.setValue(222.22);
-		assertEquals(222.22, test.getValue(), 0);
-		test.setValue(10000);
-		assertEquals(10000, test.getValue(), 0);
-		test.setValue(-1);
-		assertEquals(10000, test.getValue(), 0);
+		assertEquals(14048.3, test.getValue(), 0.01);
 	}
 
 	
@@ -110,5 +95,14 @@ public class PriceTests {
 		
 		assertFalse(test.isWorthMore(new Price(5, Currency.EURO)));
 		assertTrue(test.isWorthMore(new Price(155, Currency.EURO)));
+	}
+	
+	@Test
+	public void testGiveMoney(){
+		Price test = new Price(5.5, Currency.YEN);
+		
+		test.giveMoney(new Price(5.5, Currency.YEN));
+		
+		assertEquals(11, test.getValue(), 0);
 	}
 }
