@@ -27,6 +27,10 @@ public class User {
 		 * 	-	l'utiliser dans un "try{ ... }"
 		 * 	-	Récupérer l'exception levée (si elle survient) dans un "catch (IllegalArgumentException votre_nom_dexception)"
 		 */
+		int currentId = h.giveUserID();
+		
+		if(currentId == 0)
+			throw new IllegalArgumentException("User failed to provide correct ID.");
 		
 		if(firstname == null || lastname == null || firstname.equals("") || lastname.equals(""))
 			throw new IllegalArgumentException("User failed to provide first name or last name.");
@@ -35,7 +39,7 @@ public class User {
 			throw new IllegalArgumentException("User failed to provide valid AuctionHall");
 		
 		if(money == null)
-			throw new IllegalArgumentException("User failed to provide valid AuctionHall");
+			throw new IllegalArgumentException("User failed to provide valid money");
 		
 		
 		/*
@@ -43,7 +47,7 @@ public class User {
 		 */
 		this.firstname=firstname;
 		this.lastname=lastname;
-		this.id=h.getKnownUsers().size();
+		this.id=currentId;
 		this.money=money;
 		this.hall = h;
 		this.myProductList= new ArrayList<>();

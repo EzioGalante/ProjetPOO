@@ -16,10 +16,12 @@ public class AuctionHall {
 	 */
 	private List<User> knownUsers;
 	private List<Product> auctions;
+	private int currentID;
 	
 	public AuctionHall(){
 		this.knownUsers = new ArrayList<User>();
 		this.auctions = new ArrayList<Product>();
+		this.currentID = 0;
 	}
 
 	public List<User> getKnownUsers() {
@@ -170,5 +172,13 @@ public class AuctionHall {
 
 	}
 
-	
+	public int giveUserID(){
+		this.currentID++;
+		
+		int id = this.currentID;
+		
+		if(id < 0)
+			return 0;
+		return id;
+	}
 }

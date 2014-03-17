@@ -208,4 +208,23 @@ public class AuctionHallTests {
 		assertEquals(p.getHighestPriceUser(), j);
 	}
 
+	@Test
+	public void testGiveUserID(){
+		User one = null;
+		User two = null;
+		try{
+			one = new User("Number", "One", new Price(420, Currency.EURO), this.testHall);
+			two = new User("Number", "two", new Price(420, Currency.EURO), this.testHall);
+		} catch(Exception e){
+			assertNull(one);
+			assertNull(two);
+		}
+		
+		assertNotNull(one);
+		assertNotNull(two);
+		
+		assertEquals(1, one.getId(), 0);
+		assertEquals(2, two.getId(), 0);
+		
+	}
 }
