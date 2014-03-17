@@ -104,6 +104,39 @@ public class AuctionHallTests {
 		
 	}
 
+    @Test
+	public void testremoveProduct(){
+		
+		Price pTest = new Price(10, Currency.EURO);
+		User u = new User("Matt","Marchel",pTest,this.testHall);
+		Product test = new Product( u ,new Price(15, Currency.EURO), "productTest");
+		boolean boolProduct = true;
+		assertNotNull(pTest);
+		assertNotNull(u);
+		assertNotNull(test);
+		
+		int lon = this.testHall.getAuctions().size();
+		
+		this.testHall.addUser(u);
+		this.testHall.addAuction(test);
+		
+		int lenght = this.testHall.getAuctions().size();
+		System.out.println(lenght);
+		assertEquals(lon+1,lenght,0);
+		this.testHall.removeProduct(test);
+		
+		assertEquals(lon,this.testHall.getAuctions().size(),0);
+		
+		for(Product p : this.testHall.getAuctions()){
+			if (p == test){
+				boolProduct = false;
+			}
+            if (boolProduct == false)
+                fail("The Product was not removed frome the list");
+		}
+	}
+
+    
 	@Test
 	public void testAddUser() {
 		User u = new User("ee", "ee", new Price(20, Currency.EURO), this.testHall);
@@ -122,6 +155,38 @@ public class AuctionHallTests {
 		}
 	}
 
+    @Test
+	public void testremoveUser() {
+		
+		User u1 = new User("bruce","lee",new Price(17, Currency.EURO), this.testHall);
+		assertNotNull(u1);
+		boolean boolUser = true;
+		
+		
+		int lonUser = this.testHall.getKnownUsers().size();
+		this.testHall.addUser(u1);
+		int lenghtUser = this.testHall.getKnownUsers().size();
+		assertEquals(lonUser+1,lenghtUser,0);
+		
+		//System.out.println(lenght);
+		
+		this.testHall.removeUser(u1);
+		
+		assertEquals(lonUser,this.testHall.getKnownUsers().size(),0);
+		
+		for(User i : this.testHall.getKnownUsers()){
+			if (i == u1){
+				boolUser = false;
+			}
+            
+		}
+		if (boolUser == false){
+			fail("The User was not remove frome thi list");
+		}
+	}
+	
+
+    
 	@Test
 	public void testRaisePrice() {
 		User i = new User("Product", "Owner", new Price(20, Currency.EURO), this.testHall);
