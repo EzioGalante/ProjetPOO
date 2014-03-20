@@ -1,0 +1,6 @@
+
+	- Equals method pour User & Product (plus propre)
+	- Méthodes principales de la classe EasyBid 
+	- Ecrire le descriptif des tests
+	- Rédiger le document d'architecture
+	- Relire, refactoriser, commenter le code (essayer de l'amméliorer)
