@@ -50,12 +50,13 @@ public class EasyBid {
 			
 			else {
 				System.out.println("users: List users\nauctions: list public auctions\np: Creation of a new Product\n" +
-						"publish: Publish your product\nm: Show personnal product\nq: Quit program\n");
+						"publish: Publish your product\nm: Show personnal product\nq: Quit program\nlogout of EasyBid : logout");
 				
 				scan =sc.nextLine();
 				
 				switch(scan)
 				{
+					
 					case "users":
 						showUser();
 						break;
@@ -92,140 +93,84 @@ public class EasyBid {
 	}
 
 	private void logOut() {
-		// TODO Auto-generated method stub
-		
+		currentUser=null;
+		System.out.println("logout suceeded");
+		return;
 	}
 
 	private void logIn() {
-		// TODO Auto-generated method stub
+		
+		
+		System.out.println("Please refer your login and password:\nlogin: ");
+		String login = sc.nextLine();
+		System.out.println("password");
+		String password = sc.nextLine();
+		
+		for (User i : hall.getKnownUsers()){
+			if(i.getLogin().equals(login) && i.getPass().equals(password)){
+			
+				currentUser=i;
+				System.out.println("Login suceeded");
+				return;
+			}
+		}
 		
 	}
 
 	private void showPersonnalProduct() {
-		
-		if(this.hall.getKnownUsers().size() == 0){
-			System.out.println("[EasyBid][showAuction] : You have to create a user before showing your personnal product");
+							
+		if(currentUser.getmyProductList().size()==0) {
+			System.out.println("[EasyBid][publishProduct] Error, your personnal product list is empty, you have to add products to your list before publish one of them \n");
 			return;
 		}
 		
-		System.out.println("Please enter your user id and password to publish a product from your personnal product list \nUser id:");
-		String id = sc.nextLine();
-		
-		
-		System.out.println("User password:");
-		String pwd = sc.nextLine();
-		
-		
-		for(User i : hall.getKnownUsers() ) 
-		{	
-			
-			if (i.getId() == Integer.parseInt(id) )
-			{
-				if(pwd.equals(i.getPass()))
-				{
-					
-					if(i.getmyProductList().size()==0) {
-						System.out.println("[EasyBid][publishProduct] Error, your personnal product list is empty, you have to add products to your list before publish one of them \n");
-						return;
-					}
-					
-					System.out.println("Hello "+i.getFirstname()+"\nYour personnal product:");
-					for(Product p : i.getmyProductList()) {
-						System.out.println(p.toString()); 
-					}
-				}
-			return;
-			}
-		}		
-	
-		System.out.println("You are not yet in the User list, you have to create an user");	
+		for(Product p : currentUser.getmyProductList()) {
+			System.out.println(p.toString()); 
+		}
+		return;
 	}
 
 	private void publishProduct() {
 		
-	
-		System.out.println("Please enter your user id and password to publish a product from your personnal product list \nUser id:");
-		String id = sc.nextLine();
-		
-		
-		System.out.println("User password:");
-		String pwd = sc.nextLine();
-		
-		String nameProduct = "";
-		String minPrice = "";
-		
-		for(User i : hall.getKnownUsers() ) 
-		{	
 			
-			if (i.getId() == Integer.parseInt(id) )
-			{
-				if(pwd.equals(i.getPass()))
-				{
-					
-					if(i.getmyProductList().size()==0) {
+		if(currentUser.getmyProductList().size()==0) {
 						System.out.println("[EasyBid][publishProduct] Error, your personnal product list is empty, you have to add products to your list before publish one of them \n");
 						return;
 					}
 					
-					System.out.println("Hello "+i.getFirstname()+"\nNow refer the product you want to publish:");
-					nameProduct = sc.nextLine();
+					System.out.println("\nNow refer the product you want to publish:");
+					String nameProduct = sc.nextLine();
 					
 					if(nameProduct == null) {
 						System.out.println("[EasyBid][publishProduct] : Error, no product to publish");
 						return;
 					}
 				
-					for(Product t : i.getmyProductList())
+					for(Product t : currentUser.getmyProductList())
 					{
 						if (t.getName().equals(nameProduct)) {
-							i.Publish(t);
+							currentUser.Publish(t);
 							System.out.println("Your product was publish to the AuctionHall");
 						}
 					}
 					
 				return;
 				}
-			}
-		}
-				
-	
-		System.out.println("You are not yet in the User list, you have to create an user before publish a product");	
-	}
-		
-	
 
 	private void createProduct() {
 		
-		System.out.println("Please enter your user id and password to create a product\nUser id:");
-		String id = sc.nextLine();
-		
-		System.out.println("User password:");
-		String pwd = sc.nextLine();
-		
-		String nameProduct = "";
-		String minPrice = "";
-		for(User i : hall.getKnownUsers() ) 
-		{	
-			
-			if (i.getId() == Integer.parseInt(id) )
-			{
-				if(pwd.equals(i.getPass()))
-				{
-					System.out.println("Hello"+i.getFirstname()+"\nNow refer your name product:");
-					nameProduct = sc.nextLine();
-					System.out.println("Now refer your product minimum price, it's your minimum bid price for this product");
-					minPrice = sc.nextLine();
-				
-					Price p1 = new Price(Double.parseDouble(minPrice), i.getCurrency());
-					Product p = new Product(i, p1, nameProduct);
-					i.addtoMyProductList(p);
-					return;
-				}
-			}
-		}		
 	
-		System.out.println("You are not yet in the User list, you have to create an user before create a product");		
-	}
+		System.out.println("Now refer your name product:");
+		String nameProduct = sc.nextLine();
+		System.out.println("Now refer your product minimum price, it's your minimum bid price for this product");
+		String minPrice = sc.nextLine();
+	
+		Price p1 = new Price(Double.parseDouble(minPrice), currentUser.getCurrency());
+		Product p = new Product(currentUser, p1, nameProduct);
+		currentUser.addtoMyProductList(p);
+		return;
+				}
+
 
 	private void createUser() {
 		
@@ -286,7 +231,7 @@ public class EasyBid {
 		String pwd = sc.nextLine();
 		User u = new User(firstname, lastname, log, pwd, p, this.hall);
 		hall.addUser(u);
-		System.out.println("\nYour user id is :"+ u.getId()+" and your password is :"+pwd+"  please remember your id and password, there will be asked later on");
+		System.out.println("User "+log+" createds");
 		
 	}
 	
