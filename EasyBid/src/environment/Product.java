@@ -117,6 +117,19 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Product [Owner :"+owner.getFirstname()+" "+ owner.getLastname()+", price= "+currentPrice.getValue()+" "+currentPrice.getCurrency()+" name: "+this.getName()+" ]";
+		return "Product :\n\tOwner :"+owner.getFirstname()+" "+ owner.getLastname()
+				+"\n\tprice= "+currentPrice.getValue()+" "+currentPrice.getCurrency()+" name: "+this.getName();
 	}
+
+	@Override
+	public boolean equals(Object o){
+		if(this == o)
+			return true;
+		else if(o instanceof Product){
+			return this.name.equals(((Product) o).name);
+		}
+		else
+			return false;
+	}
+	
 }

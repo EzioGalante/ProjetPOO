@@ -102,4 +102,14 @@ public class ProductTests {
 		assertEquals(15, this.testgoodProduct.getCurrentPrice().getValue(),0);
 	}
 
+	@Test
+	public void testEquals() {
+		Product p = new Product(testUser, new Price(15, Currency.EURO), "name");
+		Product q = new Product(testUser, new Price(15, Currency.EURO), "name");
+
+		assertNotSame(p, q);
+		assertEquals(true, p.equals(q));
+	}
+	
+
 }

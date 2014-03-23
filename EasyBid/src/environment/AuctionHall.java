@@ -44,7 +44,7 @@ public class AuctionHall {
 		}
 		boolean lock = false;
 		for(User i : this.knownUsers){
-			if(p.getOwner().getFirstname().equals(i.getFirstname()) && p.getOwner().getLastname().equals(i.getLastname())){
+			if(p.getOwner().equals(i)){
 				lock = true;
 				break;
 			}
@@ -55,7 +55,7 @@ public class AuctionHall {
 		}
 		for(Product j : this.auctions){
 			//Dans le cas ou un autre produit du meme nom est trouve on ne l'ajoute pas dans la liste
-			if(p.getName().equals(j.getName())) {
+			if(p.equals(j)) {
 				System.out.println("[AuctionHall][addAuction]: Product name already in use.");
 				return;
 			}
@@ -108,18 +108,15 @@ public class AuctionHall {
 			System.out.println("No User to remove");
 			return;
 		}
+		
 		for( User i : this.knownUsers){
 			if(i == u){
-				
 				knownUsers.remove(u);
 				System.out.println("[AuctionHall][removeUser]: User just remove.");
 				return;
 			}
 		}
 	}
-	
-
-    
 	
 	/*
 	 * 
@@ -138,7 +135,7 @@ public class AuctionHall {
 		}
 		User contextUser = null;
 		for(User us : this.knownUsers){
-			if(u.getFirstname().equals(us.getFirstname())&&u.getLastname().equals(us.getLastname())){
+			if(u.equals(us)){
 				contextUser = us;
 				break;
 			}
@@ -151,7 +148,7 @@ public class AuctionHall {
 		
 		Product contextProduct = null;
 		for(Product i : this.auctions){
-			if(p.getName().equals(i.getName())){
+			if(p.equals(i)){
 				contextProduct = i;
 				break;
 			}

@@ -41,8 +41,6 @@ public class User {
 			throw new NullPointerException("User failed to provide login.");
 		else if(pass == null)
 			throw new NullPointerException("User failed to provide password.");
-		else if(h == null)
-			throw new NullPointerException("User failed to provide password.");
 		else if(money == null)
 			throw new NullPointerException("User failed to provide valid money");
 		else if(firstname.equals("") || lastname.equals("") || login.equals("") || pass.equals(""))
@@ -107,7 +105,8 @@ public class User {
 	
 	@Override
 	public String toString() {
-		return "User [lastname=" + lastname + ", firstname=" + firstname + ",id=" + id +",money="+money.getValue()+" "+money.getCurrency()+"]";
+		return "User :\n\tlogin = \n\tlastname=" + lastname + ", firstname=" + firstname 
+				+"\n\tmoney="+money.getValue()+" "+money.getCurrency();
 	}
 	
 	@Override
