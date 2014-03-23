@@ -12,57 +12,92 @@ public class EasyBid {
 
 	private AuctionHall hall;
 	private Scanner sc;
+	private User currentUser;
 	
 	
 	public EasyBid(){
 		this.hall= new AuctionHall();
-		this.sc = new Scanner(System.in); 
-		 
+		this.sc = new Scanner(System.in);
+		this.currentUser = null;
 	}
 
 	public void run(){
-		
+		String scan = "";
 		while(true)
 		{	
-			System.out.println("What do you want to do? \n\nu: Creation of a new User\np: Creation of a new Product\npublish: Publish your product\nusers: List users\nauctions: list public auctions\nq: Quit program\nm: Show personnal product\n");
-			String scan =sc.nextLine();
-			
-			
-			switch(scan)
-			{
-			
-			case"m":
-				showPersonnalProduct();
-				break;
-			
-			case "users":
-				System.err.println("- EasyBid - run - showUsers");
-				showUser();
-				break;
-			
-			case"auctions":
-				showAuction();
-				break;
-			
-			case "u":
-				createUser();
-				break;
-			
-			case "p":
-				createProduct();
-				break;
-			
-			case "publish":
-				publishProduct();
-				break;
-			
-			case "q":
-				sc.close();
-				return;
+			System.out.println("What do you want to do? \n\n");
+			if(currentUser == null){
+				System.out.println("u: Creation of a new User\nl: Login as User\nq: Quit program\n\n");
+				scan =sc.nextLine();
 				
-			default: 
+				switch(scan)
+				{
+					case "u":
+						createUser();
+						break;
+					
+					case "l":
+						logIn();
+						break;
+					
+					case "q":
+						sc.close();
+						return;
+						
+					default: 
+				}
+			}
+			
+			else {
+				System.out.println("users: List users\nauctions: list public auctions\np: Creation of a new Product\n" +
+						"publish: Publish your product\nm: Show personnal product\nq: Quit program\n");
+				
+				scan =sc.nextLine();
+				
+				switch(scan)
+				{
+					case "users":
+						showUser();
+						break;
+					
+					case"auctions":
+						showAuction();
+						break;
+					
+					case "p":
+						createProduct();
+						break;
+					
+					case "publish":
+						publishProduct();
+						break;
+						
+					case"m":
+						showPersonnalProduct();
+						break;
+					
+					case "logout":
+						logOut();
+						break;
+						
+					case "q":
+						sc.close();
+						return;
+						
+					default: 
+				}
 			}
 		}
+		
+	}
+
+	private void logOut() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void logIn() {
+		// TODO Auto-generated method stub
 		
 	}
 
