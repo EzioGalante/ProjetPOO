@@ -62,27 +62,16 @@ public class AuctionHall {
 		}
 		//Dans le cas ou le produit n'existe pas deja, on l'ajoute
 		this.auctions.add(p);
-		System.out.println("[AuctionHall][addAuction]: Product added to the list.");
 	}
 	
     // Remove Product Method
 	public void removeProduct(Product p) {
-		if (p == null) {
-			System.out.println("no product to remove");
-			return;
-		}
-        for( Product i : this.auctions){
-			if(p.getName().equals(i.getName())){
-				
-				auctions.remove(p);
-				System.out.println("[AuctionHall][removeProduct]: Product just remove.");
-				return;
-			}
-		}
-        
+		  		
+		auctions.remove(p);
+		System.out.println("[AuctionHall][removeProduct]: Product just removed.");
+		return;
 	}
-
-    
+		
 	public void addUser(User u){
 		if(u==null){
 			//securite
@@ -104,18 +93,10 @@ public class AuctionHall {
     // removeUser Method
 	
 	public void removeUser(User u){
-		if (u == null){
-			System.out.println("No User to remove");
-			return;
-		}
 		
-		for( User i : this.knownUsers){
-			if(i == u){
-				knownUsers.remove(u);
-				System.out.println("[AuctionHall][removeUser]: User just remove.");
-				return;
-			}
-		}
+		knownUsers.remove(u);
+		System.out.println("[AuctionHall][removeUser]: User just removed.");
+		return;
 	}
 	
 	/*

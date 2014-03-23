@@ -105,7 +105,7 @@ public class User {
 	
 	@Override
 	public String toString() {
-		return "User :\n\tlogin = \n\tlastname=" + lastname + ", firstname=" + firstname 
+		return "User :\n\tlogin = "+login+"\n\tlastname=" + lastname + ", firstname=" + firstname 
 				+"\n\tmoney="+money.getValue()+" "+money.getCurrency();
 	}
 	

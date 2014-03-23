@@ -57,6 +57,15 @@ public class EasyBid {
 				switch(scan)
 				{
 					
+					case "delete product":
+						removeProduct();
+						break;
+						
+					case "delete account":
+						removeUser();
+						currentUser=null;
+						break;
+				
 					case "users":
 						showUser();
 						break;
@@ -90,6 +99,39 @@ public class EasyBid {
 			}
 		}
 		
+	}
+
+	private void removeUser() {
+		System.out.println("Plesae enter your password: \n");
+		String pass;
+		int i=0;
+		
+		do {
+			pass = sc.nextLine();
+			
+			if(!pass.equals(currentUser.getPass())) {
+				i++;
+				System.out.println("Bad password, try again");
+			}
+			else break;
+		}
+		while(i<3);
+		hall.removeUser(currentUser);
+	}
+
+	private void removeProduct() {
+		
+		System.out.println("What product would you want to remove? Please enter your product name : \n");
+		String removeP = sc.nextLine();
+		
+		for(Product p : hall.getAuctions()){		
+			if(removeP.equals(p.getName()) && p.getOwner().equals(currentUser)) {
+				hall.removeProduct(p);
+				System.out.println("Produit just removed");
+				return;
+			}
+		}
+		System.out.println("Specified product was not found");
 	}
 
 	private void logOut() {
@@ -150,7 +192,7 @@ public class EasyBid {
 					{
 						if (t.getName().equals(nameProduct)) {
 							currentUser.Publish(t);
-							System.out.println("Your product was publish to the AuctionHall");
+							System.out.println("Your product was published in the AuctionHall");
 						}
 					}
 					

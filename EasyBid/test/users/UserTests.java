@@ -17,12 +17,6 @@ public class UserTests {
 	private User testGoodUser = new User("First", "Last", "login1", "pass", money, testHall);
 	
 	@Test
-	public void addtoMyproductList(){
-		Product r = new Product(testGoodUser, new Price(50, Currency.EURO), "Antique coffe set");
-		assertEquals(r, testGoodUser.getmyProductList().get(0));
-	}
-	
-	@Test
 	public void testUser() {
 		assertNotNull(this.testGoodUser);
 		
@@ -81,6 +75,15 @@ public class UserTests {
 		}
 	}
 
+
+	@Test
+	public void addtoMyproductList(){
+		
+		Product r = new Product(testGoodUser, new Price(50, Currency.EURO), "Antique coffe set");
+		testGoodUser.addtoMyProductList(r);
+		assertEquals(r, testGoodUser.getmyProductList().get(0));
+	}
+	
 	@Test
 	public void testGetFirstname() {
 		String first = this.testGoodUser.getFirstname();

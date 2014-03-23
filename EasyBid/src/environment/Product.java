@@ -37,7 +37,7 @@ public class Product {
 		this.name = name;
 		this.currentPrice = minPrice;
 		this.owner = o;
-		o.addtoMyProductList(this);
+		
 	}
 
 	
