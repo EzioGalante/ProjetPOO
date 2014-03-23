@@ -38,9 +38,6 @@ public class User {
 			throw new IllegalArgumentException("User failed to provide first name or last name.");
 		if(pass == null || pass.equals(""))
 			throw new IllegalArgumentException("User failed to provide password.");
-		if(h == null)
-			throw new IllegalArgumentException("User failed to provide valid AuctionHall");
-		
 		if(money == null)
 			throw new IllegalArgumentException("User failed to provide valid money");
 		
@@ -102,7 +99,7 @@ public class User {
 	
 	@Override
 	public String toString() {
-		return "User [lastname=" + lastname + ", firstname=" + firstname + ",id=" + id +",money="+money+" ]";
+		return "User [lastname=" + lastname + ", firstname=" + firstname + ",id=" + id +",money="+money.getValue()+" "+money.getCurrency()+"]";
 	}
 	
 	

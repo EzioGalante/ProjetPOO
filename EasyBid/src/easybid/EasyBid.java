@@ -24,41 +24,143 @@ public class EasyBid {
 		
 		while(true)
 		{	
-			System.out.println("What do you want to do? \nu: Creation of a new User\np: Creation of a new Product\npublish: Publish your product\nusers: List users\nauctions: list public auctions\nq: Quit program");
+			System.out.println("What do you want to do? \n\nu: Creation of a new User\np: Creation of a new Product\npublish: Publish your product\nusers: List users\nauctions: list public auctions\nq: Quit program\nm: Show personnal product\n");
 			String scan =sc.nextLine();
 			
 			
 			switch(scan)
 			{
+			
+			case"m":
+				showPersonnalProduct();
+				break;
+			
+			case "users":
+				System.err.println("- EasyBid - run - showUsers");
+				showUser();
+				break;
+			
+			case"auctions":
+				showAuction();
+				break;
+			
 			case "u":
 				createUser();
 				break;
+			
 			case "p":
 				createProduct();
 				break;
+			
 			case "publish":
 				publishProduct();
-			case "users":
-				publishProduct();
-			case "auctions":
-				publishProduct();
 				break;
+			
 			case "q":
+				sc.close();
 				return;
 				
 			default: 
 			}
-		}	
+		}
+		
+	}
+
+	private void showPersonnalProduct() {
+		
+		if(this.hall.getKnownUsers().size() == 0){
+			System.out.println("[EasyBid][showAuction] : You have to create a user before showing your personnal product");
+			return;
+		}
+		
+		System.out.println("Please enter your user id and password to publish a product from your personnal product list \nUser id:");
+		String id = sc.nextLine();
+		
+		
+		System.out.println("User password:");
+		String pwd = sc.nextLine();
+		
+		
+		for(User i : hall.getKnownUsers() ) 
+		{	
+			
+			if (i.getId() == Integer.parseInt(id) )
+			{
+				if(pwd.equals(i.getPass()))
+				{
+					
+					if(i.getmyProductList().size()==0) {
+						System.out.println("[EasyBid][publishProduct] Error, your personnal product list is empty, you have to add products to your list before publish one of them \n");
+						return;
+					}
+					
+					System.out.println("Hello "+i.getFirstname()+"\nYour personnal product:");
+					for(Product p : i.getmyProductList()) {
+						System.out.println(p.toString()); 
+					}
+				}
+			return;
+			}
+		}		
+	
+		System.out.println("You are not yet in the User list, you have to create an user");	
 	}
 
 	private void publishProduct() {
-		// TODO Auto-generated method stub
 		
+	
+		System.out.println("Please enter your user id and password to publish a product from your personnal product list \nUser id:");
+		String id = sc.nextLine();
+		
+		
+		System.out.println("User password:");
+		String pwd = sc.nextLine();
+		
+		String nameProduct = "";
+		String minPrice = "";
+		
+		for(User i : hall.getKnownUsers() ) 
+		{	
+			
+			if (i.getId() == Integer.parseInt(id) )
+			{
+				if(pwd.equals(i.getPass()))
+				{
+					
+					if(i.getmyProductList().size()==0) {
+						System.out.println("[EasyBid][publishProduct] Error, your personnal product list is empty, you have to add products to your list before publish one of them \n");
+						return;
+					}
+					
+					System.out.println("Hello "+i.getFirstname()+"\nNow refer the product you want to publish:");
+					nameProduct = sc.nextLine();
+					
+					if(nameProduct == null) {
+						System.out.println("[EasyBid][publishProduct] : Error, no product to publish");
+						return;
+					}
+				
+					for(Product t : i.getmyProductList())
+					{
+						if (t.getName().equals(nameProduct)) {
+							i.Publish(t);
+							System.out.println("Your product was publish to the AuctionHall");
+						}
+					}
+					
+				return;
+				}
+			}
+		}
+				
+	
+		System.out.println("You are not yet in the User list, you have to create an user before publish a product");	
 	}
+		
+	
 
 	private void createProduct() {
 		
-		Scanner sc = new Scanner(System.in);
 		System.out.println("Please enter your user id and password to create a product\nUser id:");
 		String id = sc.nextLine();
 		
@@ -141,7 +243,6 @@ public class EasyBid {
 		
 		}
 	
-		Scanner sc = new Scanner(System.in);
 		Price p = new Price(Double.parseDouble(money),c);
 		
 		System.out.println("You have to create a password user account, please enter it: ");
@@ -150,16 +251,19 @@ public class EasyBid {
 		hall.addUser(u);
 		System.out.println("Your user id is :"+ u.getId()+" and your password is :"+pwd+"  please remember your id and password, there will be asked later on");
 		
-		
 	}
 	
 	private void showUser(){
+		
 		if(this.hall.getKnownUsers().size() == 0){
 			System.out.println("[EasyBid][showUser] : no user in the list");
 			return;
 		}
+		else 
+			System.out.println("[EasyBid][showUser] : Users :");
+		
 		for(User i : this.hall.getKnownUsers()){
-			i.toString();
+			System.out.println(i.toString());
 		}
 	}
 	
@@ -168,8 +272,11 @@ public class EasyBid {
 			System.out.println("[EasyBid][showAuction] : no auctions in the list");
 			return;
 		}
+		else 
+			System.out.println("[EasyBid][showAuction] : Auctions :");
+		
 		for(Product p : this.hall.getAuctions()){
-			p.toString();
+			System.out.println(p.toString());
 		}
 	}
 }	
@@ -181,4 +288,3 @@ public class EasyBid {
  * 	- creation de la méthode removePersonnelProduct qui supprime un produit personnel de la liste perso d'un user
  */ 
 
-	
