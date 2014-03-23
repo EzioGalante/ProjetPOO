@@ -96,11 +96,18 @@ public class UserTests {
 		assertEquals("Last", last);
 	}
 
-	/*
 	@Test
-	public void testToString() {
-		fail("Not yet implemented");
+	public void testEquals() {
+		User i = new User("ee", "ee", "login7", "pass", new Price(20, Currency.EURO), testHall);
+		User j = i;
+		User k = new User("ee", "ee", "login7", "pass", new Price(20, Currency.EURO), testHall);
+		
+		assertSame(i, j);
+		assertEquals(true, i.equals(j));
+		
+		assertNotSame(i, k);
+		assertEquals(true, i.equals(k));
 	}
-	*/
+	
 
 }

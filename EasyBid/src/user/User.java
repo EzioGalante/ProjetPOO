@@ -35,17 +35,18 @@ public class User {
 		if(currentId == 0)
 			throw new IllegalArgumentException("User failed to provide correct ID.");
 		
-		else if(firstname == null || lastname == null || firstname.equals("") || lastname.equals(""))
+		else if(firstname == null || lastname == null)
 			throw new NullPointerException("User failed to provide first name or last name.");
-		else if(login == null || login.equals(""))
+		else if(login == null)
 			throw new NullPointerException("User failed to provide login.");
-		else if(pass == null || pass.equals(""))
+		else if(pass == null)
 			throw new NullPointerException("User failed to provide password.");
 		else if(h == null)
 			throw new NullPointerException("User failed to provide password.");
 		else if(money == null)
 			throw new NullPointerException("User failed to provide valid money");
-		
+		else if(firstname.equals("") || lastname.equals("") || login.equals("") || pass.equals(""))
+			throw new IllegalArgumentException("One of the user's fields was empty.");
 		
 		/*
 		 * 	Si le constructeur consid�re que les param�tres d'appel sont satisfaisants :
@@ -109,5 +110,15 @@ public class User {
 		return "User [lastname=" + lastname + ", firstname=" + firstname + ",id=" + id +",money="+money.getValue()+" "+money.getCurrency()+"]";
 	}
 	
+	@Override
+	public boolean equals(Object o){
+		if(this == o)
+			return true;
+		else if(o instanceof User){
+			return this.login.equals(((User) o).login);
+		}
+		else
+			return false;
+	}
 	
 }
