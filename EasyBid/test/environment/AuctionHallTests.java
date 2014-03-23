@@ -18,9 +18,9 @@ public class AuctionHallTests {
 	public void testGetKnownUsers() {
 		assertEquals(this.testHall.getKnownUsers().size(), 0);
 		
-		User i = new User("Product", "Owner", "pass", new Price(20, Currency.EURO), this.testHall);
-		User j = new User("Buyer", "One", "pass", new Price(420, Currency.EURO), this.testHall);
-		User k = new User("Buyer", "Two", "pass", new Price(50, Currency.EURO), this.testHall);
+		User i = new User("Product", "Owner", "login200", "pass", new Price(20, Currency.EURO), this.testHall);
+		User j = new User("Buyer", "One", "login201", "pass", new Price(420, Currency.EURO), this.testHall);
+		User k = new User("Buyer", "Two", "login202", "pass", new Price(50, Currency.EURO), this.testHall);
 		
 		this.testHall.addUser(i);
 		this.testHall.addUser(j);
@@ -38,7 +38,7 @@ public class AuctionHallTests {
 	public void testGetAuctions() {
 		assertEquals(this.testHall.getAuctions().size(), 0);
 		
-		User i = new User("Product", "Owner", "pass", new Price(20, Currency.EURO), this.testHall);
+		User i = new User("Product", "Owner", "login203", "pass", new Price(20, Currency.EURO), this.testHall);
 		this.testHall.addUser(i);
 		
 		Product p = new Product(i, new Price(750, Currency.EURO), "Coffe Table");
@@ -59,7 +59,7 @@ public class AuctionHallTests {
 
 	@Test
 	public void testAddAuction() {
-		User user = new User("Product", "Owner", "pass", new Price(20, Currency.EURO), this.testHall);
+		User user = new User("Product", "Owner", "login204", "pass", new Price(20, Currency.EURO), this.testHall);
 		Product p = new Product(user, new Price(1450, Currency.EURO), "Coffe Table");
 		
 		boolean lockUser = false, lockAuction = false;
@@ -108,7 +108,7 @@ public class AuctionHallTests {
 	public void testremoveProduct(){
 		
 		Price pTest = new Price(10, Currency.EURO);
-		User u = new User("Matt", "Marchel", "pass", pTest, this.testHall);
+		User u = new User("Matt", "Marchel", "login205", "pass", pTest, this.testHall);
 		Product test = new Product(u, new Price(15, Currency.EURO), "productTest");
 		boolean boolProduct = true;
 		assertNotNull(pTest);
@@ -139,7 +139,7 @@ public class AuctionHallTests {
     
 	@Test
 	public void testAddUser() {
-		User u = new User("ee", "ee", "pass", new Price(20, Currency.EURO), this.testHall);
+		User u = new User("ee", "ee", "login206", "pass", new Price(20, Currency.EURO), this.testHall);
 		assertNotNull(u);
 		boolean lock = false;
 		this.testHall.addUser(u);
@@ -158,7 +158,7 @@ public class AuctionHallTests {
     @Test
 	public void testremoveUser() {
 		
-		User u1 = new User("bruce", "lee", "pass", new Price(17, Currency.EURO), this.testHall);
+		User u1 = new User("bruce", "lee", "login207", "pass", new Price(17, Currency.EURO), this.testHall);
 		assertNotNull(u1);
 		boolean boolUser = true;
 		
@@ -189,8 +189,8 @@ public class AuctionHallTests {
     
 	@Test
 	public void testRaisePrice() {
-		User i = new User("Product", "Owner", "pass", new Price(20, Currency.EURO), this.testHall);
-		User j = new User("Buyer", "One", "pass", new Price(420, Currency.EURO), this.testHall);
+		User i = new User("Product", "Owner", "login208", "pass", new Price(20, Currency.EURO), this.testHall);
+		User j = new User("Buyer", "One", "login209", "pass", new Price(420, Currency.EURO), this.testHall);
 		
 		Product p = new Product(i, new Price(750, Currency.EURO), "Coffe Table");
 		assertEquals(750, p.getCurrentPrice().getValue(), 0);
@@ -213,8 +213,8 @@ public class AuctionHallTests {
 		User one = null;
 		User two = null;
 		try{
-			one = new User("Number", "One", "pass", new Price(420, Currency.EURO), this.testHall);
-			two = new User("Number", "two", "pass", new Price(420, Currency.EURO), this.testHall);
+			one = new User("Number", "One", "login210", "pass", new Price(420, Currency.EURO), this.testHall);
+			two = new User("Number", "two", "login211", "pass", new Price(420, Currency.EURO), this.testHall);
 		} catch(Exception e){
 			assertNull(one);
 			assertNull(two);

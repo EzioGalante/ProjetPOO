@@ -14,7 +14,7 @@ public class UserTests {
 
 	private AuctionHall testHall = new AuctionHall();
 	private Price money = new Price(20, Currency.EURO);
-	private User testGoodUser = new User("First", "Last", "pass", money, testHall);
+	private User testGoodUser = new User("First", "Last", "login1", "pass", money, testHall);
 	
 	@Test
 	public void addtoMyproductList(){
@@ -34,7 +34,7 @@ public class UserTests {
 		
 		//Testing with bad first name
 		try {
-			testBadFirstNameUser = new User(null, "ee", "pass", new Price(20, Currency.EURO), testHall);
+			testBadFirstNameUser = new User(null, "ee", "login2", "pass", new Price(20, Currency.EURO), testHall);
 		} catch(Exception e){
 			System.err.println("bad first name");
 			assertNull(testBadFirstNameUser);
@@ -42,15 +42,23 @@ public class UserTests {
 		
 		//Testing with bad last name
 		try {
-			testBadLastNameUser = new User("ee", null, "pass", new Price(20, Currency.EURO), testHall);
+			testBadLastNameUser = new User("ee", null, "login3", "pass", new Price(20, Currency.EURO), testHall);
 		} catch(Exception e){
 			System.err.println("bad last name");
 			assertNull(testBadLastNameUser);
 		}
 		
-		//Testing with bad last name
+		//Testing with bad login
 		try {
-			testBadPasswordUser = new User("ee", "ee", null, new Price(20, Currency.EURO), testHall);
+			testBadPasswordUser = new User("ee", "ee", null, "pass", new Price(20, Currency.EURO), testHall);
+		} catch(Exception e){
+			System.err.println("bad password");
+			assertNull(testBadPasswordUser);
+		}
+		
+		//Testing with bad password
+		try {
+			testBadPasswordUser = new User("ee", "ee", "login4", null, new Price(20, Currency.EURO), testHall);
 		} catch(Exception e){
 			System.err.println("bad password");
 			assertNull(testBadPasswordUser);
@@ -58,7 +66,7 @@ public class UserTests {
 		
 		//Testing with bad Price 
 		try {
-			testBadPriceUser = new User("ee", "ee", "pass", null, testHall);
+			testBadPriceUser = new User("ee", "ee", "login5", "pass", null, testHall);
 		} catch(Exception e){
 			System.err.println("bad Price");
 			assertNull(testBadPriceUser);
@@ -66,7 +74,7 @@ public class UserTests {
 		
 		//Testing with bad Hall
 		try {
-			testBadHallUser = new User("ee", "ee", "pass", new Price(20, Currency.EURO), null);
+			testBadHallUser = new User("ee", "ee", "login6", "pass", new Price(20, Currency.EURO), null);
 		} catch(Exception e){
 			System.err.println("bad Hall");
 			assertNull(testBadHallUser);

@@ -14,12 +14,13 @@ public class User {
 	private String firstname = "";
 	private String lastname = "";
 	private int id = 0;
+	private String login = "";
 	private String password = "";
 	private AuctionHall hall = null;
 	private Price money = null;
 	private List<Product> myProductList;
 	
-	public User(String firstname, String lastname, String pass, Price money, AuctionHall h) {
+	public User(String firstname, String lastname, String login, String pass, Price money, AuctionHall h) {
 		
 		/*
 		 * 	Pour g�rer les cas d'arguments que nous ne consid�rons pas valides, 
@@ -34,12 +35,16 @@ public class User {
 		if(currentId == 0)
 			throw new IllegalArgumentException("User failed to provide correct ID.");
 		
-		if(firstname == null || lastname == null || firstname.equals("") || lastname.equals(""))
-			throw new IllegalArgumentException("User failed to provide first name or last name.");
-		if(pass == null || pass.equals(""))
-			throw new IllegalArgumentException("User failed to provide password.");
-		if(money == null)
-			throw new IllegalArgumentException("User failed to provide valid money");
+		else if(firstname == null || lastname == null || firstname.equals("") || lastname.equals(""))
+			throw new NullPointerException("User failed to provide first name or last name.");
+		else if(login == null || login.equals(""))
+			throw new NullPointerException("User failed to provide login.");
+		else if(pass == null || pass.equals(""))
+			throw new NullPointerException("User failed to provide password.");
+		else if(h == null)
+			throw new NullPointerException("User failed to provide password.");
+		else if(money == null)
+			throw new NullPointerException("User failed to provide valid money");
 		
 		
 		/*
@@ -47,17 +52,13 @@ public class User {
 		 */
 		this.firstname=firstname;
 		this.lastname=lastname;
+		this.login = login;
 		this.password = pass;
 		this.id=currentId;
 		this.money=money;
 		this.hall = h;
 		this.myProductList= new ArrayList<>();
 		
-	}
-	
-	
-	public String getPass(){
-		return password;
 	}
 	
 	public String getFirstname(){
@@ -69,13 +70,19 @@ public class User {
 	public int getId(){
 		return id;
 	}
+	public String getLogin(){
+		return login;
+	}
+	
+	public String getPass(){
+		return password;
+	}
 	public AuctionHall getHall(){
 		return hall;
 	}
 	public List<Product> getmyProductList(){
 		return myProductList;
 	}
-	
 	public Currency getCurrency() {
 		return money.getCurrency();
 	}

@@ -280,11 +280,13 @@ public class EasyBid {
 	
 		Price p = new Price(Double.parseDouble(money),c);
 		
-		System.out.println("You have to create a password user account, please enter it: ");
+		System.out.println("You have to create a login and a password user account, please enter it: \nLogin: ");
+		String log = sc.nextLine();
+		System.out.println("Password: ");
 		String pwd = sc.nextLine();
-		User u = new User(firstname, lastname, pwd,p,this.hall);
+		User u = new User(firstname, lastname, log, pwd, p, this.hall);
 		hall.addUser(u);
-		System.out.println("Your user id is :"+ u.getId()+" and your password is :"+pwd+"  please remember your id and password, there will be asked later on");
+		System.out.println("\nYour user id is :"+ u.getId()+" and your password is :"+pwd+"  please remember your id and password, there will be asked later on");
 		
 	}
 	
