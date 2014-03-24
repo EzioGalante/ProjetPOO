@@ -1,5 +1,7 @@
 package easybid;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.Scanner;
 
 import user.User;
@@ -14,10 +16,15 @@ public class EasyBid {
 	private Scanner sc;
 	private User currentUser;
 	
-	
 	public EasyBid(){
 		this.hall= new AuctionHall();
 		this.sc = new Scanner(System.in);
+		this.currentUser = null;
+	}
+	
+	public EasyBid(FileInputStream i){
+		this.hall= new AuctionHall();
+		this.sc = new Scanner(i);
 		this.currentUser = null;
 	}
 
@@ -25,9 +32,10 @@ public class EasyBid {
 		String scan = "";
 		while(true)
 		{	
-			System.out.println("What do you want to do? \n\n");
+			System.out.println("_________________________________________________");
 			if(currentUser == null){
-				System.out.println("u: Creation of a new User\nl: Login as User\nq: Quit program\n\n");
+				System.out.println("\n\nWelcome to EasyBid :\n");
+				System.out.println("u: Creation of a new User\nl: Login as User\nq: Quit program\n___________\n");
 				scan =sc.nextLine();
 				
 				switch(scan)
@@ -49,8 +57,10 @@ public class EasyBid {
 			}
 			
 			else {
-				System.out.println("users: List users\nauctions: list public auctions\np: Creation of a new Product\n" +
-						"publish: Publish your product\nm: Show personnal product\nq: Quit program\nlogout of EasyBid : logout");
+				System.out.println("\n\nWhat do you want to do "+currentUser.getLogin()+"?\n");
+				System.out.println("users: List users\nauctions: list public auctions\n" 
+						+ "\nadd product: Creation of a new Product\npublish: Publish your product\nm: Show personnal product\n"
+						+ "\nq: Quit program\nlogout of EasyBid : logout\n___________\n");
 				
 				scan =sc.nextLine();
 				
@@ -74,7 +84,7 @@ public class EasyBid {
 						showAuction();
 						break;
 					
-					case "p":
+					case "add product":
 						createProduct();
 						break;
 					
@@ -82,7 +92,7 @@ public class EasyBid {
 						publishProduct();
 						break;
 						
-					case"m":
+					case"my":
 						showPersonnalProduct();
 						break;
 					
@@ -157,6 +167,8 @@ public class EasyBid {
 			}
 		}
 		
+		System.out.println("Error, check your login and password, they were not found.");
+		
 	}
 
 	private void showPersonnalProduct() {
@@ -172,35 +184,34 @@ public class EasyBid {
 		return;
 	}
 
+	
 	private void publishProduct() {
-		
 			
 		if(currentUser.getmyProductList().size()==0) {
-						System.out.println("[EasyBid][publishProduct] Error, your personnal product list is empty, you have to add products to your list before publish one of them \n");
-						return;
-					}
-					
-					System.out.println("\nNow refer the product you want to publish:");
-					String nameProduct = sc.nextLine();
-					
-					if(nameProduct == null) {
-						System.out.println("[EasyBid][publishProduct] : Error, no product to publish");
-						return;
-					}
-				
-					for(Product t : currentUser.getmyProductList())
-					{
-						if (t.getName().equals(nameProduct)) {
-							currentUser.Publish(t);
-							System.out.println("Your product was published in the AuctionHall");
-						}
-					}
-					
-				return;
-				}
+			System.out.println("[EasyBid][publishProduct] Error, your personnal list of products is empty, you have to add products to your list before publishing one of them \n");
+			return;
+		}
+		
+		System.out.println("\nNow refer the product you want to publish:");
+		String nameProduct = sc.nextLine();
+		
+		if(nameProduct == null) {
+			System.out.println("[EasyBid][publishProduct] : Error, no product to publish");
+			return;
+		}
+	
+		for(Product t : currentUser.getmyProductList())
+		{
+			if (t.getName().equals(nameProduct)) {
+				currentUser.Publish(t);
+				System.out.println("Your product was published in the AuctionHall");
+			}
+		}
+		
+		return;
+	}
 
 	private void createProduct() {
-		
 	
 		System.out.println("Now refer your name product:");
 		String nameProduct = sc.nextLine();
@@ -211,13 +222,12 @@ public class EasyBid {
 		Product p = new Product(currentUser, p1, nameProduct);
 		currentUser.addtoMyProductList(p);
 		return;
-				}
+	}
 
 
 	private void createUser() {
 		
 		boolean lock = true;
-		
 		
 		System.out.println("Please refer a firstname, a lastname and the money you dispose of with your currency (euro,dollard,yen,livre)\nfirstname:");
 		String firstname = sc.nextLine();
@@ -228,8 +238,6 @@ public class EasyBid {
 		
 		System.out.println("money you dispose of:");
 		String money = sc.nextLine();
-		//Double.parseDouble(money);
-		
 		
 		Currency c = null;
 		
@@ -237,31 +245,31 @@ public class EasyBid {
 			System.out.println("your currency:");
 			String currency = sc.nextLine();	 
 	
-		switch(currency)
-		{
-		case"euro":
-		case"euros":
-			c = Currency.EURO;
-			lock = false;
-			break;
-		case"dollard":
-		case"dollards":
-			c = Currency.DOLLARD;
-			lock = false;
-			break;
-		case"yen":
-		case"yens":
-			c = Currency.YEN;
-			lock = false;
-			break;
-		case"livre":
-		case"livcres":
-			c = Currency.LIVRE;
-			lock = false;
-			break;
-		default:
-		
-		}
+			switch(currency)
+			{
+				case"euro":
+				case"euros":
+					c = Currency.EURO;
+					lock = false;
+					break;
+				case"dollard":
+				case"dollards":
+					c = Currency.DOLLARD;
+					lock = false;
+					break;
+				case"yen":
+				case"yens":
+					c = Currency.YEN;
+					lock = false;
+					break;
+				case"livre":
+				case"livres":
+					c = Currency.LIVRE;
+					lock = false;
+					break;
+				default:
+			
+			}
 		
 		}
 	
@@ -273,7 +281,7 @@ public class EasyBid {
 		String pwd = sc.nextLine();
 		User u = new User(firstname, lastname, log, pwd, p, this.hall);
 		hall.addUser(u);
-		System.out.println("User "+log+" createds");
+		System.out.println("User "+log+" created");
 		
 	}
 	

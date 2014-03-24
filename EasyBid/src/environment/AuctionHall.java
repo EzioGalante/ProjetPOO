@@ -27,7 +27,6 @@ public class AuctionHall {
 	public List<User> getKnownUsers() {
 		return knownUsers;
 	}
-
 	public List<Product> getAuctions() {
 		return auctions;
 	}
@@ -36,6 +35,23 @@ public class AuctionHall {
 	 *
 	 * 
 	 */
+	public void addUser(User u){
+		if(u==null){
+			//securite
+			return;
+		}
+		
+		for(User i : this.knownUsers){
+			if(u.equals(i)){
+				System.out.println("[AuctionHall][addUser]: User already in the list.");
+				return;
+			}
+		}
+		//Utilisateur non trouve dans la liste des connus donc on l'ajoute
+		this.knownUsers.add(u);
+		System.out.println("[AuctionHall][addUser]: User added to the list");
+	}
+	
 	public void addAuction(Product p){
 		if(p==null){
 			System.out.println("[AuctionHall][addAuction]: Initialisation error.");
@@ -72,22 +88,7 @@ public class AuctionHall {
 		return;
 	}
 		
-	public void addUser(User u){
-		if(u==null){
-			//securite
-			return;
-		}
-		
-		for(User i : this.knownUsers){
-			if(u == i){
-				System.out.println("[AuctionHall][addUser]: User already in the list.");
-				return;
-			}
-		}
-		//Utilisateur non trouve dans la liste des connus donc on l'ajoute
-		this.knownUsers.add(u);
-		System.out.println("[AuctionHall][addUser]: User added to the list");
-	}
+
 
 
     // removeUser Method
@@ -110,7 +111,7 @@ public class AuctionHall {
 			return;
 		}
 		
-		if(u == p.getOwner()){
+		if(u.equals(p.getOwner())){
 			System.out.println("[AuctionHall][raisePrice]Owner is not allowed to raise the bid.");
 			return;
 		}

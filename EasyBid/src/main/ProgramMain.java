@@ -9,7 +9,7 @@ public class ProgramMain {
 	 */
 	public static void main(String[] args) {
 
-		 EasyBid e = new EasyBid() ;
+		 EasyBid e = new EasyBid();
 		 e.run();
 	}
 
