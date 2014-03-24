@@ -59,8 +59,8 @@ public class EasyBid {
 			else {
 				System.out.println("\n\nWhat do you want to do "+currentUser.getLogin()+"?\n");
 				System.out.println("users: List users\nauctions: list public auctions\n" 
-						+ "\nadd product: Creation of a new Product\npublish: Publish your product\nm: Show personnal product\n"
-						+ "\nq: Quit program\nlogout of EasyBid : logout\n___________\n");
+						+ "\nadd product: Creation of a new Product\npublish: Publish your product\nm: Show personnal product\ndelete a publish product : delete product\n "
+						+ "\nq: Quit program\nlogout of EasyBid : logout\ndelete your account : delete account\n___________\n");
 				
 				scan =sc.nextLine();
 				
@@ -112,21 +112,32 @@ public class EasyBid {
 	}
 
 	private void removeUser() {
+		
 		System.out.println("Plesae enter your password: \n");
 		String pass;
-		int i=0;
+		int i=0,t=3;
 		
 		do {
 			pass = sc.nextLine();
 			
 			if(!pass.equals(currentUser.getPass())) {
 				i++;
-				System.out.println("Bad password, try again");
+				t--;
+				System.out.println("Bad password, "+t+" chance more");
 			}
 			else break;
 		}
 		while(i<3);
-		hall.removeUser(currentUser);
+		
+		if( t == 0) {
+			System.out.println("Back on EasyBid");
+			return;
+		}
+		else {
+			hall.removeUser(currentUser);
+			System.out.println("Back on EasyBid");
+			return;
+		}
 	}
 
 	private void removeProduct() {
@@ -152,6 +163,10 @@ public class EasyBid {
 
 	private void logIn() {
 		
+		if(hall.getKnownUsers().isEmpty()) {
+			System.out.println("you have to create an user before loggin");
+			return;
+		}
 		
 		System.out.println("Please refer your login and password:\nlogin: ");
 		String login = sc.nextLine();
