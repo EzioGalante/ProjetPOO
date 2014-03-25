@@ -9,12 +9,15 @@ import environment.AuctionHall;
 import environment.Currency;
 import environment.Price;
 import environment.Product;
+import environment.Currency;
+
 
 public class EasyBid {
 
 	private AuctionHall hall;
 	private Scanner sc;
 	private User currentUser;
+	
 	
 	public EasyBid(){
 		this.hall= new AuctionHall();
@@ -59,8 +62,8 @@ public class EasyBid {
 			else {
 				System.out.println("\n\nWhat do you want to do "+currentUser.getLogin()+"?\n");
 				System.out.println("users: List users\nauctions: list public auctions\n" 
-						+ "\nadd product: Creation of a new Product\npublish: Publish your product\nm: Show personnal product\ndelete a publish product : delete product\n "
-						+ "\nq: Quit program\nlogout of EasyBid : logout\ndelete your account : delete account\n___________\n");
+						+ "\nadd product: Creation of a new Product\npublish: Publish your product\nm: Show personnal product\ndelete product : delete a publish product \n "
+						+ "\nq: Quit program\nlogout of EasyBid : logout\ndelete account : delete your account \n___________\n");
 				
 				scan =sc.nextLine();
 				
@@ -99,6 +102,9 @@ public class EasyBid {
 					case "logout":
 						logOut();
 						break;
+					case "Raise Price":
+						raisePrice();
+						break;
 						
 					case "q":
 						sc.close();
@@ -110,6 +116,56 @@ public class EasyBid {
 		}
 		
 	}
+
+	private void raisePrice() {
+		
+		if(hall.getAuctions().isEmpty()) {
+			System.out.println("No product in the auctions");
+			return;
+		}
+		
+		String newPrice = "";
+		double newPriceValue = -1;
+		
+		System.out.println("What product do you want to raise?");
+		String productToRaise = sc.nextLine();
+		Price pr = null;
+		
+		for (Product p : hall.getAuctions()) {
+			if ( p.getName().equals(productToRaise) && p.getOwner() != currentUser){
+				System.out.println("What is your new price and about this product\nPrice :?");
+							
+				do{
+					newPrice=sc.nextLine();
+					try{ 
+						newPriceValue = Double.parseDouble(newPrice);
+					} catch (Exception e){
+						System.out.println("Error, enter your value again :");
+						newPriceValue = -1;
+					}
+					
+					pr = new Price(newPriceValue,currentUser.getCurrency());
+					
+					if(pr.isWorthMore(p.getCurrentPrice()))
+					{
+						System.out.println("The actual price of this product is :\n"
+								+p.getCurrentPrice().getValue()
+								+" "+p.getCurrentPrice().getCurrency()
+								+ "\nPlease refer a superiror price :");
+						newPriceValue=-1;
+					}
+				}while(newPriceValue==-1);
+				
+				pr.convertTo(p.getOwner().getCurrency());
+				hall.raisePrice(currentUser,p, pr );
+				return;
+			}				
+		}
+		
+		System.out.println("You can't raise the price this product\n Return to EasyBid");
+	}
+		
+	
 
 	private void removeUser() {
 		
@@ -142,12 +198,17 @@ public class EasyBid {
 
 	private void removeProduct() {
 		
+		if( currentUser.getmyProductList().size()==0) {
+			System.out.println("You have no product to remove");
+			return;
+		}
+		
 		System.out.println("What product would you want to remove? Please enter your product name : \n");
 		String removeP = sc.nextLine();
 		
 		for(Product p : hall.getAuctions()){		
 			if(removeP.equals(p.getName()) && p.getOwner().equals(currentUser)) {
-				hall.removeProduct(p);
+				currentUser.Unpublish(p);
 				System.out.println("Produit just removed");
 				return;
 			}
@@ -189,7 +250,7 @@ public class EasyBid {
 	private void showPersonnalProduct() {
 							
 		if(currentUser.getmyProductList().size()==0) {
-			System.out.println("[EasyBid][publishProduct] Error, your personnal product list is empty, you have to add products to your list before publish one of them \n");
+			System.out.println("[EasyBid][publishProduct] Error, your personnal product list is empty, you have to add products to your list before\n");
 			return;
 		}
 		
@@ -219,7 +280,8 @@ public class EasyBid {
 		{
 			if (t.getName().equals(nameProduct)) {
 				currentUser.Publish(t);
-				System.out.println("Your product was published in the AuctionHall");
+				//currentUser.getmyProductList().remove(t);
+				System.out.println("Your product was published in the AuctionHall and remove from your personnal product list");
 			}
 		}
 		
@@ -231,9 +293,20 @@ public class EasyBid {
 		System.out.println("Now refer your name product:");
 		String nameProduct = sc.nextLine();
 		System.out.println("Now refer your product minimum price, it's your minimum bid price for this product");
-		String minPrice = sc.nextLine();
-	
-		Price p1 = new Price(Double.parseDouble(minPrice), currentUser.getCurrency());
+		String minPrice = "";
+		Price p1 = null;
+		while(p1==null)
+		{
+			minPrice = sc.nextLine();
+			try{ 
+				p1 = new Price(Double.parseDouble(minPrice), currentUser.getCurrency());
+			} catch (Exception e){
+				System.out.println("Error, enter your value again :");
+				p1 = null;
+			}
+
+		}
+		
 		Product p = new Product(currentUser, p1, nameProduct);
 		currentUser.addtoMyProductList(p);
 		return;
@@ -292,8 +365,19 @@ public class EasyBid {
 		
 		System.out.println("You have to create a login and a password user account, please enter it: \nLogin: ");
 		String log = sc.nextLine();
+		
+		//Sécurité sur l'unicité du loggin
+		
+		for(User i : hall.getKnownUsers()) {
+			while (i.getLogin().equals(log)) {
+				System.out.println("An other user use already this login, please refer an other one to finish creating of your account\nNew login please :");
+				log = sc.nextLine();
+			}
+		}
+		
 		System.out.println("Password: ");
 		String pwd = sc.nextLine();
+			
 		User u = new User(firstname, lastname, log, pwd, p, this.hall);
 		hall.addUser(u);
 		System.out.println("User "+log+" created");
