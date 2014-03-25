@@ -78,17 +78,39 @@ public class Product {
 	private void setPublic() {
 		this.isPublic = true;
 	}
+	private void setPrivate() {
+		this.isPublic = false;
+	}
 
 	/*
 	 * 	METHODS :
 	 * 
 	 */
 	public boolean calltopublish(User u) {
+		if(this.getPublic()==true){
+			System.out.println("[Product][calltopublish] : ce produit est deja public");
+			return false;
+		}
 		if (this.owner == u) {
 			setPublic();
 			return true;
 		} else {
 			System.out.println("[Product][calltopublish] : Pas la permission requise");
+			return false;
+
+		}
+	}
+	
+	public boolean calltounpublish(User u) {
+		if(this.getPublic()==false){
+			System.out.println("[Product][calltounpublish] : ce produit est deja privé.");
+			return false;
+		}
+		if (this.owner == u && this.getHighestPriceUser()==null){
+			setPrivate();
+			return true;
+		} else {
+			System.out.println("[Product][calltounpublish] : Pas la permission requise");
 			return false;
 
 		}
