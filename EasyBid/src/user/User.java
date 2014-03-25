@@ -1,4 +1,5 @@
-package user;
+﻿package user;
+
 import environment.Product;
 
 import java.util.ArrayList;
@@ -7,7 +8,6 @@ import java.util.List;
 import environment.AuctionHall;
 import environment.Currency;
 import environment.Price;
-
 
 public class User {
 
@@ -19,105 +19,138 @@ public class User {
 	private AuctionHall hall = null;
 	private Price money = null;
 	private List<Product> myProductList;
+	private List<Product> myAuctionList;
 	
-	public User(String firstname, String lastname, String login, String pass, Price money, AuctionHall h) {
-		
+	
+
+	public User(String firstname, String lastname, String login, String pass,
+			Price money, AuctionHall h) {
+
 		/*
-		 * 	Pour g�rer les cas d'arguments que nous ne consid�rons pas valides, 
-		 * 	nous levons des exceptions pour quitter le constructeur.
+		 * Pour g�rer les cas d'arguments que nous ne consid�rons pas valides,
+		 * nous levons des exceptions pour quitter le constructeur.
 		 * 
-		 * Cela sous-entend que l'appelant de ce constructeur devra : 
-		 * 	-	l'utiliser dans un "try{ ... }"
-		 * 	-	R�cup�rer l'exception lev�e (si elle survient) dans un "catch (IllegalArgumentException votre_nom_dexception)"
+		 * Cela sous-entend que l'appelant de ce constructeur devra : -
+		 * l'utiliser dans un "try{ ... }" - R�cup�rer l'exception lev�e (si
+		 * elle survient) dans un
+		 * "catch (IllegalArgumentException votre_nom_dexception)"
 		 */
 		int currentId = h.giveUserID();
-		
-		if(currentId == 0)
-			throw new IllegalArgumentException("User failed to provide correct ID.");
-		
-		else if(firstname == null || lastname == null)
-			throw new NullPointerException("User failed to provide first name or last name.");
-		else if(login == null)
+
+		if (currentId == 0)
+			throw new IllegalArgumentException(
+					"User failed to provide correct ID.");
+
+		else if (firstname == null || lastname == null)
+			throw new NullPointerException(
+					"User failed to provide first name or last name.");
+		else if (login == null)
 			throw new NullPointerException("User failed to provide login.");
-		else if(pass == null)
+		else if (pass == null)
 			throw new NullPointerException("User failed to provide password.");
-		else if(money == null)
+		else if (money == null)
 			throw new NullPointerException("User failed to provide valid money");
-		else if(firstname.equals("") || lastname.equals("") || login.equals("") || pass.equals(""))
-			throw new IllegalArgumentException("One of the user's fields was empty.");
-		
+		else if (firstname.equals("") || lastname.equals("")
+				|| login.equals("") || pass.equals(""))
+			throw new IllegalArgumentException(
+					"One of the user's fields was empty.");
+
 		/*
-		 * 	Si le constructeur consid�re que les param�tres d'appel sont satisfaisants :
+		 * Si le constructeur consid�re que les param�tres d'appel sont
+		 * satisfaisants :
 		 */
-		this.firstname=firstname;
-		this.lastname=lastname;
+		this.firstname = firstname;
+		this.lastname = lastname;
 		this.login = login;
 		this.password = pass;
-		this.id=currentId;
-		this.money=money;
+		this.id = currentId;
+		this.money = money;
 		this.hall = h;
-		this.myProductList= new ArrayList<>();
-		
+		this.myProductList = new ArrayList<>();
+
 	}
-	
-	public String getFirstname(){
+
+	public String getFirstname() {
 		return firstname;
 	}
-	public String getLastname(){
+
+	public String getLastname() {
 		return lastname;
 	}
-	public int getId(){
+
+	public int getId() {
 		return id;
 	}
-	public String getLogin(){
+
+	public String getLogin() {
 		return login;
 	}
-	
-	public String getPass(){
+
+	public String getPass() {
 		return password;
 	}
-	public AuctionHall getHall(){
+
+	public AuctionHall getHall() {
 		return hall;
 	}
-	public List<Product> getmyProductList(){
+
+	public List<Product> getmyProductList() {
 		return myProductList;
 	}
+	public List<Product> getmyAuctionList(){
+		return myAuctionList;
+	}
+	public void addtomyAuctionList(Product p){
+		int i;
+		boolean exist = false;
+			for (i=0; i<=myAuctionList.size(); i++){
+				if (myAuctionList.get(i).equals(p)) exist = true;
+					}
+			if (exist = false) myAuctionList.add(p);
+	}
+
 	public Currency getCurrency() {
 		return money.getCurrency();
 	}
-	
-	public void addtoMyProductList(Product p){
+
+	public void addtoMyProductList(Product p) {
 		myProductList.add(p);
-		System.out.println("[User] [addtoMyProductList] Product added to your list");
+		System.out
+				.println("[User] [addtoMyProductList] Product added to your list");
 	}
-	
-	
-	public void Publish(Product p){
-		if(p.calltopublish(this)){
+
+	public void Publish(Product p) {
+		if (p.calltopublish(this)) {
 			this.hall.addAuction(p);
 		}
 	}
 	
 	
-	public void addMoney(Price p){		
+	public void Unpublish(Product p){
+		if (p.calltopublish(this)) {
+			this.hall.removeProduct(p);
+		}
+	}
+
+	public void addMoney(Price p) {
 		this.money.giveMoney(p);
 	}
-	
+
 	@Override
 	public String toString() {
-		return "User :\n\tlogin = "+login+"\n\tlastname=" + lastname + ", firstname=" + firstname 
-				+"\n\tmoney="+money.getValue()+" "+money.getCurrency();
+		return "User :\n\tlogin = " + login + "\n\tlastname=" + lastname
+				+ ", firstname=" + firstname + "\n\tmoney=" + money.getValue()
+				+ " " + money.getCurrency();
 	}
-	
+
 	@Override
-	public boolean equals(Object o){
-		if(this == o)
+	public boolean equals(Object o) {
+		if (this == o)
 			return true;
-		else if(o instanceof User){
+		else if (o instanceof User) {
 			return this.login.equals(((User) o).login);
-		}
-		else
+		} else
 			return false;
 	}
-	
+
 }
