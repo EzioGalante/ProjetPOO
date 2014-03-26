@@ -153,5 +153,26 @@ public class Product {
 		else
 			return false;
 	}
+
+
+
+	public void realiseSale() {
+		if(!isPublic){
+			return;
+		}
+		
+		calltounpublish(owner);
+		if(highestPriceUser.pay(currentPrice, owner) == null)
+		{
+			System.out.println("[Product][realiseSale] : The price was not payed.");
+			return;
+		}
+		
+		highestPriceUser.addtoMyProductList(this);
+		highestPriceUser.removeFromMyAuctionList(this);
+		owner.removeFromMyProducList(this);
+		
+		
+	}
 	
 }

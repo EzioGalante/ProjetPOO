@@ -102,7 +102,22 @@ public class PriceTests {
 		Price test = new Price(5.5, Currency.YEN);
 		
 		test.giveMoney(new Price(5.5, Currency.YEN));
-		
 		assertEquals(11, test.getValue(), 0);
+	}
+	
+	@Test
+	public void testTakeMoney(){
+		Price test = new Price(10, Currency.YEN);
+		Price testTwo = new Price(10, Currency.LIVRE);
+		
+		test.takeMoney(new Price(5.5, Currency.YEN));
+		assertEquals(4.5, test.getValue(), 0);
+		
+		test.takeMoney(new Price(5.5, Currency.LIVRE));
+		assertEquals(4.5, test.getValue(), 0);
+		
+		testTwo.takeMoney(new Price(10, Currency.EURO));
+		assertEquals(1.76, testTwo.getValue(), 0.01);
+		
 	}
 }

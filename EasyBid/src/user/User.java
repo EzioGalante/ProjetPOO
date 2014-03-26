@@ -67,33 +67,31 @@ public class User {
 		this.money = money;
 		this.hall = h;
 		this.myProductList = new ArrayList<>();
+		this.myAuctionList = new ArrayList<>();
 
 	}
 
 	public String getFirstname() {
 		return firstname;
 	}
-
 	public String getLastname() {
 		return lastname;
 	}
-
 	public int getId() {
 		return id;
 	}
-
 	public String getLogin() {
 		return login;
 	}
-
 	public String getPass() {
 		return password;
 	}
-
 	public AuctionHall getHall() {
 		return hall;
 	}
-
+	public Price getMoney() {
+		return money;
+	}
 	public List<Product> getmyProductList() {
 		return myProductList;
 	}
@@ -103,12 +101,25 @@ public class User {
 	public void addtomyAuctionList(Product p){
 		int i;
 		boolean exist = false;
-			for (i=0; i<=myAuctionList.size(); i++){
-				if (myAuctionList.get(i).equals(p)) exist = true;
-					}
-			if (exist = false) myAuctionList.add(p);
+			for (i=0; i<myAuctionList.size(); i++){
+				if (myAuctionList.get(i).equals(p)) 
+					exist = true;
+			}
+			if (exist == false) 
+				myAuctionList.add(p);
 	}
-
+	
+	public void removeFromMyAuctionList(Product p){
+		int i;
+		boolean exist = false;
+			for (i=0; i<myAuctionList.size(); i++){
+				if (myAuctionList.get(i).equals(p)) 
+					exist = true;
+			}
+			if (exist == false) 
+				myAuctionList.remove(p);
+	}
+	
 	public Currency getCurrency() {
 		return money.getCurrency();
 	}
@@ -116,17 +127,23 @@ public class User {
 	public void addtoMyProductList(Product p) {
 		myProductList.add(p);
 		System.out
-				.println("[User] [addtoMyProductList] Product added to your list");
+				.println("[User] [addtoMyProductList]"
+						+ login +" product "+ p.getName() +" added to your list");
 	}
-
-	public void Publish(Product p) {
+	public void removeFromMyProducList(Product p) {
+		myProductList.remove(p);
+		System.out
+				.println("[User] [removeFromMyProductList] :"
+						+ login +" product "+ p.getName() +" removed from to your list");
+		}
+	public void publish(Product p) {
 		if (p.calltopublish(this)) {
 			this.hall.addAuction(p);
 		}
 	}
 	
 	
-	public void Unpublish(Product p){
+	public void unpublish(Product p){
 		if (p.calltopublish(this)) {
 			this.hall.removeProduct(p);
 		}
@@ -153,4 +170,22 @@ public class User {
 			return false;
 	}
 
+	public Price pay(Price p, User owner){
+		if(owner.equals(this)){
+			return null;
+		}
+		
+		p.convertTo(money.getCurrency());
+		if(money.isWorthMore(p)){
+			return null;
+		}
+		
+		if(money.takeMoney(p)==-1){
+			return null;
+		}
+		owner.addMoney(p);
+		return p;
+	}
+
+	
 }

@@ -212,7 +212,7 @@ public class EasyBid {
 		
 		for(Product p : hall.getAuctions()){		
 			if(removeP.equals(p.getName()) && p.getOwner().equals(currentUser)) {
-				currentUser.Unpublish(p);
+				currentUser.unpublish(p);
 				System.out.println("Produit just removed");
 				return;
 			}
@@ -283,7 +283,7 @@ public class EasyBid {
 		for(Product t : currentUser.getmyProductList())
 		{
 			if (t.getName().equals(nameProduct)) {
-				currentUser.Publish(t);
+				currentUser.publish(t);
 				//currentUser.getmyProductList().remove(t);
 				System.out.println("Your product was published in the AuctionHall and remove from your personnal product list");
 			}

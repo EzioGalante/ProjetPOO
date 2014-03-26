@@ -55,6 +55,21 @@ public class Price {
 		
 		this.value += p.getValue();
 	}
+	
+	public double takeMoney(Price p) {
+		
+		if(!p.getCurrency().equals(this.getCurrency())){
+			p.convertTo(this.getCurrency());
+		}
+		
+		if(this.value >= p.getValue()){
+			this.value -= p.getValue();
+			return p.getValue();
+		}
+		return -1;
+		//If method returned -1 it means that the money was not taken
+	}
+	
 	/*
 	 * 	METHODS :
 	 * 

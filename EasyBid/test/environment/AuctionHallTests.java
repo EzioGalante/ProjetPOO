@@ -188,4 +188,33 @@ public class AuctionHallTests {
 		assertEquals(2, two.getId(), 0);
 		
 	}
+	
+	@Test
+	public void testRealiseSale(){
+		User one = null;
+		User two = null;
+		try{
+			one = new User("Number", "One", "login210", "pass", new Price(420, Currency.EURO), this.testHall);
+			two = new User("Number", "two", "login211", "pass", new Price(420, Currency.EURO), this.testHall);
+		} catch(Exception e){
+			assertNull(one);
+			assertNull(two);
+		}
+		
+		assertNotNull(one);
+		assertNotNull(two);
+		testHall.addUser(one);
+		testHall.addUser(two);
+		
+		Product inQuestion = new Product(one, new Price(220, one.getCurrency()), "testSaleProduct");
+		
+		one.addtoMyProductList(inQuestion);
+		one.publish(inQuestion);
+		
+		inQuestion.raisePrice(two, new Price(420, Currency.EURO));
+		
+		inQuestion.realiseSale();
+		
+		//assertEquals(0, two.)
+	}
 }

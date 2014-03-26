@@ -30,7 +30,7 @@ public class UserTests {
 		try {
 			testBadFirstNameUser = new User(null, "ee", "login2", "pass", new Price(20, Currency.EURO), testHall);
 		} catch(Exception e){
-			System.err.println("bad first name");
+			System.err.println("[UserTests][testUser] : tested bad first name");
 			assertNull(testBadFirstNameUser);
 		}
 		
@@ -38,7 +38,7 @@ public class UserTests {
 		try {
 			testBadLastNameUser = new User("ee", null, "login3", "pass", new Price(20, Currency.EURO), testHall);
 		} catch(Exception e){
-			System.err.println("bad last name");
+			System.err.println("[UserTests][testUser] : tested bad last name");
 			assertNull(testBadLastNameUser);
 		}
 		
@@ -46,7 +46,7 @@ public class UserTests {
 		try {
 			testBadPasswordUser = new User("ee", "ee", null, "pass", new Price(20, Currency.EURO), testHall);
 		} catch(Exception e){
-			System.err.println("bad password");
+			System.err.println("[UserTests][testUser] : tested bad login");
 			assertNull(testBadPasswordUser);
 		}
 		
@@ -54,7 +54,7 @@ public class UserTests {
 		try {
 			testBadPasswordUser = new User("ee", "ee", "login4", null, new Price(20, Currency.EURO), testHall);
 		} catch(Exception e){
-			System.err.println("bad password");
+			System.err.println("[UserTests][testUser] : tested bad password");
 			assertNull(testBadPasswordUser);
 		}
 		
@@ -62,7 +62,7 @@ public class UserTests {
 		try {
 			testBadPriceUser = new User("ee", "ee", "login5", "pass", null, testHall);
 		} catch(Exception e){
-			System.err.println("bad Price");
+			System.err.println("[UserTests][testUser] : tested bad Price");
 			assertNull(testBadPriceUser);
 		}
 		
@@ -70,7 +70,7 @@ public class UserTests {
 		try {
 			testBadHallUser = new User("ee", "ee", "login6", "pass", new Price(20, Currency.EURO), null);
 		} catch(Exception e){
-			System.err.println("bad Hall");
+			System.err.println("[UserTests][testUser] : tested bad Hall");
 			assertNull(testBadHallUser);
 		}
 	}
@@ -89,7 +89,6 @@ public class UserTests {
 		String first = this.testGoodUser.getFirstname();
 		
 		assertEquals("First", first);
-
 	}
 
 	@Test
@@ -104,13 +103,32 @@ public class UserTests {
 		User i = new User("ee", "ee", "login7", "pass", new Price(20, Currency.EURO), testHall);
 		User j = i;
 		User k = new User("ee", "ee", "login7", "pass", new Price(20, Currency.EURO), testHall);
+		User l = new User("ee", "ee", "login8", "pass", new Price(20, Currency.EURO), testHall);
 		
 		assertSame(i, j);
 		assertEquals(true, i.equals(j));
 		
 		assertNotSame(i, k);
 		assertEquals(true, i.equals(k));
+		
+		assertEquals(false, i.equals(l));
 	}
 	
-
+	@Test
+	public void testPay(){
+		User i = new User("ee", "ee", "login9", "pass", new Price(20, Currency.EURO), testHall);
+		User j = new User("ee", "ee", "login10", "pass", new Price(20, Currency.EURO), testHall);
+		
+		Price iPayed = new Price(10, Currency.EURO);
+		Price endPrice = new Price(30, Currency.EURO);
+		
+		assertEquals(null, i.pay(new Price(10, Currency.LIVRE), i));
+		assertEquals(null, i.pay(new Price(20, Currency.LIVRE), j));
+		
+		assertEquals(iPayed, i.pay(iPayed, j));
+		assertEquals(endPrice.getValue(), j.getMoney().getValue(), 0);
+		
+		
+		
+	}
 }

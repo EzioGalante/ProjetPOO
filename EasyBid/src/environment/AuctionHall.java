@@ -68,7 +68,10 @@ public class AuctionHall {
 		System.out.println("[AuctionHall][removeProduct]: Public auction "+p.getName()+" just removed.");
 		return;
 	}
-		
+	
+	
+	
+	
 	/*
 	 * 
 	 * 
