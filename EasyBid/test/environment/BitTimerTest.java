@@ -12,7 +12,7 @@ public class BitTimerTest {
 	
 	@Test
 	public void testBidTimer() {
-		t  = new BidTimer();
+		t = new BidTimer();
 		assertNotNull(t);
 		assertEquals(false, t.getFixedDate());
 	}
@@ -40,8 +40,5 @@ public class BitTimerTest {
 		}
 	}
 	
-	public void testGetTime(){
-		//Date t = DateFormat.
-	}
 
 }

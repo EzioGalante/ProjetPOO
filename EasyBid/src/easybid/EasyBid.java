@@ -34,6 +34,7 @@ public class EasyBid {
 		String scan = "";
 		while(true)
 		{	
+			findFinishedSales();
 			System.out.println("_________________________________________________");
 			if(currentUser == null){
 				System.out.println("\n\nWelcome to EasyBid :\n");
@@ -61,8 +62,11 @@ public class EasyBid {
 			else {
 				System.out.println("\n\nWhat do you want to do "+currentUser.getLogin()+"?\n");
 				System.out.println("users: List users\nauctions: list public auctions\n" 
-						+ "\nadd product: Creation of a new Product\npublish: Publish your product\nm: Show personnal product\ndelete product : delete a publish product \n "
-						+ "\nq: Quit program\nlogout of EasyBid : logout\ndelete account : delete your account \n___________\n");
+						+ "\nraise price: emit an offer for an auction\n"
+						+ "\nadd product: Creation of a new Product\npublish: Publish your product"
+						+ "\nm: Show personnal product\ndelete product : delete a publish product \n "
+						+ "\nq: Quit program\nlogout of EasyBid : logout" 
+						+ "\ndelete account : delete your account \n___________\n");
 				
 				scan =sc.nextLine();
 				
@@ -101,7 +105,7 @@ public class EasyBid {
 					case "logout":
 						logOut();
 						break;
-					case "Raise Price":
+					case "raise price":
 						raisePrice();
 						break;
 						
@@ -113,6 +117,15 @@ public class EasyBid {
 				}
 			}
 		}
+		
+	}
+
+	private void findFinishedSales() {
+		for(Product p : hall.getAuctions())
+			if(p.getRemainingTime()<0 && p.getPublic()){
+				System.out.println("[EasyBid][findFinishedSales] : calling realiseSale for "+p.getName());
+				p.realiseSale();
+			}
 		
 	}
 
@@ -280,21 +293,28 @@ public class EasyBid {
 			return;
 		}
 		
-		String minTime = "";
+		System.out.println("Please enter a valid time of duration of sale for "+nameProduct+" .");
+		String minTime = sc.nextLine();
+		Double value;
 		long time = -1;
-		while(time == -1){
-			minTime = sc.nextLine();
+		
+		do{
+			
 			try{ 
-				time = Long.parseLong(minTime);
+				value = Double.parseDouble(minTime);
+				time = value.longValue();
 			} catch (Exception e){
-				System.out.println("Error, enter your value for "+nameProduct+" again :");
-				time = -1;
+				System.out.println("Error, in your value for "+nameProduct+", time set to 10 minutes.");
+				time = 600000;
+				continue;
 			}
-			if(time < 30*1000){
+			if(time < 30000){
 				System.out.println("Sorry, you cannot create an auction that lasts under 30 seconds");
+				System.out.println("The time you gave was "+time/1000+" seconds.\n Please enter another :");
 				time = -1;
+				minTime = sc.nextLine();
 			}
-		}
+		}while(time == -1);
 	
 		for(Product t : currentUser.getmyProductList())
 		{
@@ -302,7 +322,7 @@ public class EasyBid {
 				t.setProductTime(time);
 				currentUser.publish(t);
 				//currentUser.getmyProductList().remove(t);
-				System.out.println("Your product was published in the AuctionHall and remove from your personnal product list");
+				System.out.println(currentUser.getLogin()+", your product was published on EasyBid");
 				break;
 			}
 		}

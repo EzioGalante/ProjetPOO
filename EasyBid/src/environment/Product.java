@@ -85,6 +85,9 @@ public class Product {
 	private void setPrivate() {
 		this.isPublic = false;
 	}
+	private void setOwner(User u){
+		this.owner = u;
+	}
 
 	/*
 	 * 	METHODS :
@@ -110,7 +113,7 @@ public class Product {
 			System.out.println("[Product][calltounpublish] : ce produit est deja privé.");
 			return false;
 		}
-		if (this.owner.equals(u) && this.getHighestPriceUser()==null){
+		if (this.owner.equals(u) && (this.getHighestPriceUser()==null || getRemainingTime()<=0)){
 			setPrivate();
 			return true;
 		} else {
@@ -143,8 +146,15 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Product :\n\tOwner :"+owner.getFirstname()+" "+ owner.getLastname()
+		
+		String result = "Product :\n\tOwner :"+owner.getFirstname()+" "+ owner.getLastname()
 				+"\n\tprice= "+currentPrice.getValue()+" "+currentPrice.getCurrency()+" name: "+this.getName();
+		if(highestPriceUser != null)
+			result += "\n\tOffer from : "+highestPriceUser.getFirstname()+" "+highestPriceUser.getLastname();
+		if(endOfSale != null)
+			result += "\n\n\t\tTime remaining : "+getRemainingTime()+"\n";
+		
+		return result;
 	}
 
 	@Override
@@ -163,14 +173,16 @@ public class Product {
 		this.endOfSale = new BidTimer(t);
 	}
 	public long getRemainingTime(){
+		if(!isPublic || endOfSale==null){
+			System.out.println("No real time remaining, returning -100.");
+			return -100;
+		}
+			
 		BidTimer bt = new BidTimer();
 		 return this.endOfSale.getTime()-bt.getTime();
 	}
 
 	public void realiseSale() {
-		if(!isPublic){
-			return;
-		}
 		if(endOfSale == null || t == null)
 			return;
 		if(getRemainingTime()>=0){
@@ -187,6 +199,7 @@ public class Product {
 		highestPriceUser.addtoMyProductList(this);
 		highestPriceUser.removeFromMyAuctionList(this);
 		owner.removeFromMyProducList(this);
+		setOwner(highestPriceUser);
 		
 		
 	}
