@@ -1,7 +1,6 @@
 package easybid;
 
 import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.Scanner;
 
 import user.User;
@@ -9,7 +8,6 @@ import environment.AuctionHall;
 import environment.Currency;
 import environment.Price;
 import environment.Product;
-import environment.Currency;
 
 
 public class EasyBid {
@@ -120,7 +118,7 @@ public class EasyBid {
 	private void raisePrice() {
 		
 		if(hall.getAuctions().isEmpty()) {
-			System.out.println("No product in the auctions");
+			System.out.println("Sorry, there are no bids to raise.");
 			return;
 		}
 		
@@ -130,43 +128,50 @@ public class EasyBid {
 		System.out.println("What product do you want to raise?");
 		String productToRaise = sc.nextLine();
 		Price pr = null;
+		Product targetProduct = null;
 		
+		boolean lock = false;
 		for (Product p : hall.getAuctions()) {
-			if ( p.getName().equals(productToRaise) && p.getOwner() != currentUser){
-				System.out.println("What is your new price and about this product\nPrice :?");
-							
-				do{
-					newPrice=sc.nextLine();
-					try{ 
-						newPriceValue = Double.parseDouble(newPrice);
-					} catch (Exception e){
-						System.out.println("Error, enter your value again :");
-						newPriceValue = -1;
-					}
-					
-					pr = new Price(newPriceValue,currentUser.getCurrency());
-					
-					if(pr.isWorthMore(p.getCurrentPrice()))
-					{
-						System.out.println("The actual price of this product is :\n"
-								+p.getCurrentPrice().getValue()
-								+" "+p.getCurrentPrice().getCurrency()
-								+ "\nPlease refer a superiror price :");
-						newPriceValue=-1;
-					}
-				}while(newPriceValue==-1);
-				
-				pr.convertTo(p.getOwner().getCurrency());
-				hall.raisePrice(currentUser,p, pr );
-				return;
+			if ( p.getName().equals(productToRaise) && !p.getOwner().equals(currentUser)){
+				lock = true;
+				targetProduct = p;
+				break;
 			}				
 		}
+		if(!lock){
+			System.out.println("You can't raise the price this product\n Return to EasyBid");
+			return;
+		}
 		
-		System.out.println("You can't raise the price this product\n Return to EasyBid");
+		System.out.println("What is your offer for this product\nPrice :?");
+		
+		do{
+			newPrice=sc.nextLine();
+			try{ 
+				newPriceValue = Double.parseDouble(newPrice);
+			} catch (Exception e){
+				System.out.println("Error, enter your value again :");
+				newPriceValue = -1;
+				continue;
+			}
+			
+			pr = new Price(newPriceValue,currentUser.getCurrency());
+			pr.convertTo(targetProduct.getOwner().getCurrency());
+			
+			if(pr.isWorthMore(targetProduct.getCurrentPrice()))
+			{
+				System.out.println("The actual price of this product is :\n"
+						+targetProduct.getCurrentPrice().getValue()
+						+" "+targetProduct.getCurrentPrice().getCurrency()
+						+ "\nPlease refer a superiror price :");
+				newPriceValue=-1;
+			}
+		}while(newPriceValue==-1);
+		
+		targetProduct.raisePrice(currentUser, pr );
 	}
 		
-	
-
+		
 	private void removeUser() {
 		
 		System.out.println("Plesae enter your password: \n");
@@ -182,8 +187,7 @@ public class EasyBid {
 				System.out.println("Bad password, "+t+" chance more");
 			}
 			else break;
-		}
-		while(i<3);
+		}while(i<3);
 		
 		if( t == 0) {
 			System.out.println("Back on EasyBid");
@@ -262,9 +266,9 @@ public class EasyBid {
 
 	
 	private void publishProduct() {
-			
+		
 		if(currentUser.getmyProductList().size()==0) {
-			System.out.println("[EasyBid][publishProduct] Error, your personnal list of products is empty, you have to add products to your list before publishing one of them \n");
+			System.out.println("Error, your personnal list of products is empty, you have to add products to your list before publishing them \n");
 			return;
 		}
 		
@@ -290,9 +294,9 @@ public class EasyBid {
 
 	private void createProduct() {
 	
-		System.out.println("Now refer your name product:");
+		System.out.println("Please refer your product's name :");
 		String nameProduct = sc.nextLine();
-		System.out.println("Now refer your product minimum price, it's your minimum bid price for this product");
+		System.out.println("Now refer your product's minimum price :");
 		String minPrice = "";
 		Price p1 = null;
 		while(p1==null)

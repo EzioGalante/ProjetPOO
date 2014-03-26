@@ -91,11 +91,11 @@ public class Product {
 			System.out.println("[Product][calltopublish] : ce produit est deja public");
 			return false;
 		}
-		if (this.owner == u) {
+		if (this.owner.equals(u)) {
 			setPublic();
 			return true;
 		} else {
-			System.out.println("[Product][calltopublish] : Pas la permission requise");
+			System.out.println("[Product][calltopublish] : Pas la permission requise pour publier ce produit.");
 			return false;
 
 		}
@@ -106,11 +106,11 @@ public class Product {
 			System.out.println("[Product][calltounpublish] : ce produit est deja privé.");
 			return false;
 		}
-		if (this.owner == u && this.getHighestPriceUser()==null){
+		if (this.owner.equals(u) && this.getHighestPriceUser()==null){
 			setPrivate();
 			return true;
 		} else {
-			System.out.println("[Product][calltounpublish] : Pas la permission requise");
+			System.out.println("[Product][calltounpublish] : Pas la permission requise pour rendre le produit privé.");
 			return false;
 
 		}

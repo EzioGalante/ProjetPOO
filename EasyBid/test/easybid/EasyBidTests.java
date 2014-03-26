@@ -40,10 +40,15 @@ public class EasyBidTests {
 	@Test
 	public void testRun() {
 		
+		testCreateAndShowUsers();
 		
+	}
+	
+	
+	public void testCreateAndShowUsers(){
 		System.out.println(path);
 		try {
-			path += "tests/testRun.txt";
+			path += "tests/testCreateAndShowUsers.txt";
 			i = new FileInputStream(path);
 			
 		} catch (FileNotFoundException e) {
@@ -57,7 +62,6 @@ public class EasyBidTests {
 		
 		this.e.run();
 	}
-	
 	/*
 	@Test
 	public void testEasyBiud() {
