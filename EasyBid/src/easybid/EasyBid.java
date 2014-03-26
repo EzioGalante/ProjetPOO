@@ -279,11 +279,27 @@ public class EasyBid {
 			System.out.println("[EasyBid][publishProduct] : Error, no product to publish");
 			return;
 		}
+		
+		String minTime = "";
+		long time = -1;
+		while(time == -1){
+			minTime = sc.nextLine();
+			try{ 
+				time = Long.parseLong(minTime);
+			} catch (Exception e){
+				System.out.println("Error, enter your value for "+nameProduct+" again :");
+				time = -1;
+			}
+			if(time < 30*1000){
+				System.out.println("Sorry, you cannot create an auction that lasts under 30 seconds");
+				time = -1;
+			}
+		}
 	
 		for(Product t : currentUser.getmyProductList())
 		{
 			if (t.getName().equals(nameProduct)) {
-				
+				t.setProductTime(time);
 				currentUser.publish(t);
 				//currentUser.getmyProductList().remove(t);
 				System.out.println("Your product was published in the AuctionHall and remove from your personnal product list");
@@ -300,7 +316,6 @@ public class EasyBid {
 		String nameProduct = sc.nextLine();
 		System.out.println("Now refer your product's minimum price :");
 		String minPrice = "";
-		String minTime = "";
 		
 		Price p1 = null;
 		while(p1==null)
@@ -315,17 +330,7 @@ public class EasyBid {
 
 		}
 
-		/*
-		long time = -1;
-		while(time == -1){
-			minTime = sc.nextLine();
-			try{ 
-				time = Long.parseLong(minTime);
-			} catch (Exception e){
-				System.out.println("Error, enter your value again :");
-				time = -1;
-			}
-		}*/
+		
 		Product p = new Product(currentUser, p1, nameProduct);
 		currentUser.addtoMyProductList(p);
 		return;
