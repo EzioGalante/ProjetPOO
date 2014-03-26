@@ -1,5 +1,7 @@
 package environment;
 
+import java.util.Date;
+
 import user.User;
 
 public class Product {
@@ -18,13 +20,15 @@ public class Product {
 	 * 
 	 */
 	
-	private String name;
+	private String name = "";
 	// private String description;
 	// private String reference;
-	private Price currentPrice;
-	private User owner;
-	private User highestPriceUser;
+	private Price currentPrice = null;
+	private User owner = null;
+	private User highestPriceUser = null;
 	private boolean isPublic = false;
+	private BidTimer endOfSale = null;
+	private Date t = null;
 
 	public Product(User o, Price minPrice, String name) {
 		if (o == null || minPrice == null || name == null)
@@ -33,7 +37,7 @@ public class Product {
 		if (name == "")
 			throw new IllegalArgumentException(
 					"Error, product names cannot be empty.");
-
+		
 		this.name = name;
 		this.currentPrice = minPrice;
 		this.owner = o;
@@ -154,13 +158,25 @@ public class Product {
 			return false;
 	}
 
-
+	public void setProductTime(long time){
+		this.t = new Date(System.currentTimeMillis()+time);
+		this.endOfSale = new BidTimer(t);
+	}
+	public long getRemainingTime(){
+		BidTimer bt = new BidTimer();
+		 return this.endOfSale.getTime()-bt.getTime();
+	}
 
 	public void realiseSale() {
 		if(!isPublic){
 			return;
 		}
-		
+		if(endOfSale == null || t == null)
+			return;
+		if(getRemainingTime()>=0){
+			System.out.println("Still time left for bidding.");
+			return;
+		}
 		calltounpublish(owner);
 		if(highestPriceUser.pay(currentPrice, owner) == null)
 		{

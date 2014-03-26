@@ -1,6 +1,7 @@
 package easybid;
 
 import java.io.FileInputStream;
+import java.util.Date;
 import java.util.Scanner;
 
 import user.User;
@@ -266,7 +267,6 @@ public class EasyBid {
 
 	
 	private void publishProduct() {
-		
 		if(currentUser.getmyProductList().size()==0) {
 			System.out.println("Error, your personnal list of products is empty, you have to add products to your list before publishing them \n");
 			return;
@@ -283,9 +283,11 @@ public class EasyBid {
 		for(Product t : currentUser.getmyProductList())
 		{
 			if (t.getName().equals(nameProduct)) {
+				
 				currentUser.publish(t);
 				//currentUser.getmyProductList().remove(t);
 				System.out.println("Your product was published in the AuctionHall and remove from your personnal product list");
+				break;
 			}
 		}
 		
@@ -298,6 +300,8 @@ public class EasyBid {
 		String nameProduct = sc.nextLine();
 		System.out.println("Now refer your product's minimum price :");
 		String minPrice = "";
+		String minTime = "";
+		
 		Price p1 = null;
 		while(p1==null)
 		{
@@ -310,7 +314,18 @@ public class EasyBid {
 			}
 
 		}
-		
+
+		/*
+		long time = -1;
+		while(time == -1){
+			minTime = sc.nextLine();
+			try{ 
+				time = Long.parseLong(minTime);
+			} catch (Exception e){
+				System.out.println("Error, enter your value again :");
+				time = -1;
+			}
+		}*/
 		Product p = new Product(currentUser, p1, nameProduct);
 		currentUser.addtoMyProductList(p);
 		return;
