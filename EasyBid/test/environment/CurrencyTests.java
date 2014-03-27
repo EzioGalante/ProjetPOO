@@ -15,7 +15,7 @@ public class CurrencyTests {
 
 	@Test
 	public void testGetCurrent() {
-		
+		System.out.println("_______________________  testGetCurrent  _________________________");
 		String EuroCurrency = this.testEuroCurrency.getCurrent();
 		assertEquals("E",EuroCurrency);
 	
@@ -33,7 +33,7 @@ public class CurrencyTests {
 	
 	@Test
 	public void testGetRate() {
-		
+		System.out.println("_______________________  testGetRate  _________________________");
 		double EuroRate = this.testEuroCurrency.getRate();
 		assertEquals(1,EuroRate,0);
 		

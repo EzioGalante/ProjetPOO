@@ -20,7 +20,7 @@ public class EasyBidTests {
 	@Before
 	public void setUp(){
 		ClassLoader cl = EasyBid.class.getClassLoader();
-		this.path =  cl.getResource("").getPath()+"easybid/";
+		this.path =  cl.getResource("").getPath()+"tests/";
 		
 	}
 	
@@ -33,6 +33,7 @@ public class EasyBidTests {
 	
 	@Test
 	public void testEasyBid() {
+		System.out.println("_______________________  testEasyBid  _________________________");
 		e = new EasyBid();
 		assertNotNull(e);
 	}	
@@ -46,9 +47,10 @@ public class EasyBidTests {
 	
 	
 	public void testCreateAndShowUsers(){
+		System.out.println("_______________________  testCreateAndShowUsers  _________________________");
 		System.out.println(path);
 		try {
-			path += "tests/testCreateAndShowUsers.txt";
+			path += "testCreateAndShowUsers.txt";
 			i = new FileInputStream(path);
 			
 		} catch (FileNotFoundException e) {

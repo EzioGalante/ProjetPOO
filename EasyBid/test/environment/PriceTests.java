@@ -14,6 +14,7 @@ public class PriceTests {
 	
 	@Test
 	public void testPrice() {
+		System.out.println("_______________________  testPrice  _________________________");
 		assertNotNull(this.testgoodPrice);
 	
 		Price testBadValue = null;
@@ -40,18 +41,21 @@ public class PriceTests {
 
 	@Test
 	public void testGetValue() {
+		System.out.println("_______________________  testGetValue  _________________________");
 		double testvaleur = this.testgoodPrice.getValue();
 		assertEquals(testValeur, testvaleur, 0);
 	}
 	
 	@Test
 	public void testGetCurrency() {
+		System.out.println("_______________________  testGetCurrency  _________________________");
 		Currency current = this.testgoodPrice.getCurrency();
 		assertEquals(testCurrent,current);
 	}
 	
 	@Test
 	public void testConvertTo() {
+		System.out.println("_______________________  testConvertTo  _________________________");
 		Price test = new Price(1, Currency.EURO);
 		
 		test.convertTo(Currency.DOLLARD);
@@ -75,6 +79,7 @@ public class PriceTests {
 	
 	@Test
 	public void testIsWorthMore(){
+		System.out.println("_______________________  testIsWorthMore _________________________");
 		Price test = this.testgoodPrice;
 		boolean falseBool = true;
 		Price falsePrice = null;
@@ -99,6 +104,7 @@ public class PriceTests {
 	
 	@Test
 	public void testGiveMoney(){
+		System.out.println("_______________________  testGiveMoney  _________________________");
 		Price test = new Price(5.5, Currency.YEN);
 		
 		test.giveMoney(new Price(5.5, Currency.YEN));
@@ -107,6 +113,7 @@ public class PriceTests {
 	
 	@Test
 	public void testTakeMoney(){
+		System.out.println("_______________________  testTakeMoney _________________________");
 		Price test = new Price(10, Currency.YEN);
 		Price testTwo = new Price(10, Currency.LIVRE);
 		

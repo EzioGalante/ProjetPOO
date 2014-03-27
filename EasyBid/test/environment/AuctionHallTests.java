@@ -16,6 +16,7 @@ public class AuctionHallTests {
 
 	@Test
 	public void testGetKnownUsers() {
+		System.out.println("_______________________  testGetKnownUsers  _________________________");
 		assertEquals(this.testHall.getKnownUsers().size(), 0);
 		
 		User i = new User("Product", "Owner", "login200", "pass", new Price(20, Currency.EURO), this.testHall);
@@ -36,6 +37,7 @@ public class AuctionHallTests {
 
 	@Test
 	public void testGetAuctions() {
+		System.out.println("_______________________  testGetAuctions  _________________________");
 		assertEquals(this.testHall.getAuctions().size(), 0);
 		
 		User i = new User("Product", "Owner", "login203", "pass", new Price(20, Currency.EURO), this.testHall);
@@ -59,6 +61,7 @@ public class AuctionHallTests {
 
 	@Test
 	public void testAddAuction() {
+		System.out.println("_______________________  testAddAuction  _________________________");
 		User user = new User("Product", "Owner", "login204", "pass", new Price(20, Currency.EURO), this.testHall);
 		Product p = new Product(user, new Price(1450, Currency.EURO), "Coffe Table");
 		
@@ -90,7 +93,7 @@ public class AuctionHallTests {
 
     @Test
 	public void testremoveProduct(){
-		
+    	System.out.println("_______________________  testremoveProduct  _________________________");
 		Price pTest = new Price(10, Currency.EURO);
 		User u = new User("Matt", "Marchel", "login205", "pass", pTest, this.testHall);
 		Product test = new Product(u, new Price(15, Currency.EURO), "productTest");
@@ -123,6 +126,7 @@ public class AuctionHallTests {
     
 	@Test
 	public void testAddUser() {
+		System.out.println("_______________________  testAddUser  _________________________");
 		User u = new User("ee", "ee", "login206", "pass", new Price(20, Currency.EURO), this.testHall);
 		assertNotNull(u);
 		boolean lock = false;
@@ -141,7 +145,7 @@ public class AuctionHallTests {
 
     @Test
 	public void testremoveUser() {
-		
+    	System.out.println("_______________________  testremoveUser  _________________________");
 		User u1 = new User("bruce", "lee", "login207", "pass", new Price(17, Currency.EURO), this.testHall);
 		assertNotNull(u1);
 		boolean boolUser = true;
@@ -171,6 +175,7 @@ public class AuctionHallTests {
 	
 	@Test
 	public void testGiveUserID(){
+		System.out.println("_______________________  testGiveUserID  _________________________");
 		User one = null;
 		User two = null;
 		try{
@@ -191,6 +196,7 @@ public class AuctionHallTests {
 	
 	@Test
 	public void testRealiseSale(){
+		System.out.println("_______________________  testRealiseSalev  _________________________");
 		User one = null;
 		User two = null;
 		try{

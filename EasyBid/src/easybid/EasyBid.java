@@ -61,7 +61,7 @@ public class EasyBid {
 			
 			else {
 				System.out.println("\n\nWhat do you want to do "+currentUser.getLogin()+"?\n");
-				System.out.println("users: List users\nauctions: list public auctions\n" 
+				System.out.println("users: List users\nauctions: list public auctions\nmy auctions\n" 
 						+ "\nraise price: emit an offer for an auction\n"
 						+ "\nadd product: Creation of a new Product\npublish: Publish your product"
 						+ "\nm: Show personnal product\ndelete product : delete a publish product \n "
@@ -90,6 +90,10 @@ public class EasyBid {
 						showAuction();
 						break;
 					
+					case"my auctions":
+						showmyAuctionList();
+						break;
+						
 					case "add product":
 						createProduct();
 						break;
@@ -119,6 +123,7 @@ public class EasyBid {
 		}
 		
 	}
+
 
 	private void findFinishedSales() {
 		for(Product p : hall.getAuctions())
@@ -278,6 +283,18 @@ public class EasyBid {
 		return;
 	}
 
+	private void showmyAuctionList() {
+		
+		if(currentUser.getmyAuctionList().size()==0) {
+			System.out.println("[EasyBid][publishProduct] Error, your personnal auction list is empty, you have to make a bid before\n");
+			return;
+		}
+		
+		for(Product p : currentUser.getmyAuctionList()) {
+			System.out.println(p.toString()); 
+		}
+		return;
+	}
 	
 	private void publishProduct() {
 		if(currentUser.getmyProductList().size()==0) {

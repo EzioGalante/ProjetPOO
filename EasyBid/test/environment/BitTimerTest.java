@@ -12,12 +12,14 @@ public class BitTimerTest {
 	
 	@Test
 	public void testBidTimer() {
+		System.out.println("_______________________  testBidTimer  _________________________");
 		t = new BidTimer();
 		assertNotNull(t);
 		assertEquals(false, t.getFixedDate());
 	}
 	@Test
 	public void testBidTimerOfDateD() {
+		System.out.println("_______________________  testBidTimerOfDateD  _________________________");
 		Date d = new Date(System.currentTimeMillis()+300000);
 		t  = new BidTimer(d);
 		assertNotNull(t);
@@ -25,6 +27,7 @@ public class BitTimerTest {
 	}
 	@Test
 	public void testRefreshTime() {
+		System.out.println("_______________________  testRefreshTime  _________________________");
 		t  = new BidTimer();
 		long t2 = t.getTime();
 		try {

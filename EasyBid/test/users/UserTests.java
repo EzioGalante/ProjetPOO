@@ -18,6 +18,7 @@ public class UserTests {
 	
 	@Test
 	public void testUser() {
+		System.out.println("_______________________  testUser  _________________________");
 		assertNotNull(this.testGoodUser);
 		
 		User testBadFirstNameUser = null;
@@ -78,7 +79,7 @@ public class UserTests {
 
 	@Test
 	public void addtoMyproductList(){
-		
+		System.out.println("_______________________  addtoMyproductList  _________________________");
 		Product r = new Product(testGoodUser, new Price(50, Currency.EURO), "Antique coffe set");
 		testGoodUser.addtoMyProductList(r);
 		assertEquals(r, testGoodUser.getmyProductList().get(0));
@@ -86,6 +87,7 @@ public class UserTests {
 	
 	@Test
 	public void testGetFirstname() {
+		System.out.println("_______________________  testGetFirstname  _________________________");
 		String first = this.testGoodUser.getFirstname();
 		
 		assertEquals("First", first);
@@ -93,6 +95,7 @@ public class UserTests {
 
 	@Test
 	public void testGetLastname() {
+		System.out.println("_______________________  testGetLastname  _________________________");
 		String last = this.testGoodUser.getLastname();
 		
 		assertEquals("Last", last);
@@ -100,6 +103,7 @@ public class UserTests {
 
 	@Test
 	public void testEquals() {
+		System.out.println("_______________________  testEquals  _________________________");
 		User i = new User("ee", "ee", "login7", "pass", new Price(20, Currency.EURO), testHall);
 		User j = i;
 		User k = new User("ee", "ee", "login7", "pass", new Price(20, Currency.EURO), testHall);
@@ -116,6 +120,7 @@ public class UserTests {
 	
 	@Test
 	public void testPay(){
+		System.out.println("_______________________  testPay  _________________________");
 		User i = new User("ee", "ee", "login9", "pass", new Price(20, Currency.EURO), testHall);
 		User j = new User("ee", "ee", "login10", "pass", new Price(20, Currency.EURO), testHall);
 		

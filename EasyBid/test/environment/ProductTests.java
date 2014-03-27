@@ -27,7 +27,7 @@ public class ProductTests {
 	
 	@Test
 	public void testProduct() {
-
+		System.out.println("_______________________  testProduct  _________________________");
 		assertNotNull(this.testUserProduct);
 		
 		Product testBadUser = null;
@@ -61,22 +61,26 @@ public class ProductTests {
 
 	@Test
 	public void testGetName() {
+		System.out.println("_______________________  testGetName  _________________________");
 		assertEquals("Coffe Table", testproduct.getName());
 	}
 
 	@Test
 	public void testGetCurrentPrice() {
+		System.out.println("_______________________  testGetCurrentPrice  _________________________");
 		assertEquals(750, testproduct.getCurrentPrice().getValue(),0);
 		assertEquals(Currency.EURO, testproduct.getCurrentPrice().getCurrency());
 	}
 
 	@Test
 	public void testGetOwner() {
+		System.out.println("_______________________  testGetOwner  _________________________");
 		assertEquals(owner, testproduct.getOwner());
 	}
 
 	@Test
 	public void testGetHighestPriceUser() {
+		System.out.println("_______________________  testGetHighestPriceUser  _________________________");
 		User u = new User("price", "raiser", "login104", "pass", new Price(20, Currency.EURO), this.testHall);
 		this.testHall.addUser(u);
 		this.testHall.addUser(this.testUser);
@@ -89,6 +93,7 @@ public class ProductTests {
 
 	@Test
 	public void testRaisePrice() {
+		System.out.println("_______________________  testRaisePrice  _________________________");
 		this.testHall.addUser(this.raisePriceUser);
 		this.testHall.addUser(this.testUser);
 		this.testHall.addAuction(this.testUserProduct);
@@ -102,6 +107,7 @@ public class ProductTests {
 
 	@Test
 	public void testEquals() {
+		System.out.println("_______________________  testEquals  _________________________");
 		Product p = new Product(testUser, new Price(15, Currency.EURO), "name");
 		Product q = new Product(testUser, new Price(15, Currency.EURO), "name");
 
