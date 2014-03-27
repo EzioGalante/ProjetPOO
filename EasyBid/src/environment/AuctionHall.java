@@ -68,60 +68,6 @@ public class AuctionHall {
 		System.out.println("[AuctionHall][removeProduct]: Public auction "+p.getName()+" just removed.");
 		return;
 	}
-	
-	
-	
-	
-	/*
-	 * 
-	 * 
-	 */
-	/*
-	public void raisePrice(User u, Product p, Price contestingPrice) {
-		if(u==null || p==null || contestingPrice==null){
-			System.out.println("[AuctionHall][raisePrice]: Initialisation error.");
-			return;
-		}
-		
-		if(u.equals(p.getOwner())){
-			System.out.println("[AuctionHall][raisePrice]Owner is not allowed to raise the bid.");
-			return;
-		}
-		User contextUser = null;
-		for(User us : this.knownUsers){
-			if(u.equals(us)){
-				contextUser = us;
-				break;
-			}
-		}
-		
-		if(contextUser==null){
-			System.out.println("[AuctionHall][raisePrice] : User specified unknown.");
-			return;
-		}
-		
-		Product contextProduct = null;
-		for(Product i : this.auctions){
-			if(p.equals(i)){
-				contextProduct = i;
-				break;
-			}
-		}
-		if(contextProduct==null){
-			System.out.println("[AuctionHall][raisePrice] : Product specified unknown.");
-			return;
-		}
-		
-		if(contextProduct.getCurrentPrice().isWorthMore(contestingPrice)){
-			
-			System.out.println("Raising "+p.getName()+" from : "+p.getCurrentPrice().getValue()+" ("
-					+p.getCurrentPrice().getCurrency()
-					+") to : "+contestingPrice.getValue()+" ("+contestingPrice.getCurrency()+") .");
-			
-			contextProduct.raisePrice(contextUser, contestingPrice);
-		}
 
-	}
-	*/
 	
 }

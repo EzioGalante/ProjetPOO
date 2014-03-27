@@ -115,5 +115,15 @@ public class ProductTests {
 		assertEquals(true, p.equals(q));
 	}
 	
-
+	/*
+	@Test
+	public void testRealiseSale() {
+		System.out.println("_______________________  testRealiseSale  _________________________");
+		this.testHall.addUser(this.raisePriceUser);
+		this.testHall.addUser(this.testUser);
+		this.testHall.addAuction(this.testUserProduct);
+		
+		this.testUserProduct.raisePrice(this.raisePriceUser, new Price(15, Currency.EURO));
+	}
+	*/
 }

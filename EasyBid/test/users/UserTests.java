@@ -76,15 +76,6 @@ public class UserTests {
 		}
 	}
 
-
-	@Test
-	public void addtoMyproductList(){
-		System.out.println("_______________________  addtoMyproductList  _________________________");
-		Product r = new Product(testGoodUser, new Price(50, Currency.EURO), "Antique coffe set");
-		testGoodUser.addtoMyProductList(r);
-		assertEquals(r, testGoodUser.getmyProductList().get(0));
-	}
-	
 	@Test
 	public void testGetFirstname() {
 		System.out.println("_______________________  testGetFirstname  _________________________");
@@ -92,7 +83,6 @@ public class UserTests {
 		
 		assertEquals("First", first);
 	}
-
 	@Test
 	public void testGetLastname() {
 		System.out.println("_______________________  testGetLastname  _________________________");
@@ -101,6 +91,14 @@ public class UserTests {
 		assertEquals("Last", last);
 	}
 
+	@Test
+	public void testAddtoMyproductList(){
+		System.out.println("_______________________  testAddtoMyproductList  _________________________");
+		Product r = new Product(testGoodUser, new Price(50, Currency.EURO), "Antique coffe set");
+		testGoodUser.addtoMyProductList(r);
+		assertEquals(r, testGoodUser.getmyProductList().get(0));
+	}
+	
 	@Test
 	public void testEquals() {
 		System.out.println("_______________________  testEquals  _________________________");
