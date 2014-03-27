@@ -1,2 +1,0 @@
-INDEX VERSION 1.126+C:\Users\MAXIMATOR\ProjetPOO\.metadata\.plugins\org.eclipse.jdt.core
-2542528201.index

@@ -24,7 +24,7 @@ public class PriceTests {
 		try {
 			testBadValue = new Price(0,testCurrent);
 		}catch( Exception e){
-			System.err.println("bad value");
+			System.err.println("[PriceTests][testPrice] tested with bad value");
 			assertNull(testBadValue);
 		}
 	
@@ -32,7 +32,7 @@ public class PriceTests {
 		try {
 			testBadCurrent = new Price(testValeur,null);
 		}catch (Exception e){
-			System.err.println("bad current");
+			System.err.println("[PriceTests][testPrice] tested with bad current");
 			assertNull(testBadCurrent);
 		}
 		
@@ -80,23 +80,9 @@ public class PriceTests {
 	@Test
 	public void testIsWorthMore(){
 		System.out.println("_______________________  testIsWorthMore _________________________");
-		Price test = this.testgoodPrice;
-		boolean falseBool = true;
-		Price falsePrice = null;
+		Price test = new Price(50, Currency.EURO);
 		
-		assertFalse(test.isWorthMore(null));
-		
-		try {
-			falsePrice = new Price(-5, Currency.EURO);
-		} catch(Exception e) {
-			assertNull(falsePrice);
-		}
-		
-		try {
-			falseBool = test.isWorthMore(falsePrice);
-		} catch(Exception e) {
-			assertFalse(falseBool);
-		}
+		assertTrue(test.isWorthMore(null));
 		
 		assertFalse(test.isWorthMore(new Price(5, Currency.EURO)));
 		assertTrue(test.isWorthMore(new Price(155, Currency.EURO)));

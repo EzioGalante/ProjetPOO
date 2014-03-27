@@ -28,6 +28,7 @@ public class Product {
 	private User highestPriceUser = null;
 	private boolean isPublic = false;
 	private BidTimer endOfSale = null;
+	private BidTimer counter = null;
 	private Date t = null;
 
 	public Product(User o, Price minPrice, String name) {
@@ -41,6 +42,7 @@ public class Product {
 		this.name = name;
 		this.currentPrice = minPrice;
 		this.owner = o;
+		this.counter = new BidTimer();
 		
 	}
 
@@ -136,12 +138,25 @@ public class Product {
 
 		if (!this.currentPrice.isWorthMore(contestingPrice)) {
 			System.out
-					.println("Not accepting context price, it is lower or equal to the current sale price.");
+					.println("[Product][raisePrice] : Not accepting context price, it is lower or equal to the current sale price.");
+			return;
+		}
+		
+		if(!contestingPrice.isWorthMore(u.getMoney())){
+			System.out
+			.println("[Product][raisePrice] : Not accepting context price, it is more than "+u.getLogin()+" can pay.");
 			return;
 		}
 
 		this.setHighestPriceUser(u);
+		
+		System.out.println("[Product][raisePrice] : The price was raised from "
+				+currentPrice.getValue()+" "+currentPrice.getCurrency()
+				+ " to "+contestingPrice.getValue()+" "+contestingPrice.getCurrency()+".");
+		
+		contestingPrice.convertTo(owner.getCurrency());
 		this.currentPrice = contestingPrice;
+		
 	}
 
 	@Override
@@ -150,7 +165,7 @@ public class Product {
 		String result = "Product :\n\tOwner :"+owner.getFirstname()+" "+ owner.getLastname()
 				+"\n\tprice= "+currentPrice.getValue()+" "+currentPrice.getCurrency()+" name: "+this.getName();
 		if(highestPriceUser != null)
-			result += "\n\tOffer from : "+highestPriceUser.getFirstname()+" "+highestPriceUser.getLastname();
+			result += "\n\tOffer from : "+highestPriceUser.getLogin();
 		if(endOfSale != null)
 			result += "\n\n\t\tTime remaining : "+getRemainingTime()+"\n";
 		
@@ -174,32 +189,51 @@ public class Product {
 	}
 	public long getRemainingTime(){
 		if(!isPublic || endOfSale==null){
-			System.out.println("No real time remaining, returning -100.");
 			return -100;
 		}
 			
-		BidTimer bt = new BidTimer();
-		 return this.endOfSale.getTime()-bt.getTime();
+		counter.refreshTime();
+		return this.endOfSale.getTime()-counter.getTime();
 	}
 
 	public void realiseSale() {
+		System.out.println("[Product][realiseSale] : The sale is about to take place.\n");
 		if(endOfSale == null || t == null)
+		{
+			System.out.println("No time defined for this auction.");
 			return;
+		}
 		if(getRemainingTime()>=0){
 			System.out.println("Still time left for bidding.");
 			return;
 		}
-		calltounpublish(owner);
-		if(highestPriceUser.pay(currentPrice, owner) == null)
+		if(!calltounpublish(owner))
 		{
-			System.out.println("[Product][realiseSale] : The price was not payed.");
+			System.out.println("Unable to unpublish this product");
 			return;
 		}
 		
+		Price toBePayed = highestPriceUser.pay(currentPrice, owner);
+		
+		if(!toBePayed.equals(currentPrice))
+		{
+			System.out.println("The price was not payed.");
+			return;
+		}
+		else
+		{
+			System.out.println("\tThe price "+toBePayed.getValue()+" "+toBePayed.getCurrency()
+					+" was payed by : "+highestPriceUser.getLogin()+"\n");
+		}
 		highestPriceUser.addtoMyProductList(this);
 		highestPriceUser.removeFromMyAuctionList(this);
 		owner.removeFromMyProducList(this);
+		
+		System.out.println("[Product][realiseSale] : Product "+name+" sold by "
+				+owner.getLogin()+" to "+highestPriceUser.getLogin());
 		setOwner(highestPriceUser);
+		
+		
 		
 		
 	}

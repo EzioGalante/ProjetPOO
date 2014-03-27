@@ -12,7 +12,7 @@ public class ProductTests {
 
 	private String testname = "testname";
 	private User testUser = new User("Pierre", "lante", "login100", "pass", new Price(10, Currency.EURO), testHall);
-	private User raisePriceUser = new User("Matthias", "galante", "login102", "pass", new Price(10, Currency.EURO), testHall); 
+	private User raisePriceUser = new User("Matthias", "galante", "login102", "pass", new Price(100, Currency.EURO), testHall); 
 	private User owner = new User("Product", "Owner", "login103", "pass", new Price(20, Currency.EURO), this.testHall);
 	
 	private Product testproduct = new Product(owner, new Price(750, Currency.EURO), "Coffe Table");
@@ -81,7 +81,7 @@ public class ProductTests {
 	@Test
 	public void testGetHighestPriceUser() {
 		System.out.println("_______________________  testGetHighestPriceUser  _________________________");
-		User u = new User("price", "raiser", "login104", "pass", new Price(20, Currency.EURO), this.testHall);
+		User u = new User("price", "raiser", "login104", "pass", new Price(100000, Currency.EURO), this.testHall);
 		this.testHall.addUser(u);
 		this.testHall.addUser(this.testUser);
 		this.testHall.addAuction(this.testUserProduct);
@@ -115,15 +115,39 @@ public class ProductTests {
 		assertEquals(true, p.equals(q));
 	}
 	
-	/*
 	@Test
-	public void testRealiseSale() {
+	public void testRealiseSale(){
 		System.out.println("_______________________  testRealiseSale  _________________________");
-		this.testHall.addUser(this.raisePriceUser);
-		this.testHall.addUser(this.testUser);
-		this.testHall.addAuction(this.testUserProduct);
+		User one = null;
+		User two = null;
+		try{
+			one = new User("Number", "One", "login210", "pass", new Price(420, Currency.EURO), this.testHall);
+			two = new User("Number", "two", "login211", "pass", new Price(520, Currency.EURO), this.testHall);
+		} catch(Exception e){
+			assertNull(one);
+			assertNull(two);
+		}
 		
-		this.testUserProduct.raisePrice(this.raisePriceUser, new Price(15, Currency.EURO));
+		assertNotNull(one);
+		assertNotNull(two);
+		testHall.addUser(one);
+		testHall.addUser(two);
+		
+		//currentUser.publish(t);
+		Product inQuestion = new Product(one, new Price(220, one.getCurrency()), "testSaleProduct");
+		inQuestion.setProductTime(10);
+		
+		one.addtoMyProductList(inQuestion);
+		one.publish(inQuestion);
+		
+		inQuestion.raisePrice(two, new Price(420, Currency.EURO));
+		
+		while(inQuestion.getRemainingTime()>0);
+		inQuestion.realiseSale();
+		
+		assertEquals(100, two.getMoney().getValue(), 0.01);
+		assertEquals(840, one.getMoney().getValue(), 0.01);
+		if(!two.equals(inQuestion.getOwner()))
+			fail("User bought the product and is not owner");
 	}
-	*/
 }

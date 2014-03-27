@@ -4,9 +4,6 @@ import static org.junit.Assert.*;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
-
-import javax.naming.spi.DirectoryManager;
 
 import org.junit.After;
 import org.junit.Before;
@@ -38,14 +35,8 @@ public class EasyBidTests {
 		assertNotNull(e);
 	}	
 	
+
 	@Test
-	public void testRun() {
-		
-		testCreateAndShowUsers();
-		
-	}
-	
-	
 	public void testCreateAndShowUsers(){
 		System.out.println("_______________________  testCreateAndShowUsers  _________________________");
 		System.out.println(path);
@@ -64,15 +55,5 @@ public class EasyBidTests {
 		
 		this.e.run();
 	}
-	/*
-	@Test
-	public void testEasyBiud() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testRuny() {
-		fail("Not yet implemented");
-	}
-	*/
+	
 }

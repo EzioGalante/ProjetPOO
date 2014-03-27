@@ -1,7 +1,6 @@
 package easybid;
 
 import java.io.FileInputStream;
-import java.util.Date;
 import java.util.Scanner;
 
 import user.User;
@@ -61,10 +60,12 @@ public class EasyBid {
 			
 			else {
 				System.out.println("\n\nWhat do you want to do "+currentUser.getLogin()+"?\n");
-				System.out.println("users: List users\nauctions: list public auctions\nmy auctions\n" 
+				System.out.println("users: List users\nauctions: list public auctions"
+						+"\noffers: list auctions you emitted offers on"
+						+"\nproducts: list your personnal products"
 						+ "\nraise price: emit an offer for an auction\n"
 						+ "\nadd product: Creation of a new Product\npublish: Publish your product"
-						+ "\nm: Show personnal product\ndelete product : delete a publish product \n "
+						+ "\ndelete product : delete a publish product \n "
 						+ "\nq: Quit program\nlogout of EasyBid : logout" 
 						+ "\ndelete account : delete your account \n___________\n");
 				
@@ -86,11 +87,11 @@ public class EasyBid {
 						showUser();
 						break;
 					
-					case"auctions":
+					case "auctions":
 						showAuction();
 						break;
 					
-					case"my auctions":
+					case "offers":
 						showmyAuctionList();
 						break;
 						
@@ -102,7 +103,7 @@ public class EasyBid {
 						publishProduct();
 						break;
 						
-					case"my":
+					case "products":
 						showPersonnalProduct();
 						break;
 					
@@ -120,6 +121,7 @@ public class EasyBid {
 					default: 
 				}
 			}
+			System.gc();
 		}
 		
 	}
@@ -338,7 +340,6 @@ public class EasyBid {
 			if (t.getName().equals(nameProduct)) {
 				t.setProductTime(time);
 				currentUser.publish(t);
-				//currentUser.getmyProductList().remove(t);
 				System.out.println(currentUser.getLogin()+", your product was published on EasyBid");
 				break;
 			}

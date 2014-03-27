@@ -88,19 +88,13 @@ public class Price {
 	public boolean isWorthMore(Price p){
 		
 		if(p == null)
-		{
-			System.err.println("[Price][isWorthMore] : param error");
-			return false;
-		}
+			return true;
+		
 		double currentValue = this.getValue() / this.getCurrency().getRate();
 		double paramValue = p.getValue() / p.getCurrency().getRate();
 		
-		if(currentValue >= paramValue)
-				return false;
-		else {
-			System.out.println("[Price][isWorthMore] : initial price was greater");
-			return true;
-		}
+		return currentValue < paramValue;
+		
 	}
 
 }

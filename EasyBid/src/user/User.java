@@ -126,15 +126,12 @@ public class User {
 
 	public void addtoMyProductList(Product p) {
 		myProductList.add(p);
-		System.out
-				.println("[User] [addtoMyProductList]"
-						+ login +" product "+ p.getName() +" added to your list");
+		System.out.println(login +" : product "+ p.getName() +" added to your list with a value of "
+				+p.getCurrentPrice().getValue()+" "+p.getCurrentPrice().getCurrency());
 	}
 	public void removeFromMyProducList(Product p) {
 		myProductList.remove(p);
-		System.out
-				.println("[User] [removeFromMyProductList] :"
-						+ login +" product "+ p.getName() +" removed from to your list");
+		System.out.println(login +" : product "+ p.getName() +" removed from your list");
 		}
 	public void publish(Product p) {
 		if (p.calltopublish(this)) {
@@ -155,9 +152,14 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User :\n\tlogin = " + login + "\n\tlastname=" + lastname
+		String res = "User :\n\tlogin = " + login + "\n\tlastname=" + lastname
 				+ ", firstname=" + firstname + "\n\tmoney=" + money.getValue()
-				+ " " + money.getCurrency();
+				+ " " + money.getCurrency()+"\n";
+		
+		for(Product p : myProductList){
+			res += "\tselling -> "+p.getName()+"\n";
+		}
+		return res;
 	}
 
 	@Override
