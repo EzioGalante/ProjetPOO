@@ -26,13 +26,76 @@ List of automatically run JUnit tests :
 			+ makes valid user
 			+ adds user to the "knownUsers" list
 			+ checks that the user was added
-		
+			
+		- testremoveUser :
+			+ makes User and adds it to AuctionHall
+			+ removes it from the hall
+			+ checks the size of the list wa incremented and decremented
+			+ checks the list, if the user is found test fails
+			
+		- testremoveProduct :
+			+ makes User and Product and adds them to AuctionHall
+			+ removes Product from the AuctionHall
+			+ checks the manipulations were correctly managed
+			
+		- testGiveUserID :
+			+ makes 2 Users
+			+ checks their id's were correctly given
 		
 
+	--> BidTimer :
+		- testBidTimer :
+			+ make refreshable BidTimer
+			+ checks it's refreshable
+			
+		- testBidTimer :
+			+ make fixed BidTimer
+			+ checks it isn't refreshable
+			
+		- testRefreshTime :
+			+ makes a refreshable BidTimer
+			+ store's it's value as long
+			+ checks that the time's refreshed value differs from the initial one
+			
 	--> Currency :
+		- testGetCurrent :
+			+ For each Currency case we implemented
+			+ assert's each value is the one expected
+			
+		- testGetRate :
+			+ For each Currency case we implemented
+			+ assert's each Rate is the one expected
 	
 	--> Price :
-	
+		- testPrice :
+			+ tests null value is returned for invalid construction parameters
+			
+		- testGetValue :
+			+ tests getter work's correctly
+			
+		- testGetCurrency :
+			+ tests getter work's correctly
+			
+		- testConvertTo :
+			+ creates Price
+			+ converts to all other currencies we implemented
+			+ asserts all expected values are true
+			
+		- testIsWorthMore :
+			+ makes Price
+			+ asserts isWorthMore returns correct answer
+			
+		- testGiveMoney :
+			+ makes two Prices
+			+ gives one the other
+			+ asserts that new value is equal to the sum of the two.
+			
+		- testTakeMoney :
+			+ makes two Prices
+			+ takes one from the other
+			+ asserts that the value is equal to the difference of the two.
+			
+			
 	--> Product :
 		
 		- testProduct :
@@ -58,8 +121,16 @@ List of automatically run JUnit tests :
 		- testEquals :
 			+ creates 2 instances of Product with same name
 			+ checks that the equals method for Products returns true
+			
+		- testRealiseSale :
+			+ makes 2 Products with same name
+			+ adds them to the  the "knownUsers" list
+			+ creates Prodct and publishes it
+			+ calls the realiseSale method
+			+ assert money flow was correctly handled
+			+ asserts owner was updated.
 	
-	
+		
 --> users :
 
 
@@ -77,3 +148,33 @@ List of automatically run JUnit tests :
 			+ uses lasttname getter to get global user's last name
 			+ checks it is equal to the value we first entered
 			
+		- testAddtoMyproductList :
+			+ makes Product
+			+ adds it to the personnal products list
+			+ checks it was enterd in the list
+			
+		- testEquals :
+			+ makes 4 Users
+			+ checks equals returns true only if two insances have the same address or the same name
+		
+		- testPay :
+			+ makes 2 Users
+			+ makes 2 Prices
+			+ checks User cannot pay more than he has
+			+ asserts that the prices have the right value
+		
+		
+--> easybid :
+
+
+	--> EasyBid :
+
+		- testEasyBid : testing constructor
+			+ creates new EasyBid
+			+ asserts it isn't null
+			
+		!!!This method get's it's Standard Input from a file in EasyBid - src - easybid - tests
+		- testCreateAndShowUsers :
+			+ tries to open a FileInputStream from specified file
+			+ lauches EasyBid with FileInputStream
+			+ run's EasyBid

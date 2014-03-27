@@ -11,14 +11,17 @@ import org.junit.Test;
 
 public class EasyBidTests {
 	EasyBid e = null;
-	String path;
+	String path, workString;
 	FileInputStream i = null;
 	
 	@Before
 	public void setUp(){
 		ClassLoader cl = EasyBid.class.getClassLoader();
-		this.path =  cl.getResource("").getPath()+"tests/";
 		
+		this.workString =  cl.getResource("").getPath();
+		
+		this.path = workString.substring(0, workString.length()-4);
+		this.path += "src/easybid/tests/";
 	}
 	
 	@After
